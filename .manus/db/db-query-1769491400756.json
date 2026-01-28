@@ -1,0 +1,45 @@
+{
+  "query": "SELECT id, title, fazwazUrl FROM properties;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT id, title, fazwazUrl FROM properties;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "1 Bedroom Condo for Sale at The Sea Condominium",
+      "fazwazUrl": "https://www.fazwaz.com/property-sales/1-bedroom-condo-for-sale-at-the-sea-condominium-in-sam-roi-yot-hua-hin-u5985439"
+    },
+    {
+      "id": "2",
+      "title": "Chanote Land 3.2 Rai Sam Roi Yot – Divisible into 3 Plots",
+      "fazwazUrl": "https://www.fazwaz.com/property-sales/land-for-sale-in-sam-roi-yot-hua-hin-u5971902"
+    },
+    {
+      "id": "3",
+      "title": "Prime Sea & Mountain View Land 300m to Beach Sam Roi Yot",
+      "fazwazUrl": "https://www.fazwaz.com/property-sales/land-for-sale-in-sam-roi-yot-hua-hin-u5971841"
+    },
+    {
+      "id": "4",
+      "title": "Chanote Land 150 sqm Sam Roi Yot 1.9km to Sea + Mountain View",
+      "fazwazUrl": "https://www.fazwaz.com/property-sales/land-for-sale-in-sam-roi-yot-hua-hin-u5971886"
+    },
+    {
+      "id": "5",
+      "title": "Chanote Land 1 Rai 30 sq wah Sam Roi Yot – Mountain View",
+      "fazwazUrl": "https://www.fazwaz.com/property-sales/land-for-sale-in-sam-roi-yot-hua-hin-u5971940"
+    },
+    {
+      "id": "6",
+      "title": "1 Bedroom Condo for Sale at The Sea Condominium (70 SqM)",
+      "fazwazUrl": "https://www.fazwaz.com/property-sales/1-bedroom-condo-for-sale-at-the-sea-condominium-in-sam-roi-yot-hua-hin-u5971738"
+    },
+    {
+      "id": "7",
+      "title": "Exclusive Mango Hills Resort Estate Sam Roi Yot",
+      "fazwazUrl": "https://www.fazwaz.com/property-sales/5-bedroom-hotel-for-sale-in-sam-roi-yot-hua-hin-u5988038"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tfazwazUrl\n1\t1 Bedroom Condo for Sale at The Sea Condominium\thttps://www.fazwaz.com/property-sales/1-bedroom-condo-for-sale-at-the-sea-condominium-in-sam-roi-yot-hua-hin-u5985439\n2\tChanote Land 3.2 Rai Sam Roi Yot – Divisible into 3 Plots\thttps://www.fazwaz.com/property-sales/land-for-sale-in-sam-roi-yot-hua-hin-u5971902\n3\tPrime Sea & Mountain View Land 300m to Beach Sam Roi Yot\thttps://www.fazwaz.com/property-sales/land-for-sale-in-sam-roi-yot-hua-hin-u5971841\n4\tChanote Land 150 sqm Sam Roi Yot 1.9km to Sea + Mountain View\thttps://www.fazwaz.com/property-sales/land-for-sale-in-sam-roi-yot-hua-hin-u5971886\n5\tChanote Land 1 Rai 30 sq wah Sam Roi Yot – Mountain View\thttps://www.fazwaz.com/property-sales/land-for-sale-in-sam-roi-yot-hua-hin-u5971940\n6\t1 Bedroom Condo for Sale at The Sea Condominium (70 SqM)\thttps://www.fazwaz.com/property-sales/1-bedroom-condo-for-sale-at-the-sea-condominium-in-sam-roi-yot-hua-hin-u5971738\n7\tExclusive Mango Hills Resort Estate Sam Roi Yot\thttps://www.fazwaz.com/property-sales/5-bedroom-hotel-for-sale-in-sam-roi-yot-hua-hin-u5988038\n",
+  "stderr": "",
+  "execution_time_ms": 1543
+}

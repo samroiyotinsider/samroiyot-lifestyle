@@ -1,0 +1,32 @@
+[
+  {
+    "fazwazId": "U5988038",
+    "title": "Exclusive Mango Hills Resort Estate Sam Roi Yot",
+    "type": "Hotel",
+    "price": 698000,
+    "bedrooms": 5,
+    "bathrooms": 5,
+    "sizeSqm": 258,
+    "landSizeSqm": 7360,
+    "description": "Exclusive Opportunity: Mango Hills – Turnkey Resort Retreat in Sam Roi Yot. Traditional Thai resort estate with 120+ mango trees, saltwater pool, 5 accommodations. 4 Rai 2 Ngan 40 sq.wah Chanote land. Mountain and sea views, 1.5km to Dolphin Bay beach. Proven B&B with 5-7% yields.",
+    "address": "Sam Roi Yot, Sam Roi Yot, Prachuap Khiri Khan, Thailand",
+    "features": ["Pool", "Mountain View", "Sea View", "Mango Orchard", "Chanote Title"],
+    "status": "Active",
+    "exclusive": true
+  },
+  {
+    "fazwazId": "U5985497",
+    "title": "Renovated 3-Bed House + Chanote Land Sam Roi Yot – Mountain",
+    "type": "House",
+    "price": 235000,
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "sizeSqm": 270,
+    "landSizeSqm": 5681,
+    "description": "Fully renovated single house with 270 sqm living space on 1 Rai 2 Ngan 41 sq.wah Red Garuda Chanote land (~1.4 acres). Brand new everything, 3 beds, 3 baths, open kitchen, large hall. Mountain views, 29m paved road frontage, 1.5km from sea, 40km to Hua Hin.",
+    "address": "Sam Roi Yot, Sam Roi Yot, Prachuap Khiri Khan, Thailand",
+    "features": ["Beach Access", "Private Garden", "Terrace", "Covered Parking", "Mountain View", "Chanote Title"],
+    "status": "Active",
+    "exclusive": false
+  }
+]

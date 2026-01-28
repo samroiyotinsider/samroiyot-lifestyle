@@ -1,0 +1,17 @@
+{
+  "query": "SELECT id, title, images, videoUrl, priceEur FROM properties WHERE id = 1;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT id, title, images, videoUrl, priceEur FROM properties WHERE id = 1;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "1 Bedroom Condo for Sale at The Sea Condominium",
+      "images": "NULL",
+      "videoUrl": "NULL",
+      "priceEur": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\timages\tvideoUrl\tpriceEur\n1\t1 Bedroom Condo for Sale at The Sea Condominium\tNULL\tNULL\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 1495
+}

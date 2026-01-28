@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS `properties` (\n  `id` int AUTO_INCREMENT PRIMARY KEY,\n  `title` text NOT NULL,\n  `titleTh` text,\n  `description` text NOT NULL,\n  `descriptionTh` text,\n  `propertyType` varchar(50) NOT NULL,\n  `price` decimal(12,2),\n  `priceUsd` decimal(12,2),\n  `sizeSqm` decimal(10,2),\n  `sizeRai` decimal(10,2),\n  `bedrooms` int DEFAULT 0,\n  `bathrooms` int DEFAULT 0,\n  `features` text,\n  `images` json,\n  `videoUrl` varchar(500),\n  `latitude` decimal(10,8),\n  `longitude` decimal(11,8),\n  `address` text,\n  `addressTh` text,\n  `fazwazUrl` varchar(500),\n  `status` varchar(50) DEFAULT 'available',\n  `featured` tinyint DEFAULT 0,\n  `createdAt` timestamp DEFAULT CURRENT_TIMESTAMP,\n  `updatedAt` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute CREATE TABLE IF NOT EXISTS `properties` (\n  `id` int AUTO_INCREMENT PRIMARY KEY,\n  `title` text NOT NULL,\n  `titleTh` text,\n  `description` text NOT NULL,\n  `descriptionTh` text,\n  `propertyType` varchar(50) NOT NULL,\n  `price` decimal(12,2),\n  `priceUsd` decimal(12,2),\n  `sizeSqm` decimal(10,2),\n  `sizeRai` decimal(10,2),\n  `bedrooms` int DEFAULT 0,\n  `bathrooms` int DEFAULT 0,\n  `features` text,\n  `images` json,\n  `videoUrl` varchar(500),\n  `latitude` decimal(10,8),\n  `longitude` decimal(11,8),\n  `address` text,\n  `addressTh` text,\n  `fazwazUrl` varchar(500),\n  `status` varchar(50) DEFAULT 'available',\n  `featured` tinyint DEFAULT 0,\n  `createdAt` timestamp DEFAULT CURRENT_TIMESTAMP,\n  `updatedAt` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1642
+}

@@ -1,31 +1,364 @@
-import { useAuth } from "@/_core/hooks/useAuth";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { getLoginUrl } from "@/const";
-import { Streamdown } from 'streamdown';
+import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "wouter";
+import { trpc } from "@/lib/trpc";
+import { CheckCircle2, Home as HomeIcon, Users, Palmtree, ArrowRight, Star } from "lucide-react";
+import { useState, useEffect } from "react";
 
-/**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Workflow, Frontend Best Practices, Design Guide and Common Pitfalls
- */
 export default function Home() {
-  // The userAuth hooks provides authentication state
-  // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
-  let { user, loading, error, isAuthenticated, logout } = useAuth();
+  const { language } = useLanguage();
+  const { data: allProperties, isLoading } = trpc.properties.list.useQuery({});
+  const properties = allProperties?.filter(p => p.featured) || [];
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [showEmailPopup, setShowEmailPopup] = useState(false);
 
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
+  const heroSlides = [
+    { image: "/hero-dolphin-bay-beach.jpg", alt: "Dolphin Bay Beach" },
+    { image: "/hero-national-park.jpg", alt: "Khao Sam Roi Yot National Park" },
+    { image: "/hero-luxury-villa.jpg", alt: "Luxury Villa with Pool" },
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const popupTimer = setTimeout(() => {
+      setShowEmailPopup(true);
+    }, 15000);
+    return () => clearTimeout(popupTimer);
+  }, []);
+
+  const content = {
+    en: {
+      heroTitle: "Sam Roi Yot – Thailand's Last True Coastal Secret",
+      heroSubtitle: "Where Nature Meets Luxury Living & Smart Investment",
+      browseProp: "Browse Properties",
+      relocation: "Relocation Services",
+      trustPillar1: "Curated Exclusive Properties",
+      trustPillar1Desc: "Hand-selected beachfront homes, luxury villas, and prime land",
+      trustPillar2: "Seamless Relocation & Visa Support",
+      trustPillar2Desc: "Elite visa assistance, bank setup, and settling-in services",
+      trustPillar3: "Experience the Lifestyle First",
+      trustPillar3Desc: "Private viewings, area tours, and local community introductions",
+      featuredTitle: "Featured Exclusive Properties",
+      featuredDesc: "Discover our curated selection of premium properties in Sam Roi Yot",
+      viewAll: "View All Properties",
+      whySRY: "Why Sam Roi Yot?",
+      whyDesc: "Escape the crowds of Phuket and Pattaya. Sam Roi Yot offers pristine beaches, dramatic limestone mountains, world-class national parks, and a peaceful expat community—all within 2.5 hours of Bangkok.",
+      benefit1: "Untouched Natural Beauty",
+      benefit1Desc: "Dolphin Bay beaches, Phraya Nakhon Cave, and Khao Sam Roi Yot National Park",
+      benefit2: "Strategic Location",
+      benefit2Desc: "45 minutes to Hua Hin, 2.5 hours to Bangkok, 3hr 40min to airport (264km)",
+      benefit3: "Growing Expat Community",
+      benefit3Desc: "English-speaking services, international restaurants, and welcoming locals",
+      benefit4: "Smart Investment",
+      benefit4Desc: "Rising property values, tourism growth, and government infrastructure projects",
+      ctaTitle: "Ready to Discover Your Paradise?",
+      ctaDesc: "Let us guide you through properties, visas, and relocation—your journey starts here.",
+      contactUs: "Contact Us Today",
+      emailPopupTitle: "Get Your Free Sam Roi Yot Insider Guide",
+      emailPopupDesc: "Discover the best beaches, visa tips, hidden spots, and insider secrets about living in Sam Roi Yot.",
+      emailPlaceholder: "Enter your email",
+      getGuide: "Get Free Guide",
+      closePopup: "Maybe Later",
+    },
+    th: {
+      heroTitle: "สามร้อยยอด – ความลับชายฝั่งที่แท้จริงของไทย",
+      heroSubtitle: "ที่ซึ่งธรรมชาติพบกับการใช้ชีวิตหรูหราและการลงทุนที่ชาญฉลาด",
+      browseProp: "ดูอสังหาริมทรัพย์",
+      relocation: "บริการย้ายถิ่นฐาน",
+      trustPillar1: "อสังหาริมทรัพย์พิเศษที่คัดสรร",
+      trustPillar1Desc: "บ้านติดชายหาด วิลล่าหรูหรา และที่ดินเลิศพิเศษที่คัดสรรมาอย่างดี",
+      trustPillar2: "การย้ายถิ่นฐานและการสนับสนุนวีซ่าที่ราบรื่น",
+      trustPillar2Desc: "ความช่วยเหลือด้านวีซ่าระดับพรีเมียม การตั้งค่าธนาคาร และบริการตั้งรกราก",
+      trustPillar3: "สัมผัสไลฟ์สไตล์ก่อน",
+      trustPillar3Desc: "การชมแบบส่วนตัว ทัวร์พื้นที่ และการแนะนำชุมชนท้องถิ่น",
+      featuredTitle: "อสังหาริมทรัพย์พิเศษแนะนำ",
+      featuredDesc: "ค้นพบคอลเลกชันอสังหาริมทรัพย์พรีเมียมที่คัดสรรมาในสามร้อยยอด",
+      viewAll: "ดูอสังหาริมทรัพย์ทั้งหมด",
+      whySRY: "ทำไมต้องสามร้อยยอด?",
+      whyDesc: "หนีความแออัดของภูเก็ตและพัทยา สามร้อยยอดมีชายหาดที่บริสุทธิ์ ภูเขาหินปูนที่น่าทึ่ง อุทยานแห่งชาติระดับโลก และชุมชนชาวต่างชาติที่สงบ—ทั้งหมดอยู่ห่างจากกรุงเทพฯ เพียง 2.5 ชั่วโมง",
+      benefit1: "ความงามทางธรรมชาติที่ไม่ถูกแตะต้อง",
+      benefit1Desc: "ชายหาดดอลฟินเบย์ ถ้ำพระยานคร และอุทยานแห่งชาติเขาสามร้อยยอด",
+      benefit2: "ทำเลที่ตั้งเชิงกลยุทธ์",
+      benefit2Desc: "45 นาทีถึงหัวหิน 2.5 ชั่วโมงถึงกรุงเทพฯ 3 ชม 40 นาทีถึงสนามบิน (264 กม)",
+      benefit3: "ชุมชนชาวต่างชาติที่เติบโต",
+      benefit3Desc: "บริการภาษาอังกฤษ ร้านอาหารนานาชาติ และคนท้องถิ่นที่ต้อนรับ",
+      benefit4: "การลงทุนที่ชาญฉลาด",
+      benefit4Desc: "มูลค่าอสังหาริมทรัพย์ที่เพิ่มขึ้น การเติบโตของการท่องเที่ยว และโครงการโครงสร้างพื้นฐานของรัฐบาล",
+      ctaTitle: "พร้อมที่จะค้นพบสวรรค์ของคุณหรือยัง?",
+      ctaDesc: "ให้เราแนะนำคุณผ่านอสังหาริมทรัพย์ วีซ่า และการย้ายถิ่นฐาน—การเดินทางของคุณเริ่มต้นที่นี่",
+      contactUs: "ติดต่อเราวันนี้",
+      emailPopupTitle: "รับคู่มือภายในสามร้อยยอดฟรี",
+      emailPopupDesc: "ค้นพบชายหาดที่ดีที่สุด เคล็ดลับวีซ่า จุดที่ซ่อนอยู่ และความลับภายในเกี่ยวกับการใช้ชีวิตในสามร้อยยอด",
+      emailPlaceholder: "ใส่อีเมลของคุณ",
+      getGuide: "รับคู่มือฟรี",
+      closePopup: "ภายหลัง",
+    },
+  };
+
+  const t = content[language];
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
-      </main>
+    <div className="min-h-screen">
+      {/* Cinematic Hero Section with Slider */}
+      <section className="relative h-[70vh] md:h-[80vh] overflow-hidden">
+        {heroSlides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentSlide ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <img
+              src={slide.image}
+              alt={slide.alt}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
+          </div>
+        ))}
+        
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 drop-shadow-2xl">
+            {t.heroTitle}
+          </h1>
+          <p className="text-xl md:text-2xl text-white/95 mb-8 max-w-3xl drop-shadow-lg">
+            {t.heroSubtitle}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link href="/properties">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8 py-6">
+                {t.browseProp} <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+            <Link href="/concierge">
+              <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white/20 text-lg px-8 py-6">
+                {t.relocation}
+              </Button>
+            </Link>
+          </div>
+        </div>
+
+        {/* Slide Indicators */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all ${
+                index === currentSlide ? "bg-white w-8" : "bg-white/50"
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Trust Pillars */}
+      <section className="py-16 bg-muted/30">
+        <div className="container">
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
+              <CardContent className="pt-8 text-center">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <HomeIcon className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold mb-2">{t.trustPillar1}</h3>
+                <p className="text-muted-foreground">{t.trustPillar1Desc}</p>
+              </CardContent>
+            </Card>
+            <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
+              <CardContent className="pt-8 text-center">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold mb-2">{t.trustPillar2}</h3>
+                <p className="text-muted-foreground">{t.trustPillar2Desc}</p>
+              </CardContent>
+            </Card>
+            <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
+              <CardContent className="pt-8 text-center">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Palmtree className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold mb-2">{t.trustPillar3}</h3>
+                <p className="text-muted-foreground">{t.trustPillar3Desc}</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Properties */}
+      <section className="py-20">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">{t.featuredTitle}</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              {t.featuredDesc}
+            </p>
+          </div>
+
+          {isLoading ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3].map((i) => (
+                <Card key={i} className="overflow-hidden animate-pulse">
+                  <div className="h-64 bg-muted" />
+                  <CardContent className="p-6">
+                    <div className="h-6 bg-muted rounded mb-2" />
+                    <div className="h-4 bg-muted rounded w-2/3" />
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {properties?.slice(0, 3).map((property) => (
+                <Link key={property.id} href={`/properties/${property.id}`}>
+                  <Card className="overflow-hidden hover:shadow-xl transition-all group cursor-pointer h-full">
+                    <div className="relative h-64 overflow-hidden">
+                      {property.featured && (
+                        <div className="absolute top-4 left-4 z-10 bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1">
+                          <Star className="h-4 w-4 fill-current" />
+                          EXCLUSIVE
+                        </div>
+                      )}
+                      <img
+                        src={property.images?.[0] || "/placeholder-property.jpg"}
+                        alt={property.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <CardContent className="p-6">
+                      <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                        {property.title}
+                      </h3>
+                      <p className="text-2xl font-bold text-primary mb-2">
+                        ฿{property.price?.toLocaleString()}
+                      </p>
+                      <p className="text-muted-foreground line-clamp-2 mb-4">
+                        {property.description}
+                      </p>
+                      <div className="flex gap-4 text-sm text-muted-foreground">
+                        <span>{property.bedrooms} Beds</span>
+                        <span>{property.bathrooms} Baths</span>
+                        <span>{property.sizeSqm} m²</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          <div className="text-center mt-12">
+            <Link href="/properties">
+              <Button size="lg" variant="outline">
+                {t.viewAll} <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Sam Roi Yot */}
+      <section className="py-20 bg-muted/30">
+        <div className="container">
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">{t.whySRY}</h2>
+            <p className="text-lg text-muted-foreground">
+              {t.whyDesc}
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <Card className="border-none shadow-lg">
+              <CardContent className="p-6">
+                <CheckCircle2 className="h-8 w-8 text-primary mb-3" />
+                <h3 className="text-xl font-bold mb-2">{t.benefit1}</h3>
+                <p className="text-muted-foreground">{t.benefit1Desc}</p>
+              </CardContent>
+            </Card>
+            <Card className="border-none shadow-lg">
+              <CardContent className="p-6">
+                <CheckCircle2 className="h-8 w-8 text-primary mb-3" />
+                <h3 className="text-xl font-bold mb-2">{t.benefit2}</h3>
+                <p className="text-muted-foreground">{t.benefit2Desc}</p>
+              </CardContent>
+            </Card>
+            <Card className="border-none shadow-lg">
+              <CardContent className="p-6">
+                <CheckCircle2 className="h-8 w-8 text-primary mb-3" />
+                <h3 className="text-xl font-bold mb-2">{t.benefit3}</h3>
+                <p className="text-muted-foreground">{t.benefit3Desc}</p>
+              </CardContent>
+            </Card>
+            <Card className="border-none shadow-lg">
+              <CardContent className="p-6">
+                <CheckCircle2 className="h-8 w-8 text-primary mb-3" />
+                <h3 className="text-xl font-bold mb-2">{t.benefit4}</h3>
+                <p className="text-muted-foreground">{t.benefit4Desc}</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20 bg-primary text-primary-foreground">
+        <div className="container text-center">
+          <h2 className="text-4xl font-bold mb-4">{t.ctaTitle}</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
+            {t.ctaDesc}
+          </p>
+          <Link href="/contact">
+            <Button size="lg" variant="secondary" className="text-lg px-8 py-6">
+              {t.contactUs} <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Email Capture Popup */}
+      {showEmailPopup && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <Card className="max-w-md w-full">
+            <CardContent className="p-8">
+              <button
+                onClick={() => setShowEmailPopup(false)}
+                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
+              >
+                ✕
+              </button>
+              <h3 className="text-2xl font-bold mb-2">{t.emailPopupTitle}</h3>
+              <p className="text-muted-foreground mb-6">{t.emailPopupDesc}</p>
+              <form className="space-y-4">
+                <input
+                  type="email"
+                  placeholder={t.emailPlaceholder}
+                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+                <Button className="w-full" size="lg">
+                  {t.getGuide}
+                </Button>
+                <button
+                  type="button"
+                  onClick={() => setShowEmailPopup(false)}
+                  className="w-full text-sm text-muted-foreground hover:text-foreground"
+                >
+                  {t.closePopup}
+                </button>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }

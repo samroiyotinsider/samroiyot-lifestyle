@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE properties \nSET \n  title = 'Renovated Single House with Garden',\n  description = 'Newly renovated brand new single house featuring a spacious modern kitchen and large hall. Located on Red Garuda Chanote land (1 Rai 2 Ngan 41 sq.wah, approximately 1.4 acres) with 29 meters of paved road frontage. Just 1.5km from the sea with stunning mountain views. This property offers the perfect blend of modern comfort and natural beauty in Sam Roi Yot.',\n  price = 5800000,\n  priceUsd = 161000,\n  sizeSqm = 270,\n  sizeRai = '1 Rai 2 Ngan 41 sq.wah',\n  bedrooms = 3,\n  bathrooms = 3,\n  features = '[\"Mountain View\", \"Renovated\", \"Garden\", \"Paved Road Access\", \"Red Garuda Chanote\", \"Large Kitchen\", \"Spacious Hall\"]'\nWHERE title LIKE '%Renovated Single House%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user hTJ5tDY4LoLP9rv.root --database 6XDA8SzMFvtPL5hBHftmHV --execute UPDATE properties \nSET \n  title = 'Renovated Single House with Garden',\n  description = 'Newly renovated brand new single house featuring a spacious modern kitchen and large hall. Located on Red Garuda Chanote land (1 Rai 2 Ngan 41 sq.wah, approximately 1.4 acres) with 29 meters of paved road frontage. Just 1.5km from the sea with stunning mountain views. This property offers the perfect blend of modern comfort and natural beauty in Sam Roi Yot.',\n  price = 5800000,\n  priceUsd = 161000,\n  sizeSqm = 270,\n  sizeRai = '1 Rai 2 Ngan 41 sq.wah',\n  bedrooms = 3,\n  bathrooms = 3,\n  features = '[\"Mountain View\", \"Renovated\", \"Garden\", \"Paved Road Access\", \"Red Garuda Chanote\", \"Large Kitchen\", \"Spacious Hall\"]'\nWHERE title LIKE '%Renovated Single House%';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 58
+}

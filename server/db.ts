@@ -1,6 +1,11 @@
-import { eq } from "drizzle-orm";
+import { and, desc, eq, gte, lte, like, or, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { 
+  InsertUser, users,
+  properties, InsertProperty,
+  inquiries, InsertInquiry,
+  lifestyleArticles, InsertLifestyleArticle
+} from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -89,4 +94,156 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+// Property queries
+export async function getAllProperties(filters?: {
+  propertyType?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  features?: string[];
+  status?: string;
+}) {
+  const db = await getDb();
+  if (!db) return [];
+
+  let query = db.select().from(properties);
+  const conditions = [];
+
+  if (filters?.propertyType) {
+    conditions.push(eq(properties.propertyType, filters.propertyType as any));
+  }
+  if (filters?.minPrice) {
+    conditions.push(gte(properties.price, filters.minPrice));
+  }
+  if (filters?.maxPrice) {
+    conditions.push(lte(properties.price, filters.maxPrice));
+  }
+  if (filters?.status) {
+    conditions.push(eq(properties.status, filters.status as any));
+  }
+
+  if (conditions.length > 0) {
+    query = query.where(and(...conditions)) as any;
+  }
+
+  const results = await query.orderBy(desc(properties.featured), desc(properties.createdAt));
+  
+  // Filter by features in application layer since JSON querying is complex
+  if (filters?.features && filters.features.length > 0) {
+    return results.filter(prop => {
+      const propFeatures = JSON.parse(prop.features || '[]');
+      return filters.features!.some(f => propFeatures.includes(f));
+    });
+  }
+
+  return results;
+}
+
+export async function getPropertyById(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const result = await db.select().from(properties).where(eq(properties.id, id)).limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function getFeaturedProperties(limit = 6) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return db.select().from(properties)
+    .where(and(eq(properties.featured, 1), eq(properties.status, 'available')))
+    .orderBy(desc(properties.createdAt))
+    .limit(limit);
+}
+
+export async function createProperty(data: InsertProperty) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  const result = await db.insert(properties).values(data);
+  return result;
+}
+
+export async function updateProperty(id: number, data: Partial<InsertProperty>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db.update(properties).set(data).where(eq(properties.id, id));
+}
+
+export async function deleteProperty(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db.delete(properties).where(eq(properties.id, id));
+}
+
+// Inquiry queries
+export async function createInquiry(data: InsertInquiry) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  const result = await db.insert(inquiries).values(data);
+  return result;
+}
+
+export async function getAllInquiries() {
+  const db = await getDb();
+  if (!db) return [];
+
+  return db.select().from(inquiries).orderBy(desc(inquiries.createdAt));
+}
+
+export async function getInquiryById(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const result = await db.select().from(inquiries).where(eq(inquiries.id, id)).limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function updateInquiryStatus(id: number, status: 'new' | 'contacted' | 'closed') {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db.update(inquiries).set({ status }).where(eq(inquiries.id, id));
+}
+
+// Lifestyle articles queries
+export async function getAllLifestyleArticles(published = true) {
+  const db = await getDb();
+  if (!db) return [];
+
+  let query = db.select().from(lifestyleArticles);
+  
+  if (published) {
+    query = query.where(eq(lifestyleArticles.published, 1)) as any;
+  }
+
+  return query.orderBy(desc(lifestyleArticles.createdAt));
+}
+
+export async function getLifestyleArticleBySlug(slug: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const result = await db.select().from(lifestyleArticles)
+    .where(eq(lifestyleArticles.slug, slug))
+    .limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function createLifestyleArticle(data: InsertLifestyleArticle) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  const result = await db.insert(lifestyleArticles).values(data);
+  return result;
+}
+
+export async function updateLifestyleArticle(id: number, data: Partial<InsertLifestyleArticle>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db.update(lifestyleArticles).set(data).where(eq(lifestyleArticles.id, id));
+}

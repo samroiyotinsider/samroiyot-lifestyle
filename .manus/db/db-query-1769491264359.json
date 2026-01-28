@@ -1,0 +1,15 @@
+{
+  "query": "SELECT id, title, LEFT(images, 100) as images_preview FROM properties LIMIT 1;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT id, title, LEFT(images, 100) as images_preview FROM properties LIMIT 1;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "1 Bedroom Condo for Sale at The Sea Condominium",
+      "images_preview": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\timages_preview\n1\t1 Bedroom Condo for Sale at The Sea Condominium\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 1478
+}

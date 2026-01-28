@@ -4,17 +4,39 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import FloatingChatButtons from "./components/FloatingChatButtons";
+import { AIChatbot } from "./components/AIChatbot";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import Home from "./pages/Home";
+import Properties from "./pages/Properties";
+import PropertyDetail from "./pages/PropertyDetail";
+import Lifestyle from "./pages/Lifestyle";
+import Concierge from "./pages/Concierge";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function Router() {
-  // make sure to consider if you need authentication for certain routes
   return (
-    <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
-    </Switch>
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex-1">
+        <Switch>
+          <Route path="/" component={Home} />
+          <Route path="/properties" component={Properties} />
+          <Route path="/properties/:id" component={PropertyDetail} />
+          <Route path="/lifestyle" component={Lifestyle} />
+          <Route path="/concierge" component={Concierge} />
+          <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/admin" component={AdminDashboard} />
+          <Route path="/404" component={NotFound} />
+          <Route component={NotFound} />
+        </Switch>
+      </main>
+      <Footer />
+    </div>
   );
 }
 
@@ -33,6 +55,8 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
+          <FloatingChatButtons />
+          <AIChatbot />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
