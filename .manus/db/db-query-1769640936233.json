@@ -1,0 +1,9 @@
+{
+  "query": "\nCREATE TABLE IF NOT EXISTS `inquiries` (\n  `id` int AUTO_INCREMENT PRIMARY KEY,\n  `propertyId` int,\n  `name` varchar(255) NOT NULL,\n  `email` varchar(255) NOT NULL,\n  `phone` varchar(50),\n  `message` text NOT NULL,\n  `inquiryType` enum('property', 'concierge', 'general') NOT NULL,\n  `status` enum('new', 'contacted', 'resolved') DEFAULT 'new',\n  `createdAt` timestamp DEFAULT CURRENT_TIMESTAMP\n);\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute \nCREATE TABLE IF NOT EXISTS `inquiries` (\n  `id` int AUTO_INCREMENT PRIMARY KEY,\n  `propertyId` int,\n  `name` varchar(255) NOT NULL,\n  `email` varchar(255) NOT NULL,\n  `phone` varchar(50),\n  `message` text NOT NULL,\n  `inquiryType` enum('property', 'concierge', 'general') NOT NULL,\n  `status` enum('new', 'contacted', 'resolved') DEFAULT 'new',\n  `createdAt` timestamp DEFAULT CURRENT_TIMESTAMP\n);\n",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1633
+}

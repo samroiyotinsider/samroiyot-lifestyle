@@ -1,0 +1,65 @@
+{
+  "query": "SELECT * FROM inquiries ORDER BY createdAt DESC LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT * FROM inquiries ORDER BY createdAt DESC LIMIT 5;",
+  "rows": [
+    {
+      "id": "7",
+      "propertyId": "1",
+      "name": "John Tester",
+      "email": "john.tester@example.com",
+      "phone": "+66123456789",
+      "message": "I'm very interested in this beautiful condo. Please send me more information and arrange a viewing.",
+      "inquiryType": "property",
+      "status": "new",
+      "createdAt": "2026-01-28 22:56:53"
+    },
+    {
+      "id": "6",
+      "propertyId": "NULL",
+      "name": "John Smith",
+      "email": "john@example.com",
+      "phone": "+9876543210",
+      "message": "I have a general question about Sam Roi Yot.",
+      "inquiryType": "general",
+      "status": "new",
+      "createdAt": "2026-01-28 22:56:14"
+    },
+    {
+      "id": "5",
+      "propertyId": "NULL",
+      "name": "Jane Doe",
+      "email": "jane@example.com",
+      "phone": "NULL",
+      "message": "I need help with visa services.",
+      "inquiryType": "concierge",
+      "status": "new",
+      "createdAt": "2026-01-28 22:56:14"
+    },
+    {
+      "id": "4",
+      "propertyId": "1",
+      "name": "Test User",
+      "email": "test@example.com",
+      "phone": "+1234567890",
+      "message": "I'm interested in this property. Please contact me.",
+      "inquiryType": "property",
+      "status": "new",
+      "createdAt": "2026-01-28 22:56:12"
+    },
+    {
+      "id": "2",
+      "propertyId": "NULL",
+      "name": "Jane Doe",
+      "email": "jane@example.com",
+      "phone": "NULL",
+      "message": "I need help with visa services.",
+      "inquiryType": "concierge",
+      "status": "new",
+      "createdAt": "2026-01-28 22:55:48"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tpropertyId\tname\temail\tphone\tmessage\tinquiryType\tstatus\tcreatedAt\n7\t1\tJohn Tester\tjohn.tester@example.com\t+66123456789\tI'm very interested in this beautiful condo. Please send me more information and arrange a viewing.\tproperty\tnew\t2026-01-28 22:56:53\n6\tNULL\tJohn Smith\tjohn@example.com\t+9876543210\tI have a general question about Sam Roi Yot.\tgeneral\tnew\t2026-01-28 22:56:14\n5\tNULL\tJane Doe\tjane@example.com\tNULL\tI need help with visa services.\tconcierge\tnew\t2026-01-28 22:56:14\n4\t1\tTest User\ttest@example.com\t+1234567890\tI'm interested in this property. Please contact me.\tproperty\tnew\t2026-01-28 22:56:12\n2\tNULL\tJane Doe\tjane@example.com\tNULL\tI need help with visa services.\tconcierge\tnew\t2026-01-28 22:55:48\n",
+  "stderr": "",
+  "execution_time_ms": 1573
+}

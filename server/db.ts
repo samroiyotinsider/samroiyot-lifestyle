@@ -184,7 +184,11 @@ export async function createInquiry(data: InsertInquiry) {
   if (!db) throw new Error("Database not available");
 
   const result = await db.insert(inquiries).values(data);
-  return result;
+  const insertId = Number(result[0].insertId);
+  
+  // Fetch and return the created inquiry
+  const created = await db.select().from(inquiries).where(eq(inquiries.id, insertId)).limit(1);
+  return created[0];
 }
 
 export async function getAllInquiries() {

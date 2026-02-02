@@ -1,14 +1,24 @@
+import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { trpc } from "@/lib/trpc";
 import { Link, useLocation } from "wouter";
-import { Plus, Home, MessageSquare, LogOut, Loader2 } from "lucide-react";
+import { Plus, Home, MessageSquare, LogOut, Loader2, Edit, Trash2, Eye } from "lucide-react";
 import { toast } from "sonner";
+import { PropertyForm, type PropertyFormData } from "@/components/PropertyForm";
+import type { Property } from "../../../drizzle/schema";
 
 export default function AdminDashboard() {
   const { user, loading, isAuthenticated, logout } = useAuth();
   const [, setLocation] = useLocation();
+  const [showPropertyForm, setShowPropertyForm] = useState(false);
+  const [editingProperty, setEditingProperty] = useState<Property | undefined>();
+  const [deletePropertyId, setDeletePropertyId] = useState<number | null>(null);
+
+  const utils = trpc.useUtils();
 
   const logoutMutation = trpc.auth.logout.useMutation({
     onSuccess: () => {
@@ -27,6 +37,85 @@ export default function AdminDashboard() {
     undefined,
     { enabled: isAuthenticated && user?.role === "admin" }
   );
+
+  const createPropertyMutation = trpc.properties.create.useMutation({
+    onSuccess: () => {
+      toast.success("Property created successfully!");
+      utils.properties.list.invalidate();
+      setShowPropertyForm(false);
+    },
+    onError: (error) => {
+      toast.error(`Failed to create property: ${error.message}`);
+    },
+  });
+
+  const updatePropertyMutation = trpc.properties.update.useMutation({
+    onSuccess: () => {
+      toast.success("Property updated successfully!");
+      utils.properties.list.invalidate();
+      setShowPropertyForm(false);
+      setEditingProperty(undefined);
+    },
+    onError: (error) => {
+      toast.error(`Failed to update property: ${error.message}`);
+    },
+  });
+
+  const deletePropertyMutation = trpc.properties.delete.useMutation({
+    onSuccess: () => {
+      toast.success("Property deleted successfully!");
+      utils.properties.list.invalidate();
+      setDeletePropertyId(null);
+    },
+    onError: (error) => {
+      toast.error(`Failed to delete property: ${error.message}`);
+    },
+  });
+
+  const updateInquiryStatusMutation = trpc.inquiries.updateStatus.useMutation({
+    onSuccess: () => {
+      toast.success("Inquiry status updated!");
+      utils.inquiries.list.invalidate();
+    },
+    onError: (error) => {
+      toast.error(`Failed to update status: ${error.message}`);
+    },
+  });
+
+  const handlePropertySubmit = async (data: PropertyFormData) => {
+    if (editingProperty) {
+      await updatePropertyMutation.mutateAsync({
+        id: editingProperty.id,
+        ...data,
+      });
+    } else {
+      await createPropertyMutation.mutateAsync(data);
+    }
+  };
+
+  const handleAddProperty = () => {
+    setEditingProperty(undefined);
+    setShowPropertyForm(true);
+  };
+
+  const handleEditProperty = (property: Property) => {
+    setEditingProperty(property);
+    setShowPropertyForm(true);
+  };
+
+  const handleDeleteProperty = (id: number) => {
+    setDeletePropertyId(id);
+  };
+
+  const confirmDelete = () => {
+    if (deletePropertyId) {
+      deletePropertyMutation.mutate({ id: deletePropertyId });
+    }
+  };
+
+  const handleUpdateInquiryStatus = (id: number, status: "new" | "contacted" | "closed") => {
+    updateInquiryStatusMutation.mutate({ id, status });
+  };
 
   if (loading) {
     return (
@@ -77,7 +166,7 @@ export default function AdminDashboard() {
   }
 
   const pendingInquiries = inquiries?.filter(i => i.status === "new") || [];
-  const recentInquiries = inquiries?.slice(0, 5) || [];
+  const recentInquiries = inquiries?.slice(0, 10) || [];
 
   return (
     <div className="min-h-screen bg-background">
@@ -164,7 +253,7 @@ export default function AdminDashboard() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle>Properties</CardTitle>
-              <Button size="sm" onClick={() => toast.info("Property creation form coming soon")}>
+              <Button size="sm" onClick={handleAddProperty}>
                 <Plus className="h-4 w-4 mr-2" />
                 Add Property
               </Button>
@@ -177,31 +266,53 @@ export default function AdminDashboard() {
               </div>
             ) : properties && properties.length > 0 ? (
               <div className="space-y-4">
-                {properties.map((property) => (
-                  <div
-                    key={property.id}
-                    className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors"
-                  >
-                    <div className="flex-1">
-                      <h3 className="font-semibold">{property.title}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        ฿{property.price.toLocaleString()} • {property.propertyType} • {property.status}
-                      </p>
+                {properties.map((property) => {
+                  const priceDisplay = property.priceEur 
+                    ? `€${property.priceEur.toLocaleString()}`
+                    : property.price 
+                    ? `฿${property.price.toLocaleString()}`
+                    : "Price not set";
+                  
+                  return (
+                    <div
+                      key={property.id}
+                      className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors"
+                    >
+                      <div className="flex-1">
+                        <h3 className="font-semibold">{property.title}</h3>
+                        <p className="text-sm text-muted-foreground">
+                          {priceDisplay} • {property.propertyType} • {property.status}
+                          {property.featured ? " • Featured" : ""}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Button variant="outline" size="sm" asChild>
+                          <Link href={`/properties/${property.id}`}>
+                            <Eye className="h-4 w-4 mr-1" />
+                            View
+                          </Link>
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleEditProperty(property)}
+                        >
+                          <Edit className="h-4 w-4 mr-1" />
+                          Edit
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleDeleteProperty(property.id)}
+                          className="text-destructive hover:text-destructive"
+                        >
+                          <Trash2 className="h-4 w-4 mr-1" />
+                          Delete
+                        </Button>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Button variant="outline" size="sm" asChild>
-                        <Link href={`/property/${property.id}`}>View</Link>
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => toast.info("Edit functionality coming soon")}
-                      >
-                        Edit
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             ) : (
               <div className="text-center py-8 text-muted-foreground">
@@ -232,6 +343,9 @@ export default function AdminDashboard() {
                       <div>
                         <p className="font-semibold">{inquiry.name}</p>
                         <p className="text-sm text-muted-foreground">{inquiry.email}</p>
+                        {inquiry.phone && (
+                          <p className="text-sm text-muted-foreground">{inquiry.phone}</p>
+                        )}
                       </div>
                       <span
                         className={`text-xs px-2 py-1 rounded-full ${
@@ -251,15 +365,35 @@ export default function AdminDashboard() {
                       {inquiry.propertyId && <span>• Property #{inquiry.propertyId}</span>}
                       <span>• {new Date(inquiry.createdAt).toLocaleDateString()}</span>
                     </div>
-                    {inquiry.status === "new" && (
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => toast.info("Status update functionality coming soon")}
-                      >
-                        Mark as Contacted
-                      </Button>
-                    )}
+                    <div className="flex gap-2">
+                      {inquiry.status === "new" && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleUpdateInquiryStatus(inquiry.id, "contacted")}
+                        >
+                          Mark as Contacted
+                        </Button>
+                      )}
+                      {inquiry.status === "contacted" && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleUpdateInquiryStatus(inquiry.id, "closed")}
+                        >
+                          Mark as Closed
+                        </Button>
+                      )}
+                      {inquiry.status === "closed" && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleUpdateInquiryStatus(inquiry.id, "new")}
+                        >
+                          Reopen
+                        </Button>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -271,6 +405,50 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Property Form Dialog */}
+      <Dialog open={showPropertyForm} onOpenChange={(open) => {
+        setShowPropertyForm(open);
+        if (!open) setEditingProperty(undefined);
+      }}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>
+              {editingProperty ? "Edit Property" : "Add New Property"}
+            </DialogTitle>
+          </DialogHeader>
+          <PropertyForm
+            property={editingProperty}
+            onSubmit={handlePropertySubmit}
+            onCancel={() => {
+              setShowPropertyForm(false);
+              setEditingProperty(undefined);
+            }}
+          />
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={deletePropertyId !== null} onOpenChange={(open) => !open && setDeletePropertyId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete the property
+              and remove it from the database.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={confirmDelete}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
