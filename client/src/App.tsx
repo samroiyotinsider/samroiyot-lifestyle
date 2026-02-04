@@ -12,6 +12,10 @@ import Home from "./pages/Home";
 import Properties from "./pages/Properties";
 import PropertyDetail from "./pages/PropertyDetail";
 import Lifestyle from "./pages/Lifestyle";
+import Guides from "./pages/Guides";
+import News from "./pages/News";
+import Services from "./pages/Services";
+import Events from "./pages/Events";
 import Concierge from "./pages/Concierge";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -27,6 +31,10 @@ function Router() {
           <Route path="/properties" component={Properties} />
           <Route path="/properties/:id" component={PropertyDetail} />
           <Route path="/lifestyle" component={Lifestyle} />
+          <Route path="/guides" component={Guides} />
+          <Route path="/news" component={News} />
+          <Route path="/services" component={Services} />
+          <Route path="/events" component={Events} />
           <Route path="/concierge" component={Concierge} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />

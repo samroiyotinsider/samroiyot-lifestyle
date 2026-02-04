@@ -12,6 +12,10 @@ export function Header() {
   const navItems = [
     { href: "/", label: t("Home", "หน้าแรก") },
     { href: "/lifestyle", label: t("Lifestyle", "ไลฟ์สไตล์") },
+    { href: "/guides", label: t("Guides", "คู่มือ") },
+    { href: "/news", label: t("News", "ข่าวสาร") },
+    { href: "/services", label: t("Services", "บริการ") },
+    { href: "/events", label: t("Events", "เหตุการณ์") },
     { href: "/properties", label: t("Properties", "ทรัพย์สิน") },
     { href: "/concierge", label: t("Concierge", "บริการคอนเซียร์จ") },
     { href: "/about", label: t("About", "เกี่ยวกับเรา") },
