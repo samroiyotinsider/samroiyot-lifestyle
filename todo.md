@@ -241,7 +241,23 @@
 - [ ] 6 topic video IDs for /area-guide
 - [ ] Individual property tour video IDs
 
-### Phase 10: Concierge Customization (One-on-One)
+### Phase 9: Facebook Extraction & Content Strategy (Completed)
+- [x] Extract all detailed information from Friends of Sam Roi Yot Facebook
+- [x] Create Master Partner/Services List (internal staff reference)
+- [x] Write detailed video scripts for all 18 videos
+- [x] Update Concierge page with direct phone booking model (+66 092-2746524)
+- [x] Add incentive messaging (complementary gift from web developer)
+- [x] Test Concierge page with new direct booking model
+- [x] Create final checkpoint with all deliverables
+
+### Phase 10: Video Integration (User Provides IDs)
+- [ ] Homepage hero video ID
+- [ ] 4 "Why Sam Roi Yot?" video IDs
+- [ ] 4 FAQ video IDs for /buying-guide
+- [ ] 6 topic video IDs for /area-guide
+- [ ] Individual property tour video IDs
+
+### Phase 11: Concierge Customization (One-on-One)
 - [ ] Review Concierge page with user
 - [ ] Customize based on user feedback
 - [ ] Final testing and polish
