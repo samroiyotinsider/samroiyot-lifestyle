@@ -261,3 +261,13 @@
 - [ ] Review Concierge page with user
 - [ ] Customize based on user feedback
 - [ ] Final testing and polish
+
+
+## Kit's Corner Page (Completed)
+- [x] Create Kit's Corner page showcasing Punoi Bungalow Airbnb rental
+- [x] Add personal/casual tone with Kit's story and local tips
+- [x] Include property details, amenities, and recommendations
+- [x] Add bilingual support (English/Thai)
+- [x] Integrate Airbnb booking link
+- [x] Add to Footer navigation
+- [x] Test page and verify all functionality

@@ -18,6 +18,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import AdminDashboard from "./pages/AdminDashboard";
 import PartnersList from "./pages/PartnersList";
+import KitsCorner from "./pages/KitsCorner";
 
 function Router() {
   return (
@@ -35,6 +36,7 @@ function Router() {
           <Route path="/contact" component={Contact} />
           <Route path="/admin" component={AdminDashboard} />
           <Route path="/partners" component={PartnersList} />
+          <Route path="/kits-corner" component={KitsCorner} />
           <Route path="/404" component={NotFound} />
           <Route component={NotFound} />
         </Switch>

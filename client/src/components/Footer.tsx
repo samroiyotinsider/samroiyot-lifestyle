@@ -51,6 +51,11 @@ export function Footer() {
                   {t("About Us", "เกี่ยวกับเรา")}
                 </Link>
               </li>
+              <li>
+                <Link href="/kits-corner" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t("Kit's Corner", "มุมของคิท")}
+                </Link>
+              </li>
             </ul>
           </div>
 
