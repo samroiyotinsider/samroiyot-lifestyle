@@ -17,6 +17,7 @@ export function Header() {
     { href: "/concierge", label: t("Concierge", "บริการคอนเซียร์จ") },
     { href: "/about", label: t("About", "เกี่ยวกับเรา") },
     { href: "/contact", label: t("Contact", "ติดต่อ") },
+    { href: "/kits-corner", label: t("Kit's Corner", "มุมของคิท") },
   ];
 
   const toggleLanguage = () => {
