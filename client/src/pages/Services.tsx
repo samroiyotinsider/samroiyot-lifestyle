@@ -51,30 +51,7 @@ export default function Services() {
           }
         ]
       },
-      {
-        category: "Activities & Tours",
-        icon: Bike,
-        services: [
-          {
-            name: "Sam Roi Yot Biking Tours",
-            description: "Local biking tour agency offering guided tours through scenic routes and hidden trails.",
-            specialties: ["Off-road biking", "Scenic routes", "Small groups", "Equipment provided"],
-            rating: 4.9
-          },
-          {
-            name: "Boat Tours & Kayaking",
-            description: "Long-tail boat rentals and guided kayaking through mangrove channels with wildlife viewing.",
-            specialties: ["Island hopping", "Mangrove kayaking", "Wildlife viewing", "Photography tours"],
-            rating: 4.8
-          },
-          {
-            name: "Cooking Classes",
-            description: "Learn to prepare authentic Thai cuisine from experienced local instructors.",
-            specialties: ["Thai cooking", "Market tours", "Hands-on classes", "Recipe books included"],
-            rating: 4.9
-          }
-        ]
-      },
+
       {
         category: "Accommodations & Real Estate",
         icon: Home,
@@ -155,18 +132,7 @@ export default function Services() {
           }
         ]
       },
-      {
-        category: "กิจกรรมและทัวร์",
-        icon: Bike,
-        services: [
-          {
-            name: "ทัวร์จักรยานสามร้อยยอด",
-            description: "บริษัททัวร์จักรยานท้องถิ่นนำเสนอทัวร์ที่มีไกด์ผ่านเส้นทางสวยงาม",
-            specialties: ["จักรยานออฟโรด", "เส้นทางสวยงาม", "กลุ่มเล็ก", "อุปกรณ์ให้"],
-            rating: 4.9
-          }
-        ]
-      }
+
     ]
   };
 

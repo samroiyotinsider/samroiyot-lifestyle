@@ -158,3 +158,90 @@
 - [x] Integrate lifestyle photos from Facebook community
 - [x] Test all new pages and features
 - [x] Create final checkpoint with all Facebook integration complete
+
+
+## Navigation & Homepage Fixes (Current Session)
+- [x] Move Properties to position 2 in navigation (right after Home)
+- [x] Add Cheap Condo as featured property on homepage with EUR price
+- [x] Add 3.2 Rai Land as featured property on homepage with EUR price
+- [x] Fix Mango Hills price display (show EUR price on card)
+- [x] Restructure Services page (remove activities/tours, keep practical services only)
+- [x] Create Internal Partner List page (printable, protected, for staff reference)
+- [x] Update Concierge page to include Activities & Tours as offered services
+- [x] Test all changes and create final checkpoint
+
+
+## BRAND OVERHAUL: Sam Roi Yot Insider (Video-First Strategy)
+
+### Phase 1: S3 & Preparation
+- [x] Upload large image file to S3 (cave-pavilion.jpg)
+- [x] Update todo.md with all overhaul tasks
+
+### Phase 2: Branding & Navigation
+- [x] Update site title: "Sam Roi Yot Lifestyle" → "Sam Roi Yot Insider"
+- [x] Update tagline: "Your Expert Guide to Thailand's Hidden Coastal Paradise"
+- [x] Update email: samroiyotinsider.com
+- [x] Simplify navigation: Home | Properties | Area Guide | Buying Guide | Concierge | About | Contact
+- [x] Remove pages: Lifestyle, Guides, News, Services, Events
+- [x] Update Header component with new branding
+- [x] Update Footer component with new branding
+
+### Phase 3: Homepage Video-First Transformation
+- [x] Replace hero carousel with YouTube video embed (autoplay, muted, loop)
+- [x] Add hero overlay with title + tagline + 2 CTAs
+- [x] Convert "Why Sam Roi Yot" section to 4-video grid (2x2 responsive)
+- [x] Keep featured properties section, add video embeds to property cards
+- [x] Add CSS for responsive video containers (.video-container, .video-container-large)
+- [x] Test lazy loading for all videos
+
+### Phase 4: Create /buying-guide Page
+- [x] Create new page component: BuyingGuide.tsx
+- [x] Add hero section with title + large video embed
+- [x] Add email capture form (placeholder for ConvertKit)
+- [x] Create 4 expandable FAQ sections with video embeds
+- [x] Add bottom CTA buttons (Explore Properties, Book Consultation)
+- [x] Add to routing in App.tsx
+
+### Phase 5: Create /area-guide Page
+- [x] Create new page component: AreaGuide.tsx
+- [x] Add hero section with title + large video embed
+- [x] Create 6-topic grid with video embeds (2 columns desktop, stack mobile)
+- [x] Topics: Beaches, Cost of Living, Activities, National Park, Dining, Healthcare
+- [x] Add bottom CTA (Explore Concierge Services)
+- [x] Add to routing in App.tsx
+
+### Phase 6: Update Property Detail Pages
+- [x] Convert property hero to large YouTube video embed (property tour)
+- [x] Simplify property info: name, price, 5 key specs only
+- [x] Add 2 CTA buttons (Book Viewing, Watch Buying Guide)
+- [x] Add secondary video section at bottom (Money video - same for all properties)
+- [x] Update PropertyDetail.tsx component
+
+### Phase 7: SEO Optimization
+- [x] Add meta tags to all pages (title, description, keywords, OG tags)
+- [x] Add schema markup (LocalBusiness, Product, VideoObject)
+- [x] Add image alt text to all images
+- [x] Verify header hierarchy (H1, H2, H3)
+- [x] Add internal linking strategy
+- [x] Create /sitemap.xml
+- [x] Create /robots.txt
+- [x] Test performance (<3 second load time)
+
+### Phase 8: Finalization
+- [x] Test all pages and video embeds (with placeholder IDs)
+- [x] Test mobile responsiveness
+- [x] Test navigation and routing
+- [x] Create final checkpoint
+- [x] Prepare for video integration (user will provide YouTube IDs)
+
+### Phase 9: Video Integration (User Provides IDs)
+- [ ] Homepage hero video ID
+- [ ] 4 "Why Sam Roi Yot?" video IDs
+- [ ] 4 FAQ video IDs for /buying-guide
+- [ ] 6 topic video IDs for /area-guide
+- [ ] Individual property tour video IDs
+
+### Phase 10: Concierge Customization (One-on-One)
+- [ ] Review Concierge page with user
+- [ ] Customize based on user feedback
+- [ ] Final testing and polish

@@ -106,57 +106,34 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      {/* Cinematic Hero Section with Slider */}
-      <section className="relative h-[70vh] md:h-[80vh] overflow-hidden">
-        {heroSlides.map((slide, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <img
-              src={slide.image}
-              alt={slide.alt}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
-          </div>
-        ))}
+      {/* Video Hero Section */}
+      <section className="relative hero-video-section">
+        <div className="video-wrapper">
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/PLACEHOLDER_HERO_VIDEO?autoplay=1&mute=1&loop=1&playlist=PLACEHOLDER_HERO_VIDEO&controls=0&modestbranding=1"
+            frameBorder="0"
+            allow="autoplay"
+            className="absolute inset-0"
+          ></iframe>
+        </div>
         
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 drop-shadow-2xl">
-            {t.heroTitle}
-          </h1>
-          <p className="text-xl md:text-2xl text-white/95 mb-8 max-w-3xl drop-shadow-lg">
-            {t.heroSubtitle}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
+        <div className="hero-overlay">
+          <h1>{t.heroTitle}</h1>
+          <p className="tagline">{t.heroSubtitle}</p>
+          <div className="cta-buttons flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/properties">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8 py-6">
                 {t.browseProp} <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
-            <Link href="/concierge">
+            <Link href="/buying-guide">
               <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white/20 text-lg px-8 py-6">
                 {t.relocation}
               </Button>
             </Link>
           </div>
-        </div>
-
-        {/* Slide Indicators */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
-          {heroSlides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all ${
-                index === currentSlide ? "bg-white w-8" : "bg-white/50"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
         </div>
       </section>
 
@@ -267,7 +244,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Sam Roi Yot */}
+      {/* Why Sam Roi Yot - Video Grid */}
       <section className="py-20 bg-muted/30">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center mb-12">
@@ -277,35 +254,63 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <Card className="border-none shadow-lg">
-              <CardContent className="p-6">
-                <CheckCircle2 className="h-8 w-8 text-primary mb-3" />
-                <h3 className="text-xl font-bold mb-2">{t.benefit1}</h3>
-                <p className="text-muted-foreground">{t.benefit1Desc}</p>
-              </CardContent>
-            </Card>
-            <Card className="border-none shadow-lg">
-              <CardContent className="p-6">
-                <CheckCircle2 className="h-8 w-8 text-primary mb-3" />
-                <h3 className="text-xl font-bold mb-2">{t.benefit2}</h3>
-                <p className="text-muted-foreground">{t.benefit2Desc}</p>
-              </CardContent>
-            </Card>
-            <Card className="border-none shadow-lg">
-              <CardContent className="p-6">
-                <CheckCircle2 className="h-8 w-8 text-primary mb-3" />
-                <h3 className="text-xl font-bold mb-2">{t.benefit3}</h3>
-                <p className="text-muted-foreground">{t.benefit3Desc}</p>
-              </CardContent>
-            </Card>
-            <Card className="border-none shadow-lg">
-              <CardContent className="p-6">
-                <CheckCircle2 className="h-8 w-8 text-primary mb-3" />
-                <h3 className="text-xl font-bold mb-2">{t.benefit4}</h3>
-                <p className="text-muted-foreground">{t.benefit4Desc}</p>
-              </CardContent>
-            </Card>
+          <div className="benefits-grid">
+            <div className="benefit-item">
+              <div className="video-container">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/PLACEHOLDER_BENEFIT_1?rel=0&modestbranding=1"
+                  frameBorder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <h3 className="text-xl font-bold mt-4">{t.benefit1}</h3>
+            </div>
+            <div className="benefit-item">
+              <div className="video-container">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/PLACEHOLDER_BENEFIT_2?rel=0&modestbranding=1"
+                  frameBorder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <h3 className="text-xl font-bold mt-4">{t.benefit2}</h3>
+            </div>
+            <div className="benefit-item">
+              <div className="video-container">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/PLACEHOLDER_BENEFIT_3?rel=0&modestbranding=1"
+                  frameBorder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <h3 className="text-xl font-bold mt-4">{t.benefit3}</h3>
+            </div>
+            <div className="benefit-item">
+              <div className="video-container">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/PLACEHOLDER_BENEFIT_4?rel=0&modestbranding=1"
+                  frameBorder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <h3 className="text-xl font-bold mt-4">{t.benefit4}</h3>
+            </div>
           </div>
         </div>
       </section>

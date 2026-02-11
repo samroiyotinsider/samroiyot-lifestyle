@@ -1,0 +1,9 @@
+{
+  "query": "SELECT id, title, price, featured FROM properties WHERE price = 125000 OR price = 195000;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT id, title, price, featured FROM properties WHERE price = 125000 OR price = 195000;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1522
+}

@@ -166,8 +166,25 @@ export default function PropertyDetail() {
           {t("Back to Properties", "กลับไปยังทรัพย์สิน")}
         </Button>
 
+        {/* Video Section */}
+        {property.videoUrl && (
+          <div className="space-y-2">
+            <h3 className="text-lg font-semibold">{t("Property Tour Video", "วิดีโอทัวร์ทรัพย์สิน")}</h3>
+            <div className="video-container-large">
+              <iframe
+                src={getYouTubeEmbedUrl(property.videoUrl)}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+        )}
+
         {/* Image Gallery */}
         <div className="space-y-4">
+          <h3 className="text-lg font-semibold">{t("Photo Gallery", "แกลเลอรี่ภาพ")}</h3>
           <div className="relative h-[500px] rounded-lg overflow-hidden">
             <img
               src={images[selectedImage] || 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200'}

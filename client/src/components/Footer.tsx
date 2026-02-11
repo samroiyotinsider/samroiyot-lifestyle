@@ -12,12 +12,12 @@ export function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <h3 className="font-bold text-lg text-primary">
-              {t("Sam Roi Yot Lifestyle", "แสนร้อยยอด ไลฟ์สไตล์")}
+              {t("Sam Roi Yot Insider", "แสนร้อยยอด อินไซเดอร์")}
             </h3>
             <p className="text-sm text-muted-foreground">
               {t(
-                "Your one-stop gateway to Sam Roi Yot: Lifestyle, Properties & Concierge",
-                "ประตูสู่แสนร้อยยอด: ไลฟ์สไตล์ ทรัพย์สิน และบริการคอนเซียร์จ"
+                "Your Expert Guide to Thailand's Hidden Coastal Paradise",
+                "คู่มือผู้เชี่ยวชาญสู่สวรรค์ชายฝั่งที่ซ่อนเร้นของไทย"
               )}
             </p>
           </div>
@@ -32,8 +32,13 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/lifestyle" className="text-muted-foreground hover:text-primary transition-colors">
-                  {t("Lifestyle", "ไลฟ์สไตล์")}
+                <Link href="/area-guide" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t("Area Guide", "คู่มือพื้นที่")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/buying-guide" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t("Buying Guide", "คู่มือการซื้อ")}
                 </Link>
               </li>
               <li>
@@ -56,10 +61,10 @@ export function Footer() {
               <li className="flex items-start gap-2">
                 <Mail className="h-4 w-4 mt-0.5 text-primary" />
                 <a
-                  href="mailto:info@samroiyotlifestyle.com"
+                  href="mailto:info@samroiyotinsider.com"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  info@samroiyotlifestyle.com
+                  info@samroiyotinsider.com
                 </a>
               </li>
               <li className="flex items-start gap-2">
@@ -102,7 +107,7 @@ export function Footer() {
 
         <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
           <p>
-            © {new Date().getFullYear()} {t("Sam Roi Yot Lifestyle", "แสนร้อยยอด ไลฟ์สไตล์")}.{" "}
+            © {new Date().getFullYear()} {t("Sam Roi Yot Insider", "แสนร้อยยอด อินไซเดอร์")}.{" "}
             {t("All rights reserved.", "สงวนลิขสิทธิ์")}
           </p>
         </div>

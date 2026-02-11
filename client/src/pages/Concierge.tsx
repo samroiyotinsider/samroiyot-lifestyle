@@ -45,6 +45,20 @@ export default function Concierge() {
   const services = [
     {
       icon: FileText,
+      title: t("Activities & Tours", "กิจกรรมและทัวร์"),
+      description: t(
+        "Curated experiences including biking tours, kayaking adventures, cooking classes, market tours, hiking, and sunset photography. We book trusted local partners for authentic experiences.",
+        "ประสบการณ์ที่คัดสรรมาแล้ว รวมถึงทัวร์จักรยาน การผจญภัยพายเรือ ชั้นเรียนการทำอาหาร ทัวร์ตลาด การเดินป่า และการถ่ายภาพพระอาทิตย์ตกดิน เราจองพันธมิตรท้องถิ่นที่เชื่อถือได้เพื่อประสบการณ์ที่แท้จริง"
+      ),
+      features: [
+        t("Biking & hiking tours", "ทัวร์จักรยานและเดินป่า"),
+        t("Kayaking & boat tours", "ทัวร์พายเรือและเรือ"),
+        t("Cooking classes & market tours", "ชั้นเรียนการทำอาหารและทัวร์ตลาด"),
+        t("Photography & sunset tours", "ทัวร์ถ่ายภาพและพระอาทิตย์ตกดิน"),
+      ],
+    },
+    {
+      icon: FileText,
       title: t("Visa & Immigration", "วีซ่าและการตรวจคนเข้าเมือง"),
       description: t(
         "Thailand Elite/Privilege Visa guidance, retirement visa extensions, and application assistance. We help navigate Thai immigration requirements smoothly.",

@@ -1,0 +1,52 @@
+{
+  "query": "SELECT id, title, featured, price FROM properties ORDER BY title;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT id, title, featured, price FROM properties ORDER BY title;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "1 Bedroom Condo for Sale at The Sea Condominium",
+      "featured": "0",
+      "price": "NULL"
+    },
+    {
+      "id": "6",
+      "title": "1 Bedroom Condo for Sale at The Sea Condominium (70 SqM)",
+      "featured": "0",
+      "price": "NULL"
+    },
+    {
+      "id": "5",
+      "title": "Chanote Land 1 Rai 30 sq wah Sam Roi Yot – Mountain View",
+      "featured": "0",
+      "price": "NULL"
+    },
+    {
+      "id": "4",
+      "title": "Chanote Land 150 sqm Sam Roi Yot 1.9km to Sea + Mountain View",
+      "featured": "0",
+      "price": "NULL"
+    },
+    {
+      "id": "2",
+      "title": "Chanote Land 3.2 Rai Sam Roi Yot – Divisible into 3 Plots",
+      "featured": "0",
+      "price": "NULL"
+    },
+    {
+      "id": "7",
+      "title": "Exclusive Mango Hills Resort Estate Sam Roi Yot",
+      "featured": "1",
+      "price": "NULL"
+    },
+    {
+      "id": "3",
+      "title": "Prime Sea & Mountain View Land 300m to Beach Sam Roi Yot",
+      "featured": "0",
+      "price": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tfeatured\tprice\n1\t1 Bedroom Condo for Sale at The Sea Condominium\t0\tNULL\n6\t1 Bedroom Condo for Sale at The Sea Condominium (70 SqM)\t0\tNULL\n5\tChanote Land 1 Rai 30 sq wah Sam Roi Yot – Mountain View\t0\tNULL\n4\tChanote Land 150 sqm Sam Roi Yot 1.9km to Sea + Mountain View\t0\tNULL\n2\tChanote Land 3.2 Rai Sam Roi Yot – Divisible into 3 Plots\t0\tNULL\n7\tExclusive Mango Hills Resort Estate Sam Roi Yot\t1\tNULL\n3\tPrime Sea & Mountain View Land 300m to Beach Sam Roi Yot\t0\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 1722
+}

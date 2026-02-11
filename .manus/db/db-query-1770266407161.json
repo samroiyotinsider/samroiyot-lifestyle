@@ -1,0 +1,52 @@
+{
+  "query": "SELECT id, title, priceEur, featured FROM properties ORDER BY priceEur;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT id, title, priceEur, featured FROM properties ORDER BY priceEur;",
+  "rows": [
+    {
+      "id": "4",
+      "title": "Chanote Land 150 sqm Sam Roi Yot 1.9km to Sea + Mountain View",
+      "priceEur": "55000",
+      "featured": "0"
+    },
+    {
+      "id": "5",
+      "title": "Chanote Land 1 Rai 30 sq wah Sam Roi Yot – Mountain View",
+      "priceEur": "55000",
+      "featured": "0"
+    },
+    {
+      "id": "3",
+      "title": "Prime Sea & Mountain View Land 300m to Beach Sam Roi Yot",
+      "priceEur": "60000",
+      "featured": "0"
+    },
+    {
+      "id": "1",
+      "title": "1 Bedroom Condo for Sale at The Sea Condominium",
+      "priceEur": "125000",
+      "featured": "0"
+    },
+    {
+      "id": "6",
+      "title": "1 Bedroom Condo for Sale at The Sea Condominium (70 SqM)",
+      "priceEur": "140000",
+      "featured": "0"
+    },
+    {
+      "id": "2",
+      "title": "Chanote Land 3.2 Rai Sam Roi Yot – Divisible into 3 Plots",
+      "priceEur": "195000",
+      "featured": "1"
+    },
+    {
+      "id": "7",
+      "title": "Exclusive Mango Hills Resort Estate Sam Roi Yot",
+      "priceEur": "595000",
+      "featured": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tpriceEur\tfeatured\n4\tChanote Land 150 sqm Sam Roi Yot 1.9km to Sea + Mountain View\t55000\t0\n5\tChanote Land 1 Rai 30 sq wah Sam Roi Yot – Mountain View\t55000\t0\n3\tPrime Sea & Mountain View Land 300m to Beach Sam Roi Yot\t60000\t0\n1\t1 Bedroom Condo for Sale at The Sea Condominium\t125000\t0\n6\t1 Bedroom Condo for Sale at The Sea Condominium (70 SqM)\t140000\t0\n2\tChanote Land 3.2 Rai Sam Roi Yot – Divisible into 3 Plots\t195000\t1\n7\tExclusive Mango Hills Resort Estate Sam Roi Yot\t595000\t1\n",
+  "stderr": "",
+  "execution_time_ms": 1595
+}

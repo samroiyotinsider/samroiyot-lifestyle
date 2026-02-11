@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /partners
+Disallow: /*.json$
+
+# Sitemaps
+Sitemap: https://samroiyotinsider.com/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1

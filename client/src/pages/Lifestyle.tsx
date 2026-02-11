@@ -65,7 +65,7 @@ export default function Lifestyle() {
           icon: Palmtree,
           title: "The Sam Roi Yot Lifestyle",
           subtitle: "Redefine What Living Well Means",
-          image: "/lifestyle/cave-pavilion.jpg",
+          image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663314810987/YfhsFQHkUyZMkhsF.jpg",
           content: [
             "Life in Sam Roi Yot follows a different rhythm than Thailand's urban centers or tourist zones. Mornings often begin with the sound of waves and birdsong rather than traffic, perhaps with a sunrise walk along an empty beach or a yoga session overlooking the mountains. The day might include a scooter ride to the local market for fresh ingredients, a few hours of work from a beachfront cafe, and an afternoon hike in the national park or swim in the Gulf.",
             "This lifestyle particularly appeals to those seeking to escape the constant stimulation and stress of modern urban life. Here, entertainment comes from nature rather than nightclubs, social life centers on genuine connections rather than networking events, and success is measured in sunsets watched and trails hiked rather than meetings attended and deals closed.",

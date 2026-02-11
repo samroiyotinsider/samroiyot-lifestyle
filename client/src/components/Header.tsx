@@ -11,12 +11,9 @@ export function Header() {
 
   const navItems = [
     { href: "/", label: t("Home", "หน้าแรก") },
-    { href: "/lifestyle", label: t("Lifestyle", "ไลฟ์สไตล์") },
-    { href: "/guides", label: t("Guides", "คู่มือ") },
-    { href: "/news", label: t("News", "ข่าวสาร") },
-    { href: "/services", label: t("Services", "บริการ") },
-    { href: "/events", label: t("Events", "เหตุการณ์") },
     { href: "/properties", label: t("Properties", "ทรัพย์สิน") },
+    { href: "/area-guide", label: t("Area Guide", "คู่มือพื้นที่") },
+    { href: "/buying-guide", label: t("Buying Guide", "คู่มือการซื้อ") },
     { href: "/concierge", label: t("Concierge", "บริการคอนเซียร์จ") },
     { href: "/about", label: t("About", "เกี่ยวกับเรา") },
     { href: "/contact", label: t("Contact", "ติดต่อ") },
@@ -30,7 +27,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center space-x-2 text-xl font-bold text-primary">
-          <span>{t("Sam Roi Yot Lifestyle", "แสนร้อยยอด ไลฟ์สไตล์")}</span>
+          <span>{t("Sam Roi Yot Insider", "แสนร้อยยอด อินไซเดอร์")}</span>
         </Link>
 
         {/* Desktop Navigation */}
