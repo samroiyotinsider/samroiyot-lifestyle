@@ -32,7 +32,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex md:items-center md:gap-6">
+        <div className="hidden md:flex md:items-center md:gap-3">
           {navItems.map((item) => (
             <Link
               key={item.href}
