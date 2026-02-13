@@ -178,7 +178,7 @@ export default function Concierge() {
                   </a>
                 </div>
                 <p className="text-lg text-muted-foreground">
-                  {t("Khun Kitty | Thai / English", "คุณกิตติ | ไทย / อังกฤษ")}
+                  {t("Khun Kitty (Aor) | Thai / English", "คุณกิตติ (อ้อ) | ไทย / อังกฤษ")}
                 </p>
               </div>
 

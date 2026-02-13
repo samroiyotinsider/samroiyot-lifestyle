@@ -11,7 +11,7 @@ export default function About() {
       <section className="bg-gradient-to-br from-primary/10 to-secondary/10 py-20">
         <div className="container text-center space-y-6">
           <h1 className="text-4xl md:text-5xl font-bold">
-            {t("About Sam Roi Yot Lifestyle", "เกี่ยวกับแสนร้อยยอด ไลฟ์สไตล์")}
+            {t("About Sam Roi Yot Insider", "เกี่ยวกับแสนร้อยยอด อินไซเดอร์")}
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             {t(
@@ -31,7 +31,7 @@ export default function About() {
           <div className="prose prose-lg max-w-none space-y-6 text-muted-foreground">
             <p>
               {t(
-                "Sam Roi Yot Lifestyle was founded with a simple mission: to help people discover and settle into one of Thailand's most beautiful and underrated coastal areas. We fell in love with Sam Roi Yot's serene beaches, stunning national park, and welcoming community, and we wanted to share this hidden gem with others seeking a better quality of life.",
+                "Sam Roi Yot Insider was founded with a simple mission: to help people discover and settle into one of Thailand's most beautiful and underrated coastal areas. We fell in love with Sam Roi Yot's serene beaches, stunning national park, and welcoming community, and we wanted to share this hidden gem with others seeking a better quality of life.",
                 "แสนร้อยยอด ไลฟ์สไตล์ก่อตั้งขึ้นด้วยภารกิจง่ายๆ: เพื่อช่วยให้ผู้คนค้นพบและตั้งรกรากในหนึ่งในพื้นที่ชายฝั่งที่สวยงามและถูกประเมินค่าต่ำที่สุดของประเทศไทย เราตกหลุมรักชายหาดที่เงียบสงบของแสนร้อยยอด อุทยานแห่งชาติที่สวยงาม และชุมชนที่อบอุ่น และเราต้องการแบ่งปันอัญมณีที่ซ่อนอยู่นี้กับผู้อื่นที่แสวงหาคุณภาพชีวิตที่ดีขึ้น"
               )}
             </p>

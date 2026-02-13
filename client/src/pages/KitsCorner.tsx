@@ -213,7 +213,7 @@ const KitsCorner = () => {
       </div>
 
       {/* Hero Section */}
-      <div className="relative h-96 bg-cover bg-center" style={{ backgroundImage: 'url(/punoi_bungalow_hero.webp)' }}>
+      <div className="relative h-96 bg-cover bg-center" style={{ backgroundImage: 'url(/kits-bungalow.png)' }}>
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative h-full flex flex-col justify-center items-center text-white text-center px-4">
           <h1 className="text-5xl font-bold mb-2">{t.title}</h1>
