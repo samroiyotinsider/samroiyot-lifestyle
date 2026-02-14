@@ -271,3 +271,20 @@
 - [x] Integrate Airbnb booking link
 - [x] Add to Footer navigation
 - [x] Test page and verify all functionality
+
+
+## Events Integration & YouTube Enhancement (Current Session)
+- [x] Create events database schema with commission tracking
+- [x] Build web scraper for visitsamroiyot.com events feed
+- [x] Create tRPC events router with booking and commission procedures
+- [x] Implement Events page component with YouTube video preview integration
+- [x] Add affiliate link support for events
+- [x] Create comprehensive unit tests for events API (11 tests passing)
+- [x] Integrate real-time event scraping with daily scheduling
+- [x] Set up commission tracking and booking system
+- [ ] Create booking confirmation email system
+- [ ] Build events dashboard for admin to view bookings and commissions
+- [ ] Add YouTube video upload/embed UI for events
+- [ ] Implement affiliate link management interface
+- [ ] Test event booking flow end-to-end
+- [ ] Create final checkpoint with events integration complete

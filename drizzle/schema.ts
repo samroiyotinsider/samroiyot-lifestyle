@@ -100,3 +100,87 @@ export const lifestyleArticles = mysqlTable("lifestyleArticles", {
 
 export type LifestyleArticle = typeof lifestyleArticles.$inferSelect;
 export type InsertLifestyleArticle = typeof lifestyleArticles.$inferInsert;
+
+/**
+ * Events from Visit Sam Roi Yot and local partners
+ */
+export const events = mysqlTable("events", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  titleTh: varchar("titleTh", { length: 255 }),
+  description: text("description"),
+  descriptionTh: text("descriptionTh"),
+  category: varchar("category", { length: 100 }).notNull(), // Adventure, Day Time, Eating Out, Live Music, Market, Night Time
+  startDate: timestamp("startDate").notNull(),
+  endDate: timestamp("endDate"),
+  location: text("location"),
+  locationTh: text("locationTh"),
+  latitude: varchar("latitude", { length: 50 }),
+  longitude: varchar("longitude", { length: 50 }),
+  price: int("price"), // Price in THB
+  priceUsd: int("priceUsd"), // Price in USD
+  organizer: varchar("organizer", { length: 255 }),
+  organizerPhone: varchar("organizerPhone", { length: 50 }),
+  organizerEmail: varchar("organizerEmail", { length: 320 }),
+  youtubeUrl: varchar("youtubeUrl", { length: 500 }), // YouTube video preview
+  affiliateLink: varchar("affiliateLink", { length: 500 }), // Affiliate link for booking
+  source: mysqlEnum("source", ["visitsamroiyot", "partner", "internal"]).default("internal").notNull(),
+  sourceId: varchar("sourceId", { length: 255 }), // ID from original source
+  commissionRate: int("commissionRate").default(25).notNull(), // Commission percentage
+  bookingUrl: varchar("bookingUrl", { length: 500 }), // URL to book through us
+  published: int("published").default(1).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  lastScrapedAt: timestamp("lastScrapedAt"), // Track when we last updated from source
+});
+
+export type Event = typeof events.$inferSelect;
+export type InsertEvent = typeof events.$inferInsert;
+
+/**
+ * Event bookings and commission tracking
+ */
+export const eventBookings = mysqlTable("eventBookings", {
+  id: int("id").autoincrement().primaryKey(),
+  eventId: int("eventId").notNull(),
+  userId: int("userId"), // NULL for non-authenticated bookings
+  guestName: varchar("guestName", { length: 255 }).notNull(),
+  guestEmail: varchar("guestEmail", { length: 320 }).notNull(),
+  guestPhone: varchar("guestPhone", { length: 50 }),
+  numberOfGuests: int("numberOfGuests").default(1).notNull(),
+  totalPrice: int("totalPrice"), // Total price in THB
+  totalPriceUsd: int("totalPriceUsd"), // Total price in USD
+  commissionAmount: int("commissionAmount"), // Our commission in THB
+  commissionAmountUsd: int("commissionAmountUsd"), // Our commission in USD
+  affiliateLinkUsed: int("affiliateLinkUsed").default(0).notNull(), // 1 if booked via affiliate link
+  status: mysqlEnum("status", ["pending", "confirmed", "completed", "cancelled"]).default("pending").notNull(),
+  bookingReference: varchar("bookingReference", { length: 100 }).unique(),
+  notes: text("notes"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type EventBooking = typeof eventBookings.$inferSelect;
+export type InsertEventBooking = typeof eventBookings.$inferInsert;
+
+/**
+ * Affiliate links and tracking
+ */
+export const affiliateLinks = mysqlTable("affiliateLinks", {
+  id: int("id").autoincrement().primaryKey(),
+  eventId: int("eventId"),
+  propertyId: int("propertyId"),
+  affiliateUrl: varchar("affiliateUrl", { length: 500 }).notNull(),
+  affiliateNetwork: varchar("affiliateNetwork", { length: 100 }), // e.g., "booking.com", "airbnb", "custom"
+  commissionPercentage: int("commissionPercentage").notNull(),
+  clicks: int("clicks").default(0).notNull(),
+  conversions: int("conversions").default(0).notNull(),
+  revenue: int("revenue").default(0).notNull(), // Revenue in THB
+  revenueUsd: int("revenueUsd").default(0).notNull(), // Revenue in USD
+  active: int("active").default(1).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type AffiliateLink = typeof affiliateLinks.$inferSelect;
+export type InsertAffiliateLink = typeof affiliateLinks.$inferInsert;

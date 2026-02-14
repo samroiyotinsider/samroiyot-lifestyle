@@ -4,7 +4,10 @@ import {
   InsertUser, users,
   properties, InsertProperty,
   inquiries, InsertInquiry,
-  lifestyleArticles, InsertLifestyleArticle
+  lifestyleArticles, InsertLifestyleArticle,
+  events, InsertEvent, Event,
+  eventBookings, InsertEventBooking,
+  affiliateLinks, InsertAffiliateLink
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -250,4 +253,128 @@ export async function updateLifestyleArticle(id: number, data: Partial<InsertLif
   if (!db) throw new Error("Database not available");
 
   await db.update(lifestyleArticles).set(data).where(eq(lifestyleArticles.id, id));
+}
+
+// Event queries
+export async function getAllEvents(filters?: {
+  category?: string;
+  source?: string;
+  published?: boolean;
+  startDate?: Date;
+  endDate?: Date;
+}) {
+  const db = await getDb();
+  if (!db) return [];
+
+  let query = db.select().from(events);
+  const conditions = [];
+
+  if (filters?.category) {
+    conditions.push(eq(events.category, filters.category));
+  }
+  if (filters?.source) {
+    conditions.push(eq(events.source, filters.source as any));
+  }
+  if (filters?.published !== undefined) {
+    conditions.push(eq(events.published, filters.published ? 1 : 0));
+  }
+  if (filters?.startDate) {
+    conditions.push(gte(events.startDate, filters.startDate));
+  }
+  if (filters?.endDate) {
+    conditions.push(lte(events.startDate, filters.endDate));
+  }
+
+  if (conditions.length > 0) {
+    query = query.where(and(...conditions)) as any;
+  }
+
+  return query.orderBy(desc(events.startDate));
+}
+
+export async function getEventById(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const result = await db.select().from(events).where(eq(events.id, id)).limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function getEventBySourceId(sourceId: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const result = await db.select().from(events).where(eq(events.sourceId, sourceId)).limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function createEvent(data: InsertEvent) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  const result = await db.insert(events).values(data);
+  return result;
+}
+
+export async function updateEvent(id: number, data: Partial<InsertEvent>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db.update(events).set(data).where(eq(events.id, id));
+}
+
+export async function deleteEvent(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db.delete(events).where(eq(events.id, id));
+}
+
+// Event booking queries
+export async function createEventBooking(data: InsertEventBooking) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  const result = await db.insert(eventBookings).values(data);
+  const insertId = Number(result[0].insertId);
+  
+  const created = await db.select().from(eventBookings).where(eq(eventBookings.id, insertId)).limit(1);
+  return created[0];
+}
+
+export async function getEventBookingsByEventId(eventId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return db.select().from(eventBookings).where(eq(eventBookings.eventId, eventId)).orderBy(desc(eventBookings.createdAt));
+}
+
+export async function updateEventBookingStatus(id: number, status: 'pending' | 'confirmed' | 'completed' | 'cancelled') {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db.update(eventBookings).set({ status }).where(eq(eventBookings.id, id));
+}
+
+// Affiliate link queries
+export async function createAffiliateLink(data: InsertAffiliateLink) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  const result = await db.insert(affiliateLinks).values(data);
+  return result;
+}
+
+export async function getAffiliateLinksByEventId(eventId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return db.select().from(affiliateLinks).where(eq(affiliateLinks.eventId, eventId));
+}
+
+export async function updateAffiliateLink(id: number, data: Partial<InsertAffiliateLink>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db.update(affiliateLinks).set(data).where(eq(affiliateLinks.id, id));
 }

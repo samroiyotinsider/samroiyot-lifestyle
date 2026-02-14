@@ -1,11 +1,22 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Card } from "@/components/ui/card";
-import { Calendar, MapPin, Users, Clock, ExternalLink } from "lucide-react";
+import { Calendar, MapPin, Users, Clock, ExternalLink, Play } from "lucide-react";
 import { useState } from "react";
+import { trpc } from "@/lib/trpc";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export default function Events() {
   const { language, t } = useLanguage();
   const [selectedMonth, setSelectedMonth] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedSource, setSelectedSource] = useState<string | null>(null);
+
+  // Fetch events from API
+  const { data: apiEvents, isLoading: isLoadingApi } = trpc.events.getAll.useQuery({
+    category: selectedCategory || undefined,
+    source: selectedSource as any || undefined,
+  });
 
   const events = {
     en: [
@@ -29,66 +40,6 @@ export default function Events() {
         attendees: "300+",
         type: "Festival"
       },
-      {
-        id: 3,
-        title: "Community Beach Cleanup",
-        month: "Monthly",
-        date: "Last Saturday of Month",
-        description: "Regular community effort to keep our beaches clean and pristine. All welcome to participate.",
-        location: "Various Beaches",
-        attendees: "50-100",
-        type: "Community"
-      },
-      {
-        id: 4,
-        title: "Expat Social Meetup",
-        month: "Weekly",
-        date: "Friday Evenings",
-        description: "Casual gathering of expats and locals at local restaurants and beach spots. Great way to meet people and make friends.",
-        location: "Local Restaurants",
-        attendees: "20-50",
-        type: "Social"
-      },
-      {
-        id: 5,
-        title: "Hiking & Nature Exploration",
-        month: "Weekly",
-        date: "Saturday Mornings",
-        description: "Guided hikes through Khao Sam Roi Yot National Park with experienced local guides. All fitness levels welcome.",
-        location: "Khao Sam Roi Yot National Park",
-        attendees: "10-30",
-        type: "Activity"
-      },
-      {
-        id: 6,
-        title: "Local Market Tour",
-        month: "Monthly",
-        date: "First Sunday of Month",
-        description: "Guided tour of daily fresh markets with local guide explaining produce, prices, and local specialties.",
-        location: "Central Market",
-        attendees: "15-25",
-        type: "Educational"
-      },
-      {
-        id: 7,
-        title: "Sunset Photography Walk",
-        month: "Weekly",
-        date: "Wednesday Evenings",
-        description: "Casual walk to scenic sunset spots perfect for photography. Photographers and nature lovers welcome.",
-        location: "Various Beaches",
-        attendees: "10-20",
-        type: "Activity"
-      },
-      {
-        id: 8,
-        title: "Thai Cooking Class",
-        month: "Monthly",
-        date: "Varies",
-        description: "Learn to prepare authentic Thai dishes from experienced local instructors. Includes market visit and recipe book.",
-        location: "Local Kitchen",
-        attendees: "8-12",
-        type: "Educational"
-      }
     ],
     th: [
       {
@@ -101,40 +52,25 @@ export default function Events() {
         attendees: "500+",
         type: "เทศกาล"
       },
-      {
-        id: 2,
-        title: "เทศกาลลอยกระทง",
-        month: "พฤศจิกายน",
-        date: "พฤศจิกายน (วันเพ็ญ)",
-        description: "เทศกาลสวยงามที่ชาวบ้านและนักท่องเที่ยวลอยกระทงประดับบนน้ำ",
-        location: "หาดและแม่น้ำ",
-        attendees: "300+",
-        type: "เทศกาล"
-      },
-      {
-        id: 3,
-        title: "ทำความสะอาดชายหาดชุมชน",
-        month: "รายเดือน",
-        date: "วันเสาร์สุดท้ายของเดือน",
-        description: "ความพยายามของชุมชนในการรักษาหาดให้สะอาดและสวยงาม ทุกคนยินดีต้อนรับ",
-        location: "หาดต่างๆ",
-        attendees: "50-100",
-        type: "ชุมชน"
-      },
-      {
-        id: 4,
-        title: "การพบปะของชาวต่างชาติ",
-        month: "รายสัปดาห์",
-        date: "เย็นวันศุกร์",
-        description: "การพบปะอย่างไม่เป็นทางการของชาวต่างชาติและชาวบ้านท้องถิ่น",
-        location: "ร้านอาหารท้องถิ่น",
-        attendees: "20-50",
-        type: "สังคม"
-      }
     ]
   };
 
-  const currentEvents = language === "en" ? events.en : events.th;
+  // Use API events if available, otherwise fall back to static events
+  const currentEvents = apiEvents && apiEvents.length > 0 ? apiEvents.map(e => ({
+    id: e.id,
+    title: e.title,
+    month: new Date(e.startDate).toLocaleString('en-US', { month: 'long' }),
+    date: new Date(e.startDate).toLocaleDateString(),
+    description: e.description || '',
+    location: e.location || '',
+    attendees: '?',
+    type: e.category,
+    youtubeUrl: e.youtubeUrl,
+    price: e.price,
+    commissionRate: e.commissionRate,
+    affiliateLink: e.affiliateLink,
+    source: e.source,
+  })) : (language === "en" ? events.en : events.th);
 
   const months = ["all", "January", "February", "March", "April", "May", "June", 
                   "July", "August", "September", "October", "November", "December"];
@@ -145,16 +81,17 @@ export default function Events() {
     "Social": "bg-green-100 text-green-800",
     "Activity": "bg-orange-100 text-orange-800",
     "Educational": "bg-pink-100 text-pink-800",
-    "เทศกาล": "bg-purple-100 text-purple-800",
-    "ชุมชน": "bg-blue-100 text-blue-800",
-    "สังคม": "bg-green-100 text-green-800",
-    "กิจกรรม": "bg-orange-100 text-orange-800",
-    "การศึกษา": "bg-pink-100 text-pink-800"
+    "Day Time": "bg-yellow-100 text-yellow-800",
+    "Night Time": "bg-indigo-100 text-indigo-800",
+    "Eating Out": "bg-red-100 text-red-800",
+    "Adventure": "bg-green-100 text-green-800",
+    "Live Music": "bg-pink-100 text-pink-800",
+    "Market": "bg-blue-100 text-blue-800",
   };
 
   const filteredEvents = selectedMonth === "all" 
     ? currentEvents 
-    : currentEvents.filter(event => event.month === selectedMonth);
+    : currentEvents.filter((event: any) => event.month === selectedMonth);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -166,14 +103,54 @@ export default function Events() {
           </h1>
           <p className="text-xl text-blue-100">
             {language === "en"
-              ? "Discover what's happening in Sam Roi Yot"
+              ? "Discover what's happening in Sam Roi Yot - Live Events & YouTube Previews"
               : "ค้นพบว่ามีอะไรเกิดขึ้นในสามร้อยยอด"}
           </p>
         </div>
       </div>
 
-      {/* Month Filter */}
+      {/* Filters */}
       <div className="max-w-5xl mx-auto px-4 py-8">
+        {/* Source Filter */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold text-slate-900 mb-3">
+            {language === "en" ? "Filter by Source:" : "ตัวกรองตามแหล่ง:"}
+          </h3>
+          <div className="flex flex-wrap gap-2 mb-6">
+            <button
+              onClick={() => setSelectedSource(null)}
+              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                selectedSource === null
+                  ? "bg-blue-600 text-white"
+                  : "bg-slate-200 text-slate-800 hover:bg-slate-300"
+              }`}
+            >
+              {language === "en" ? "All Sources" : "ทั้งหมด"}
+            </button>
+            <button
+              onClick={() => setSelectedSource("visitsamroiyot")}
+              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                selectedSource === "visitsamroiyot"
+                  ? "bg-blue-600 text-white"
+                  : "bg-slate-200 text-slate-800 hover:bg-slate-300"
+              }`}
+            >
+              Visit Sam Roi Yot
+            </button>
+            <button
+              onClick={() => setSelectedSource("partner")}
+              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                selectedSource === "partner"
+                  ? "bg-blue-600 text-white"
+                  : "bg-slate-200 text-slate-800 hover:bg-slate-300"
+              }`}
+            >
+              {language === "en" ? "Partner Events" : "กิจกรรมของพาร์ทเนอร์"}
+            </button>
+          </div>
+        </div>
+
+        {/* Month Filter */}
         <div className="mb-8">
           <h3 className="text-lg font-semibold text-slate-900 mb-3">
             {language === "en" ? "Filter by Month:" : "ตัวกรองตามเดือน:"}
@@ -206,18 +183,52 @@ export default function Events() {
         </div>
 
         {/* Events Grid */}
-        {filteredEvents.length > 0 ? (
+        {isLoadingApi ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            {filteredEvents.map((event) => (
+            {[...Array(6)].map((_, i) => (
+              <Card key={i} className="animate-pulse">
+                <div className="h-48 bg-slate-200"></div>
+                <div className="p-6 space-y-4">
+                  <div className="h-4 bg-slate-200 rounded w-3/4"></div>
+                  <div className="h-3 bg-slate-200 rounded w-1/2"></div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        ) : filteredEvents.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            {filteredEvents.map((event: any) => (
               <Card key={event.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                {/* YouTube Video Preview */}
+                {event.youtubeUrl && (
+                  <div className="relative bg-black h-48 flex items-center justify-center group cursor-pointer">
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30"></div>
+                    <a
+                      href={event.youtubeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="z-10 hover:scale-110 transition-transform"
+                    >
+                      <Play className="w-16 h-16 text-white opacity-80 hover:opacity-100" />
+                    </a>
+                  </div>
+                )}
+                
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-3">
                     <h3 className="text-xl font-bold text-slate-900 flex-1">
                       {event.title}
                     </h3>
-                    <span className={`ml-2 px-3 py-1 rounded-full text-sm font-semibold whitespace-nowrap ${typeColors[event.type]}`}>
-                      {event.type}
-                    </span>
+                    <div className="flex gap-2 ml-2">
+                      <span className={`px-3 py-1 rounded-full text-sm font-semibold whitespace-nowrap ${typeColors[event.type] || 'bg-slate-100 text-slate-800'}`}>
+                        {event.type}
+                      </span>
+                      {event.source && (
+                        <Badge variant="outline">
+                          {event.source === "visitsamroiyot" ? "VSY" : event.source === "partner" ? "Partner" : "Our Event"}
+                        </Badge>
+                      )}
+                    </div>
                   </div>
 
                   <p className="text-slate-700 mb-4">
@@ -233,15 +244,40 @@ export default function Events() {
                       <MapPin className="w-4 h-4" />
                       <span>{event.location}</span>
                     </div>
+                    {event.price && (
+                      <div className="flex items-center gap-2 text-slate-600">
+                        <Clock className="w-4 h-4" />
+                        <span>THB {event.price.toLocaleString()}</span>
+                      </div>
+                    )}
                     <div className="flex items-center gap-2 text-slate-600">
                       <Users className="w-4 h-4" />
                       <span>{language === "en" ? "Expected attendees:" : "ผู้เข้าร่วมที่คาดหวัง:"} {event.attendees}</span>
                     </div>
                   </div>
 
-                  <button className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                    {language === "en" ? "Learn More" : "เรียนรู้เพิ่มเติม"}
-                  </button>
+                  {event.commissionRate && (
+                    <div className="bg-amber-50 border border-amber-200 rounded p-2 text-xs text-amber-800 mb-4">
+                      💰 {event.commissionRate}% commission on bookings
+                    </div>
+                  )}
+
+                  <div className="flex gap-2">
+                    <button className="flex-1 bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                      {language === "en" ? "Book Now" : "จองเลย"}
+                    </button>
+                    {event.affiliateLink && (
+                      <a
+                        href={event.affiliateLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 border border-slate-300 rounded-lg font-semibold hover:bg-slate-50 transition-colors flex items-center gap-2"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        Link
+                      </a>
+                    )}
+                  </div>
                 </div>
               </Card>
             ))}
