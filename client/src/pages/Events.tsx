@@ -277,12 +277,7 @@ export default function Events() {
                       )}
                     </div>
 
-                    {/* Source Info */}
-                    {event.source && event.source !== "internal" && (
-                      <div className="mb-4 p-2 bg-blue-50 rounded text-xs text-blue-700">
-                        {t("From", "จาก")}: {event.source === "visitsamroiyot" ? "Visit Sam Roi Yot" : event.source}
-                      </div>
-                    )}
+                    {/* Source Info - Hidden to avoid showing competitor */}
 
                     {/* Contact Button */}
                     <Button
@@ -290,8 +285,18 @@ export default function Events() {
                       size="sm"
                       className="w-full"
                       onClick={() => {
-                        const message = `Hi, I'm interested in: ${event.title}`;
-                        window.location.href = `https://wa.me/66922746524?text=${encodeURIComponent(message)}`;
+                        // Link to organizer contact if available, otherwise to Facebook group
+                        const organizer = (event as any).organizer;
+                        const phone = (event as any).phone;
+                        if (phone) {
+                          window.location.href = `tel:${phone}`;
+                        } else if (organizer) {
+                          // Try to find organizer on Facebook
+                          window.location.href = `https://www.facebook.com/search/top/?q=${encodeURIComponent(organizer)}`;
+                        } else {
+                          // Default to Facebook group
+                          window.location.href = 'https://www.facebook.com/groups/friendsofsam';
+                        }
                       }}
                     >
                       <ExternalLink className="h-4 w-4 mr-2" />
@@ -312,7 +317,7 @@ export default function Events() {
           </p>
           <p className="text-sm text-foreground/70">
             {t("Join our Facebook community for real-time event announcements:", "เข้าร่วมชุมชน Facebook ของเราเพื่อรับประกาศเหตุการณ์แบบเรียลไทม์:")}
-            <a href="https://www.facebook.com/groups/friendsofsam" className="text-blue-600 hover:underline ml-1" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.facebook.com/groups/friendsofsamroiyot/" className="text-blue-600 hover:underline ml-1" target="_blank" rel="noopener noreferrer">
               Friends of Sam Roi Yot
             </a>
           </p>

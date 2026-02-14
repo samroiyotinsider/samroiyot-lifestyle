@@ -1,0 +1,13 @@
+{
+  "query": "SELECT COUNT(*) as total_events FROM events; DELETE FROM events WHERE title LIKE 'Test Event%' OR title LIKE 'Updated Test Event%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT COUNT(*) as total_events FROM events; DELETE FROM events WHERE title LIKE 'Test Event%' OR title LIKE 'Updated Test Event%';",
+  "rows": [
+    {
+      "total_events": "21"
+    }
+  ],
+  "messages": [],
+  "stdout": "total_events\n21\n",
+  "stderr": "",
+  "execution_time_ms": 2480
+}

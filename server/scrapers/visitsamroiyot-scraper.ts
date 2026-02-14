@@ -1,11 +1,12 @@
-import * as cheerio from "cheerio";
+import { load as cheerioLoad } from "cheerio";
 import { getDb, createEvent, getEventBySourceId, updateEvent } from "../db";
 import { InsertEvent } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
+import { cleanLocation, extractPhone, cleanOrganizer } from "../utils/locationCleaner";
 
 /**
  * Scraper for visitsamroiyot.com events
- * Fetches the events page and extracts event data
+ * Fetches the events page and extracts event data using Modern Events Calendar (MEC) structure
  */
 
 interface ScrapedEvent {
@@ -29,38 +30,67 @@ export async function scrapeVisitSamRoiYotEvents(): Promise<void> {
     }
 
     const html = await response.text();
-    const $ = cheerio.load(html);
+    const $ = cheerioLoad(html);
 
     const scrapedEvents: ScrapedEvent[] = [];
+    const processedEventIds = new Set<string>();
 
-    // Parse event items from the page
-    // The events are structured in divs with specific classes
-    const eventElements = $("a[href*='event']").closest("div");
+    // Modern Events Calendar wraps events in <article> tags
+    // Each article contains event details with data-event-id attributes
+    const eventArticles = $("article");
 
-    eventElements.each((index: number, element: any) => {
+    console.log(`[Scraper] Found ${eventArticles.length} article elements`);
+
+    eventArticles.each((index: number, element: any) => {
       try {
-        const $element = $(element);
+        const $article = $(element);
+        
+        // Get event ID from any child element with data-event-id
+        const eventIdElement = $article.find("[data-event-id]").first();
+        const eventId = eventIdElement.attr("data-event-id");
+        
+        if (!eventId || processedEventIds.has(eventId)) {
+          return; // Skip if no ID or already processed
+        }
+        
+        processedEventIds.add(eventId);
 
-        // Extract event title
-        const titleElement = $element.find("a").first();
+        // Extract event title - use .mec-event-title class
+        const titleElement = $article.find(".mec-event-title").first();
         const title = titleElement.text().trim();
 
-        if (!title) return; // Skip if no title
+        if (!title) {
+          console.log(`[Scraper] No title found in article ${eventId}`);
+          return;
+        }
 
-        // Extract category from labels
-        const categoryElement = $element.find("a").eq(1);
-        const category = categoryElement.text().trim() || "Day Time";
+        // Get all text from the article for pattern matching
+        const articleText = $article.text();
 
-        // Extract date and time from the event element
-        // Look for date patterns like "10 FEBRUARY 2026" and "15:00 - 17:00"
-        const eventText = $element.text();
-        const dateMatch = eventText.match(/(\d{1,2})\s+([A-Z]+)\s+(\d{4})/);
-        const timeMatch = eventText.match(/(\d{2}):(\d{2})\s*-\s*(\d{2}):(\d{2})/);
+        // Extract date and time
+        // Pattern: "09 February 2026" and "15:30 - 18:30"
+        const dateMatch = articleText.match(/(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})/);
+        const timeMatch = articleText.match(/(\d{2}):(\d{2})\s*-\s*(\d{2}):(\d{2})/);
 
-        if (!dateMatch) return; // Skip if no date found
+        if (!dateMatch) {
+          console.log(`[Scraper] No date found for event: ${title}`);
+          return;
+        }
 
-        const [, day, month, year] = dateMatch;
+        const [, day, monthStr, year] = dateMatch;
         const monthMap: Record<string, number> = {
+          January: 0,
+          February: 1,
+          March: 2,
+          April: 3,
+          May: 4,
+          June: 5,
+          July: 6,
+          August: 7,
+          September: 8,
+          October: 9,
+          November: 10,
+          December: 11,
           JANUARY: 0,
           FEBRUARY: 1,
           MARCH: 2,
@@ -75,8 +105,11 @@ export async function scrapeVisitSamRoiYotEvents(): Promise<void> {
           DECEMBER: 11,
         };
 
-        const monthIndex = monthMap[month];
-        if (monthIndex === undefined) return;
+        const monthIndex = monthMap[monthStr];
+        if (monthIndex === undefined) {
+          console.log(`[Scraper] Unknown month: ${monthStr}`);
+          return;
+        }
 
         const startDate = new Date(
           parseInt(year),
@@ -86,20 +119,53 @@ export async function scrapeVisitSamRoiYotEvents(): Promise<void> {
           timeMatch ? parseInt(timeMatch[2]) : 0
         );
 
-        // Extract location from the event element
-        const locationElement = $element.find("a").eq(2);
-        const location = locationElement.text().trim() || "Sam Roi Yot";
+        // Extract category - look for category labels
+        let category = "Day Time"; // Default category
+        const categoryMatch = articleText.match(/(Adventure|Day Time|Eating Out|Live Music|Market|Night Time)/);
+        if (categoryMatch) {
+          category = categoryMatch[1];
+        }
 
-        // Extract price if present
-        const priceText = eventText.match(/THB\s*([\d,]+)/);
-        const price = priceText ? parseInt(priceText[1].replace(/,/g, "")) : undefined;
+        // Extract location - look for venue name or address
+        let location = "Sam Roi Yot";
+        
+        // Try to find location in the article text
+        // It's usually after the title or in a specific section
+        const locationPatterns = [
+          /(?:at|@|venue:)\s*([^,\n]+)/i,
+          /([A-Za-z\s]+(?:Beach|Bar|Market|Restaurant|Venue|Club)[^,\n]*)/,
+          /(?:Location:|Where:)\s*([^,\n]+)/i,
+        ];
 
-        // Extract organizer name if present (usually after location)
-        const organizerElement = $element.find("a").eq(3);
-        const organizer = organizerElement.text().trim() || undefined;
+        for (const pattern of locationPatterns) {
+          const match = articleText.match(pattern);
+          if (match) {
+            location = match[1].trim();
+            break;
+          }
+        }
+        
+        // Clean up the location
+        location = cleanLocation(location);
 
-        // Create unique source ID from title + date
-        const sourceId = `vsy-${title.toLowerCase().replace(/\s+/g, "-")}-${startDate.getTime()}`;
+        // Extract price if present (THB format)
+        let price: number | undefined;
+        const priceMatch = articleText.match(/THB\s*([\d,]+)/);
+        if (priceMatch) {
+          price = parseInt(priceMatch[1].replace(/,/g, ""));
+        }
+
+        // Extract organizer name if present
+        let organizer: string | undefined;
+        let phone: string | undefined;
+        const organizerMatch = articleText.match(/(?:by|@|Organizer:)\s*([A-Za-z\s0-9+\-\(\)]+?)(?:\n|,|$)/i);
+        if (organizerMatch) {
+          const rawOrganizer = organizerMatch[1].trim();
+          phone = extractPhone(rawOrganizer);
+          organizer = cleanOrganizer(rawOrganizer);
+        }
+
+        const sourceId = `visitsamroiyot-${eventId}`;
 
         scrapedEvents.push({
           title,
@@ -110,62 +176,68 @@ export async function scrapeVisitSamRoiYotEvents(): Promise<void> {
           organizer,
           sourceId,
         });
+
+        console.log(`[Scraper] Extracted: ${title} (${category}) on ${dateMatch[1]} ${monthStr} ${year}`);
       } catch (error) {
-        console.error(`[Scraper] Error parsing event element:`, error);
+        console.error(`[Scraper] Error parsing event:`, error);
       }
     });
 
-    console.log(`[Scraper] Found ${scrapedEvents.length} events`);
+    console.log(`[Scraper] Total extracted: ${scrapedEvents.length} events`);
 
-    // Insert or update events in database
-    for (const scrapedEvent of scrapedEvents) {
-      try {
-        // Check if event already exists
-        const existingEvent = await getEventBySourceId(scrapedEvent.sourceId);
+    // Save events to database
+    if (scrapedEvents.length > 0) {
+      const db = await getDb();
+      if (!db) {
+        console.error("[Scraper] Database connection failed");
+        return;
+      }
 
-        const eventData: InsertEvent = {
-          title: scrapedEvent.title,
-          category: scrapedEvent.category,
-          startDate: scrapedEvent.startDate,
-          endDate: scrapedEvent.endDate,
-          location: scrapedEvent.location,
-          price: scrapedEvent.price,
-          organizer: scrapedEvent.organizer,
-          source: "visitsamroiyot",
-          sourceId: scrapedEvent.sourceId,
-          commissionRate: 25, // Default 25% commission
-          published: 1,
-          lastScrapedAt: new Date(),
-        };
+      for (const event of scrapedEvents) {
+        try {
+          // Check if event already exists
+          const existing = await getEventBySourceId(event.sourceId);
 
-        if (existingEvent) {
-          // Update existing event
-          await updateEvent(existingEvent.id, {
-            ...eventData,
-            updatedAt: new Date(),
-          });
-
-          console.log(`[Scraper] Updated event: ${scrapedEvent.title}`);
-        } else {
-          // Insert new event
-          await createEvent(eventData);
-          console.log(`[Scraper] Inserted event: ${scrapedEvent.title}`);
+          if (existing) {
+            // Update existing event
+            await updateEvent(existing.id, {
+              title: event.title,
+              category: event.category,
+              startDate: event.startDate,
+              location: event.location,
+              price: event.price,
+              organizer: event.organizer,
+              source: "visitsamroiyot",
+              lastScrapedAt: new Date(),
+            });
+            console.log(`[Scraper] Updated event: ${event.title}`);
+          } else {
+            // Create new event
+            await createEvent({
+              title: event.title,
+              category: event.category,
+              startDate: event.startDate,
+              location: event.location,
+              price: event.price,
+              organizer: event.organizer,
+              source: "visitsamroiyot",
+              sourceId: event.sourceId,
+              lastScrapedAt: new Date(),
+            });
+            console.log(`[Scraper] Created event: ${event.title}`);
+          }
+        } catch (error) {
+          console.error(`[Scraper] Error saving event ${event.title}:`, error);
         }
-      } catch (error) {
-        console.error(`[Scraper] Error inserting event:`, error);
       }
     }
 
     console.log("[Scraper] Visit Sam Roi Yot events scrape completed");
   } catch (error) {
-    console.error("[Scraper] Error scraping Visit Sam Roi Yot:", error);
-    throw error;
+    console.error("[Scraper] Error during scrape:", error);
   }
 }
 
-/**
- * Schedule the scraper to run daily at 2 AM
- */
 export function scheduleVisitSamRoiYotScraper(): void {
   // Run immediately on startup
   scrapeVisitSamRoiYotEvents().catch(console.error);

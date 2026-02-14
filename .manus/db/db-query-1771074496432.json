@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE events SET location = 'Noi Beach Bar' WHERE title LIKE '%Beach Bar Weekly Pool Comp%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute UPDATE events SET location = 'Noi Beach Bar' WHERE title LIKE '%Beach Bar Weekly Pool Comp%';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1550
+}

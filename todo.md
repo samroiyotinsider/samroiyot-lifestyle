@@ -302,3 +302,14 @@
 - [x] Fix TypeScript errors and test Events page
 - [ ] Clean up test events from database (keep only real events)
 - [ ] Monetize later with video integration and affiliate links
+
+
+## Events Page Fixes Completed (Feb 14, 2026)
+- [x] Remove competitor source attribution from Events page
+- [x] Fix contact buttons to link to organizers/Facebook
+- [x] Update Facebook group link to correct URL
+- [x] Clean up garbled location data with location cleaner utility
+- [x] Fix location cleaner to handle edge cases
+- [x] Test scraper with real events from visitsamroiyot.com (7 events extracted)
+- [x] Verify daily auto-scraping scheduled for 2 AM UTC (9 AM Bangkok time)
+- [x] Fix location display for all events (Noi Beach Bar, Local Food Market, Sam Roi Yot)
