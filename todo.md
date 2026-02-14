@@ -288,3 +288,17 @@
 - [ ] Implement affiliate link management interface
 - [ ] Test event booking flow end-to-end
 - [ ] Create final checkpoint with events integration complete
+
+
+## Events Page Rebuild (Free Traffic Resource - Current Session)
+- [x] Remove booking/commission system from Events page
+- [x] Rebuild Events as free resource (like visitsamroiyot.com)
+- [x] Add category and month filtering
+- [x] Improve event display with better UX than competitor
+- [x] Add "Get Details" WhatsApp CTA instead of booking buttons
+- [x] Bilingual support (English/Thai) for events page
+- [x] Display event source information (Visit Sam Roi Yot, Partner, Internal)
+- [x] Add Facebook community link for real-time updates
+- [x] Fix TypeScript errors and test Events page
+- [ ] Clean up test events from database (keep only real events)
+- [ ] Monetize later with video integration and affiliate links
