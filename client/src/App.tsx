@@ -19,6 +19,7 @@ import Contact from "./pages/Contact";
 import AdminDashboard from "./pages/AdminDashboard";
 import PartnersList from "./pages/PartnersList";
 import KitsCorner from "./pages/KitsCorner";
+import Events from "./pages/Events";
 
 function Router() {
   return (
@@ -37,6 +38,7 @@ function Router() {
           <Route path="/admin" component={AdminDashboard} />
           <Route path="/partners" component={PartnersList} />
           <Route path="/kits-corner" component={KitsCorner} />
+          <Route path="/events" component={Events} />
           <Route path="/404" component={NotFound} />
           <Route component={NotFound} />
         </Switch>
