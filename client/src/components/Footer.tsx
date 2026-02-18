@@ -98,7 +98,7 @@ export function Footer() {
                 WhatsApp
               </a>
               <a
-                href="https://line.me/ti/p/~samroiyotlifestyle"
+                href="https://line.me/ti/p/~samroiyotinsider"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2 bg-[#00B900] text-white rounded-md hover:bg-[#00A000] transition-colors text-sm"

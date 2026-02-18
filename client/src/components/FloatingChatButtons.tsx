@@ -6,7 +6,7 @@ export default function FloatingChatButtons() {
 
   const whatsappNumber = "66922746524"; // +66 092-2746524
   const whatsappMessage = encodeURIComponent("Hi, interested in Sam Roi Yot properties or relocation?");
-  const lineId = "samroiyotlifestyle"; // TODO: Replace with actual Line ID
+  const lineId = "samroiyotinsider"; // TODO: Replace with actual Line ID
 
   return (
     <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-3">

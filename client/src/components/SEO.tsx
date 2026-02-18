@@ -10,7 +10,7 @@ interface SEOProps {
 }
 
 export function SEO({
-  title = "Sam Roi Yot Lifestyle - Beachfront Properties & Relocation Services",
+  title = "Sam Roi Yot Insider - Beachfront Properties & Relocation Services",
   description = "Discover your dream beachfront property in Sam Roi Yot, Thailand. Affordable luxury condos, villas, and houses near Hua Hin. Full relocation and concierge services.",
   keywords = "Sam Roi Yot real estate, beachfront property Thailand, Hua Hin properties, Thailand retirement, expat living Thailand, Sam Roi Yot condos, beach houses Thailand, property investment Thailand",
   ogImage = "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1200",
@@ -69,7 +69,7 @@ export const schemas = {
   realEstateAgent: {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
-    name: "Sam Roi Yot Lifestyle",
+    name: "Sam Roi Yot Insider",
     description: "Real estate and relocation services in Sam Roi Yot, Thailand",
     address: {
       "@type": "PostalAddress",
@@ -77,7 +77,7 @@ export const schemas = {
       addressRegion: "Prachuap Khiri Khan",
       addressCountry: "TH",
     },
-    email: "info@samroiyotlifestyle.com",
+    email: "info@samroiyotinsider.com",
     areaServed: {
       "@type": "City",
       name: "Sam Roi Yot",
