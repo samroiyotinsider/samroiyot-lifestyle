@@ -20,6 +20,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import PartnersList from "./pages/PartnersList";
 import KitsCorner from "./pages/KitsCorner";
 import Events from "./pages/Events";
+import AdminLeads from "./pages/AdminLeads";
 
 function Router() {
   return (
@@ -39,6 +40,7 @@ function Router() {
           <Route path="/partners" component={PartnersList} />
           <Route path="/kits-corner" component={KitsCorner} />
           <Route path="/events" component={Events} />
+          <Route path="/admin/leads" component={AdminLeads} />
           <Route path="/404" component={NotFound} />
           <Route component={NotFound} />
         </Switch>

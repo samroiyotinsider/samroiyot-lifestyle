@@ -1,0 +1,22 @@
+{
+  "query": "SELECT email, firstName, interestLevel, createdAt FROM leads ORDER BY createdAt DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT email, firstName, interestLevel, createdAt FROM leads ORDER BY createdAt DESC;",
+  "rows": [
+    {
+      "email": "goducks247365@gmail.com",
+      "firstName": "gg",
+      "interestLevel": "casual_visitor",
+      "createdAt": "2026-02-20 04:45:42"
+    },
+    {
+      "email": "sur.sent@gmail.com",
+      "firstName": "Test User",
+      "interestLevel": "casual_visitor",
+      "createdAt": "2026-02-20 04:31:46"
+    }
+  ],
+  "messages": [],
+  "stdout": "email\tfirstName\tinterestLevel\tcreatedAt\ngoducks247365@gmail.com\tgg\tcasual_visitor\t2026-02-20 04:45:42\nsur.sent@gmail.com\tTest User\tcasual_visitor\t2026-02-20 04:31:46\n",
+  "stderr": "",
+  "execution_time_ms": 1480
+}

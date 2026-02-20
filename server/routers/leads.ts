@@ -19,7 +19,10 @@ import {
   exportLeadsToCSV,
 } from "../db-leads";
 
+import { leadsAnalyticsRouter } from "./leads-analytics";
+
 export const leadsRouter = {
+  analytics: leadsAnalyticsRouter,
   /**
    * Signup for lead magnet (public)
    */
