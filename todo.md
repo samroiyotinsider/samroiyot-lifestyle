@@ -332,3 +332,21 @@
 - [ ] Test unsubscribe functionality (GDPR compliant)
 - [ ] Document lead magnet system
 - [ ] Create final checkpoint before going live
+
+
+## EMAIL FUNNEL SYSTEM - COMPLETED
+- [x] Email signup form on homepage (working - tested with sur.sent@gmail.com)
+- [x] Email signup form on Buying Guide page (added)
+- [x] Leads database table with email tracking fields
+- [x] Email service layer (email-service.ts with 4 email templates)
+- [x] Email scheduler for automation (days 0, 3, 7, 14)
+- [x] PDF uploaded to S3 (Claude guide: https://files.manuscdn.com/user_upload_by_module/session_file/310519663314810987/PqiyrVUHeoljDzMq.pdf)
+- [x] YouTube links integration (4 placeholder links in welcome email)
+- [x] Affiliate links system (8 affiliate partners in email 3)
+- [x] Email funnel tests (email-funnel.test.ts - 11 tests passing)
+- [x] tRPC email router (email.processScheduledEmails mutation)
+- [ ] Connect actual email sending (Manus integration - placeholder ready)
+- [ ] Implement email open tracking
+- [ ] Implement email click tracking
+- [ ] Create admin dashboard for lead management
+- [ ] Build lead export functionality (CSV)

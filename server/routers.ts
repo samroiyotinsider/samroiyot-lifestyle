@@ -5,6 +5,7 @@ import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { chatbotRouter } from "./chatbotRouter";
 import { eventsRouter } from "./routers/events";
 import { leadsRouter } from "./routers/leads";
+import { emailRouter } from "./routers/email";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import * as db from "./db";
@@ -16,6 +17,7 @@ export const appRouter = router({
   chatbot: chatbotRouter,
   events: eventsRouter,
   leads: leadsRouter,
+  email: emailRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {

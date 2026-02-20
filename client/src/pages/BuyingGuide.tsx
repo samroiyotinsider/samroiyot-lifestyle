@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { Link } from "wouter";
+import { EmailSignupForm } from "@/components/EmailSignupForm";
 
 export default function BuyingGuide() {
   const { language, t } = useLanguage();
@@ -98,16 +99,17 @@ export default function BuyingGuide() {
             </p>
           </div>
 
-          {/* Email Form Placeholder */}
-          <div className="bg-background p-8 rounded-lg border">
-            <p className="text-center text-muted-foreground mb-4">
-              {t(
-                "[Email capture form will be added here - ConvertKit embed]",
-                "[แบบฟอร์มจับอีเมลจะถูกเพิ่มที่นี่ - ConvertKit embed]"
-              )}
-            </p>
-            <div className="h-12 bg-muted rounded animate-pulse"></div>
-          </div>
+          {/* Email Form */}
+          <EmailSignupForm
+            title={t(
+              "Download Free Thailand Property Buyer's Guide (PDF)",
+              "ดาวน์โหลด Thailand Property Buyer's Guide ฟรี (PDF)"
+            )}
+            description={t(
+              "30-page comprehensive guide with checklists, legal frameworks, and cost breakdowns",
+              "คู่มือฉบับสมบูรณ์ 30 หน้าพร้อมรายการตรวจสอบ กรอบกฎหมาย และการแบ่งต้นทุน"
+            )}
+          />
         </div>
       </section>
 

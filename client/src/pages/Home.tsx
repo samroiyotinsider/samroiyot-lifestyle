@@ -5,6 +5,7 @@ import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { CheckCircle2, Home as HomeIcon, Users, Palmtree, ArrowRight, Star } from "lucide-react";
 import { useState, useEffect } from "react";
+import { EmailSignupForm } from "@/components/EmailSignupForm";
 
 export default function Home() {
   const { language } = useLanguage();
@@ -333,35 +334,19 @@ export default function Home() {
       {/* Email Capture Popup */}
       {showEmailPopup && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <Card className="max-w-md w-full">
-            <CardContent className="p-8">
-              <button
-                onClick={() => setShowEmailPopup(false)}
-                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
-              >
-                ✕
-              </button>
-              <h3 className="text-2xl font-bold mb-2">{t.emailPopupTitle}</h3>
-              <p className="text-muted-foreground mb-6">{t.emailPopupDesc}</p>
-              <form className="space-y-4">
-                <input
-                  type="email"
-                  placeholder={t.emailPlaceholder}
-                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                />
-                <Button className="w-full" size="lg">
-                  {t.getGuide}
-                </Button>
-                <button
-                  type="button"
-                  onClick={() => setShowEmailPopup(false)}
-                  className="w-full text-sm text-muted-foreground hover:text-foreground"
-                >
-                  {t.closePopup}
-                </button>
-              </form>
-            </CardContent>
-          </Card>
+          <div className="relative w-full max-w-md">
+            <button
+              onClick={() => setShowEmailPopup(false)}
+              className="absolute -top-8 right-0 text-white hover:text-gray-200 text-2xl z-50"
+            >
+              ✕
+            </button>
+            <EmailSignupForm
+              onSuccess={() => {
+                setShowEmailPopup(false);
+              }}
+            />
+          </div>
         </div>
       )}
     </div>
