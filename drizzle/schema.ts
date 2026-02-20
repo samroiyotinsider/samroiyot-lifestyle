@@ -184,3 +184,43 @@ export const affiliateLinks = mysqlTable("affiliateLinks", {
 
 export type AffiliateLink = typeof affiliateLinks.$inferSelect;
 export type InsertAffiliateLink = typeof affiliateLinks.$inferInsert;
+
+/**
+ * Email leads and subscribers from lead magnet
+ */
+export const leads = mysqlTable("leads", {
+  id: int("id").autoincrement().primaryKey(),
+  email: varchar("email", { length: 320 }).notNull().unique(),
+  firstName: varchar("firstName", { length: 100 }),
+  interestLevel: mysqlEnum("interestLevel", ["casual_visitor", "serious_buyer", "investor"]).default("casual_visitor").notNull(),
+  unsubscribed: int("unsubscribed").default(0).notNull(),
+  unsubscribeToken: varchar("unsubscribeToken", { length: 255 }).unique(),
+  
+  // Email tracking
+  email1Sent: timestamp("email1Sent"),
+  email1Opened: int("email1Opened").default(0).notNull(),
+  email1Clicked: int("email1Clicked").default(0).notNull(),
+  
+  email2Sent: timestamp("email2Sent"),
+  email2Opened: int("email2Opened").default(0).notNull(),
+  email2Clicked: int("email2Clicked").default(0).notNull(),
+  
+  email3Sent: timestamp("email3Sent"),
+  email3Opened: int("email3Opened").default(0).notNull(),
+  email3Clicked: int("email3Clicked").default(0).notNull(),
+  
+  email4Sent: timestamp("email4Sent"),
+  email4Opened: int("email4Opened").default(0).notNull(),
+  email4Clicked: int("email4Clicked").default(0).notNull(),
+  
+  // Engagement tracking
+  youtubeClicked: int("youtubeClicked").default(0).notNull(),
+  propertyInquirySubmitted: int("propertyInquirySubmitted").default(0).notNull(),
+  affiliateLinkClicked: int("affiliateLinkClicked").default(0).notNull(),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Lead = typeof leads.$inferSelect;
+export type InsertLead = typeof leads.$inferInsert;

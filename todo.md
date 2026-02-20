@@ -313,3 +313,22 @@
 - [x] Test scraper with real events from visitsamroiyot.com (7 events extracted)
 - [x] Verify daily auto-scraping scheduled for 2 AM UTC (9 AM Bangkok time)
 - [x] Fix location display for all events (Noi Beach Bar, Local Food Market, Sam Roi Yot)
+
+
+## Lead Magnet & Email Funnel System (Current Phase)
+- [ ] Create enhanced lead magnet PDF (blend Claude's + property investment angle)
+- [ ] Build email signup form component on homepage
+- [ ] Create leads database table with tracking fields
+- [ ] Create email templates (4 emails over 14 days)
+- [ ] Build email automation/scheduling system
+- [ ] Implement email open tracking
+- [ ] Implement email click tracking
+- [ ] Create admin dashboard for lead management
+- [ ] Build lead export functionality (CSV)
+- [ ] Write comprehensive test suite for lead capture
+- [ ] Write tests for email scheduling
+- [ ] Write tests for email tracking
+- [ ] Run end-to-end testing (signup → emails → tracking)
+- [ ] Test unsubscribe functionality (GDPR compliant)
+- [ ] Document lead magnet system
+- [ ] Create final checkpoint before going live

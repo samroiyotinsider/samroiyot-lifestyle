@@ -4,6 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { chatbotRouter } from "./chatbotRouter";
 import { eventsRouter } from "./routers/events";
+import { leadsRouter } from "./routers/leads";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import * as db from "./db";
@@ -14,6 +15,7 @@ export const appRouter = router({
   system: systemRouter,
   chatbot: chatbotRouter,
   events: eventsRouter,
+  leads: leadsRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {
