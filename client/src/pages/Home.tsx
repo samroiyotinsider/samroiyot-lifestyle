@@ -121,7 +121,7 @@ export default function Home() {
         </div>
         
         <div className="hero-overlay">
-          <h1>{t.heroTitle}</h1>
+          <h1 className="whitespace-nowrap">{t.heroTitle}</h1>
           <p className="tagline">{t.heroSubtitle}</p>
           <div className="cta-buttons flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/properties">
@@ -218,7 +218,7 @@ export default function Home() {
                         {property.title}
                       </h3>
                       <p className="text-2xl font-bold text-primary mb-2">
-                        ฿{property.price?.toLocaleString()}
+                        {property.priceEur ? `€${property.priceEur.toLocaleString()}` : `${property.price?.toLocaleString()} THB`}
                       </p>
                       <p className="text-muted-foreground line-clamp-2 mb-4">
                         {property.description}

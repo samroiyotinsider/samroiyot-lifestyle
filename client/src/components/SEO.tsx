@@ -77,7 +77,7 @@ export const schemas = {
       addressRegion: "Prachuap Khiri Khan",
       addressCountry: "TH",
     },
-    email: "info@samroiyotinsider.com",
+    email: "samroiyot.th@gmail.com",
     areaServed: {
       "@type": "City",
       name: "Sam Roi Yot",

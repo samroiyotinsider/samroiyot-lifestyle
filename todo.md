@@ -350,3 +350,12 @@
 - [ ] Implement email click tracking
 - [ ] Create admin dashboard for lead management
 - [ ] Build lead export functionality (CSV)
+
+
+## Site Refinements (February 21, 2026)
+- [ ] Replace globe icon with flag icons (Thai flag on English, UK flag on Thai)
+- [ ] Remove baht icon from property listings
+- [ ] Fix mobile line break for "Sam Roi Yot" text
+- [ ] Update Mango Hills price to €482,000
+- [ ] Upload QR codes (Line + WhatsApp) and add to contact sections
+- [ ] Change all email references to samroiyot.th@gmail.com

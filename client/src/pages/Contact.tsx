@@ -75,10 +75,10 @@ export default function Contact() {
                     <div>
                       <p className="font-medium">{t("Email", "อีเมล")}</p>
                       <a
-                        href="mailto:info@samroiyotlifestyle.com"
+                        href="mailto:samroiyot.th@gmail.com"
                         className="text-sm text-muted-foreground hover:text-primary transition-colors"
                       >
-                        info@samroiyotlifestyle.com
+                        samroiyot.th@gmail.com
                       </a>
                     </div>
                   </div>

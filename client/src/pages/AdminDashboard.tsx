@@ -270,7 +270,7 @@ export default function AdminDashboard() {
                   const priceDisplay = property.priceEur 
                     ? `€${property.priceEur.toLocaleString()}`
                     : property.price 
-                    ? `฿${property.price.toLocaleString()}`
+                    ? `${property.price.toLocaleString()} THB`
                     : "Price not set";
                   
                   return (

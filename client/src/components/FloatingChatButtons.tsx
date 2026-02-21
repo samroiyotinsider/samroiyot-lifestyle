@@ -1,17 +1,26 @@
-import { MessageCircle, Phone } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { useState } from "react";
 
 export default function FloatingChatButtons() {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const whatsappNumber = "66922746524"; // +66 092-2746524
+  const whatsappNumber = "66922746524";
   const whatsappMessage = encodeURIComponent("Hi, interested in Sam Roi Yot properties or relocation?");
-  const lineId = "samroiyotinsider"; // TODO: Replace with actual Line ID
+  const lineId = "samroiyotinsider";
 
   return (
     <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
       {isExpanded && (
         <>
+          {/* WhatsApp QR Code */}
+          <div className="bg-white p-2 rounded-lg shadow-lg">
+            <img
+              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663314810987/IFcQZyMDqVPOrZWH.png"
+              alt="WhatsApp QR Code"
+              className="w-32 h-32 rounded"
+            />
+          </div>
+
           {/* WhatsApp Button */}
           <a
             href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
@@ -24,6 +33,15 @@ export default function FloatingChatButtons() {
             </svg>
             <span className="font-medium">WhatsApp</span>
           </a>
+
+          {/* Line QR Code */}
+          <div className="bg-white p-2 rounded-lg shadow-lg">
+            <img
+              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663314810987/zthknVOdoyPXreOw.jpeg"
+              alt="Line QR Code"
+              className="w-32 h-32 rounded"
+            />
+          </div>
 
           {/* Line Button */}
           <a

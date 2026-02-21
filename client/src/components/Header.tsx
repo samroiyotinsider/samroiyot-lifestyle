@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 
@@ -53,7 +53,11 @@ export function Header() {
             onClick={toggleLanguage}
             className="ml-2"
           >
-            <Globe className="h-4 w-4 mr-1" />
+            {language === "en" ? (
+              <span className="h-4 w-4 mr-1">🇹🇭</span>
+            ) : (
+              <span className="h-4 w-4 mr-1">🇬🇧</span>
+            )}
             {language === "en" ? "ไทย" : "EN"}
           </Button>
         </div>
@@ -65,7 +69,7 @@ export function Header() {
             size="sm"
             onClick={toggleLanguage}
           >
-            <Globe className="h-4 w-4" />
+            {language === "en" ? "🇹🇭" : "🇬🇧"}
           </Button>
           <Button
             variant="ghost"

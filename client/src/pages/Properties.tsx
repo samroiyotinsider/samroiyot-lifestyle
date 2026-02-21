@@ -193,7 +193,7 @@ export default function Properties() {
                               {property.priceEur ? (
                                 `€${property.priceEur.toLocaleString()}`
                               ) : property.price ? (
-                                `฿${property.price.toLocaleString()}`
+                                `${property.price.toLocaleString()} THB`
                               ) : (
                                 'Price on request'
                               )}

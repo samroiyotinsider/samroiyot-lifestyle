@@ -1,0 +1,16 @@
+{
+  "query": "SELECT id, title, titleTh, priceEur FROM properties WHERE title LIKE '%Mango%' OR title LIKE '%mango%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT id, title, titleTh, priceEur FROM properties WHERE title LIKE '%Mango%' OR title LIKE '%mango%';",
+  "rows": [
+    {
+      "id": "7",
+      "title": "Exclusive Mango Hills Resort Estate Sam Roi Yot",
+      "titleTh": "NULL",
+      "priceEur": "482000"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\ttitleTh\tpriceEur\n7\tExclusive Mango Hills Resort Estate Sam Roi Yot\tNULL\t482000\n",
+  "stderr": "",
+  "execution_time_ms": 1596
+}
