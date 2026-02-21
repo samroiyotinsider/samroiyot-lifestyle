@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { trpc } from "@/lib/trpc";
-import { Mail, MapPin, MessageCircle } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { PropertyMap } from "@/components/PropertyMap";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -97,29 +97,7 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t space-y-3">
-                  <p className="font-medium">{t("Instant Messaging", "ข้อความทันที")}</p>
-                  <div className="space-y-2">
-                    <a
-                      href="https://wa.me/66123456789"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm w-full justify-center"
-                    >
-                      <MessageCircle className="h-4 w-4" />
-                      WhatsApp
-                    </a>
-                    <a
-                      href="https://line.me/ti/p/~samroiyotlifestyle"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-[#00B900] text-white rounded-md hover:bg-[#00A000] transition-colors text-sm w-full justify-center"
-                    >
-                      <MessageCircle className="h-4 w-4" />
-                      Line
-                    </a>
-                  </div>
-                </div>
+
               </CardContent>
             </Card>
 

@@ -1,5 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "wouter";
 
 export function Footer() {
@@ -94,30 +94,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Instant Contact */}
-          <div className="space-y-4">
-            <h4 className="font-semibold">{t("Get in Touch", "ติดต่อเรา")}</h4>
-            <div className="flex flex-col gap-2">
-              <a
-                href="https://wa.me/66123456789"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm"
-              >
-                <MessageCircle className="h-4 w-4" />
-                WhatsApp
-              </a>
-              <a
-                href="https://line.me/ti/p/~samroiyotinsider"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 bg-[#00B900] text-white rounded-md hover:bg-[#00A000] transition-colors text-sm"
-              >
-                <MessageCircle className="h-4 w-4" />
-                Line
-              </a>
-            </div>
-          </div>
+
         </div>
 
         <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">

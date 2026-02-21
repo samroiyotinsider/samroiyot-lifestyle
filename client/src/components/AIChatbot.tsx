@@ -14,8 +14,6 @@ interface Message {
   suggestWhatsApp?: boolean;
 }
 
-const WHATSAPP_NUMBER = "66123456789"; // Replace with actual WhatsApp number
-
 export function AIChatbot() {
   const { t, language } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
@@ -81,15 +79,6 @@ export function AIChatbot() {
     }
   };
 
-  const handleWhatsAppClick = () => {
-    const message = encodeURIComponent(
-      language === "th"
-        ? "สวัสดีค่ะ ฉันสนใจข้อมูลเพิ่มเติมเกี่ยวกับ Sam Roi Yot Lifestyle"
-        : "Hello, I'm interested in learning more about Sam Roi Yot Lifestyle"
-    );
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
-  };
-
   if (!isOpen) {
     return (
       <Button
@@ -135,18 +124,7 @@ export function AIChatbot() {
                     <p className="text-sm whitespace-pre-wrap">{message.content}</p>
                   </div>
                 </div>
-                {message.suggestWhatsApp && (
-                  <div className="flex justify-start mt-2">
-                    <Button
-                      size="sm"
-                      onClick={handleWhatsAppClick}
-                      className="bg-green-600 hover:bg-green-700"
-                    >
-                      <MessageCircle className="h-4 w-4 mr-2" />
-                      {t("Chat on WhatsApp", "แชทผ่าน WhatsApp")}
-                    </Button>
-                  </div>
-                )}
+
               </div>
             ))}
             {sendMessageMutation.isPending && (
