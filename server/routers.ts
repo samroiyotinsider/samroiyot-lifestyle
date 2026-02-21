@@ -10,6 +10,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import * as db from "./db";
 import { notifyOwner } from "./_core/notification";
+import { sendInquiryNotificationEmail } from "./email-service";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -154,7 +155,7 @@ export const appRouter = router({
       .mutation(async ({ input }) => {
         const result = await db.createInquiry(input);
         
-        // Send notification to owner
+        // Send notification to owner via Manus Notification Service
         const propertyInfo = input.propertyId 
           ? await db.getPropertyById(input.propertyId)
           : null;
@@ -166,6 +167,17 @@ Email: ${input.email}
 ${input.phone ? `Phone: ${input.phone}\n` : ''}${propertyInfo ? `Property: ${propertyInfo.title}\n` : ''}Message: ${input.message}`;
         
         await notifyOwner({ title, content });
+        
+        // Send email notification to owner's Gmail
+        await sendInquiryNotificationEmail(
+          'samroiyot.th@gmail.com',
+          input.inquiryType,
+          input.name,
+          input.email,
+          input.phone,
+          input.message,
+          propertyInfo?.title
+        );
         
         return result;
       }),

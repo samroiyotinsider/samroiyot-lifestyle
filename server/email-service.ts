@@ -1,4 +1,5 @@
-// Email service for sending transactional emails
+// Email service for sending transactional emails using Manus built-in email API
+import { ENV } from "./_core/env";
 
 export interface EmailContent {
   to: string;
@@ -9,22 +10,55 @@ export interface EmailContent {
 
 /**
  * Send email using Manus built-in email service
+ * All emails are sent to the owner's configured email (samroiyot.th@gmail.com)
  * Emails are sent immediately
  */
 export async function sendEmail(email: EmailContent): Promise<boolean> {
   try {
-    // For now, we'll use the notifyOwner function as a placeholder
-    // In production, you would integrate with a proper email service
-    // like SendGrid, Mailgun, or Brevo
-
     console.log(`[Email Service] Sending email to ${email.to}`);
     console.log(`[Email Service] Subject: ${email.subject}`);
     if (email.pdfUrl) {
       console.log(`[Email Service] PDF URL: ${email.pdfUrl}`);
     }
 
-    // TODO: Integrate with actual email service
-    // For now, return success to allow the system to work
+    // Use Manus built-in email API
+    if (!ENV.forgeApiUrl || !ENV.forgeApiKey) {
+      console.error("[Email Service] Manus email API not configured");
+      return false;
+    }
+
+    const endpoint = new URL(
+      "email.v1.EmailService/SendEmail",
+      ENV.forgeApiUrl.endsWith("/") ? ENV.forgeApiUrl : `${ENV.forgeApiUrl}/`
+    ).toString();
+
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        authorization: `Bearer ${ENV.forgeApiKey}`,
+        "content-type": "application/json",
+        "connect-protocol-version": "1",
+      },
+      body: JSON.stringify({
+        to: email.to,
+        subject: email.subject,
+        htmlContent: email.htmlContent,
+        ...(email.pdfUrl && { attachmentUrl: email.pdfUrl }),
+      }),
+    });
+
+    if (!response.ok) {
+      const detail = await response.text().catch(() => "");
+      console.error(
+        `[Email Service] Failed to send email (${response.status} ${response.statusText})${
+          detail ? `: ${detail}` : ""
+        }`
+      );
+      return false;
+    }
+
+    console.log(`[Email Service] Email sent successfully to ${email.to}`);
     return true;
   } catch (error) {
     console.error("[Email Service] Error sending email:", error);
@@ -243,6 +277,44 @@ export async function sendReengagementEmail(
   return sendEmail({
     to: email,
     subject: "Let's Find Your Perfect Home in Sam Roi Yot",
+    htmlContent,
+  });
+}
+
+/**
+ * Send inquiry notification email to owner
+ */
+export async function sendInquiryNotificationEmail(
+  ownerEmail: string,
+  inquiryType: string,
+  name: string,
+  visitorEmail: string,
+  phone: string | undefined,
+  message: string,
+  propertyTitle: string | undefined
+): Promise<boolean> {
+  const htmlContent = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+      <h2>New ${inquiryType} Inquiry 📬</h2>
+      
+      <p><strong>From:</strong> ${name}</p>
+      <p><strong>Email:</strong> <a href="mailto:${visitorEmail}">${visitorEmail}</a></p>
+      ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ""}
+      ${propertyTitle ? `<p><strong>Property:</strong> ${propertyTitle}</p>` : ""}
+      
+      <h3>Message:</h3>
+      <p>${message.replace(/\n/g, "<br/>")}</p>
+      
+      <hr/>
+      <p style="font-size: 12px; color: #666;">
+        This inquiry was submitted via your Sam Roi Yot Insider website.
+      </p>
+    </div>
+  `;
+
+  return sendEmail({
+    to: ownerEmail,
+    subject: `New ${inquiryType} Inquiry from ${name}`,
     htmlContent,
   });
 }
