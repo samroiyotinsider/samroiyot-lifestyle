@@ -258,6 +258,19 @@
     z-index: 10;
   }
 
+  .hero-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media (min-width: 768px) {
+    .hero-title {
+      white-space: normal;
+      overflow: visible;
+    }
+  }
+
   .hero-overlay h1 {
     font-size: 2rem;
     font-weight: bold;

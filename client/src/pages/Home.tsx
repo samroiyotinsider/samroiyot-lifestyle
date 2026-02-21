@@ -121,7 +121,7 @@ export default function Home() {
         </div>
         
         <div className="hero-overlay">
-          <h1 className="whitespace-nowrap">{t.heroTitle}</h1>
+          <h1 className="hero-title">{t.heroTitle}</h1>
           <p className="tagline">{t.heroSubtitle}</p>
           <div className="cta-buttons flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/properties">

@@ -188,30 +188,6 @@ const KitsCorner = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      {/* Language Toggle */}
-      <div className="fixed top-24 right-4 z-10 flex gap-2">
-        <button
-          onClick={() => setLanguage('en')}
-          className={`px-3 py-1 rounded text-sm font-medium transition ${
-            language === 'en'
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-          }`}
-        >
-          EN
-        </button>
-        <button
-          onClick={() => setLanguage('th')}
-          className={`px-3 py-1 rounded text-sm font-medium transition ${
-            language === 'th'
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-          }`}
-        >
-          ไทย
-        </button>
-      </div>
-
       {/* Hero Section */}
       <div className="relative h-96 bg-cover bg-center" style={{ backgroundImage: 'url(/kits-bungalow.png)' }}>
         <div className="absolute inset-0 bg-black/40"></div>
