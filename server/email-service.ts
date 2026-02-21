@@ -8,9 +8,11 @@ export interface EmailContent {
   pdfUrl?: string;
 }
 
+const OWNER_EMAIL = "samroiyot.th@gmail.com";
+
 /**
  * Send email using Manus built-in email service
- * All emails are sent to the owner's configured email (samroiyot.th@gmail.com)
+ * All emails are sent via Manus infrastructure to the recipient
  * Emails are sent immediately
  */
 export async function sendEmail(email: EmailContent): Promise<boolean> {
@@ -44,6 +46,7 @@ export async function sendEmail(email: EmailContent): Promise<boolean> {
         to: email.to,
         subject: email.subject,
         htmlContent: email.htmlContent,
+        from: "Sam Roi Yot <noreply@samroiyot.manus.space>",
         ...(email.pdfUrl && { attachmentUrl: email.pdfUrl }),
       }),
     });
@@ -285,7 +288,6 @@ export async function sendReengagementEmail(
  * Send inquiry notification email to owner
  */
 export async function sendInquiryNotificationEmail(
-  ownerEmail: string,
   inquiryType: string,
   name: string,
   visitorEmail: string,
@@ -313,7 +315,7 @@ export async function sendInquiryNotificationEmail(
   `;
 
   return sendEmail({
-    to: ownerEmail,
+    to: OWNER_EMAIL,
     subject: `New ${inquiryType} Inquiry from ${name}`,
     htmlContent,
   });

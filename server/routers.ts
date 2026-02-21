@@ -168,9 +168,8 @@ ${input.phone ? `Phone: ${input.phone}\n` : ''}${propertyInfo ? `Property: ${pro
         
         await notifyOwner({ title, content });
         
-        // Send email notification to owner's Gmail
+        // Send email notification to owner
         await sendInquiryNotificationEmail(
-          'samroiyot.th@gmail.com',
           input.inquiryType,
           input.name,
           input.email,
