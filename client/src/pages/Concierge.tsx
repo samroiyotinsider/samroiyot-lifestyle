@@ -5,12 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { trpc } from "@/lib/trpc";
-import { Plane, Car, FileText, Home, CreditCard, Phone } from "lucide-react";
+import { Plane, Car, FileText, Home, CreditCard, Phone, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { WhatsAppQRModal } from "@/components/WhatsAppQRModal";
 
 export default function Concierge() {
   const { t } = useLanguage();
+  const [showWhatsAppQR, setShowWhatsAppQR] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -199,6 +201,13 @@ export default function Concierge() {
               <div className="text-center space-y-2 text-sm text-muted-foreground">
                 <p>{t("Available for consultations and bookings", "พร้อมให้คำปรึกษาและจองบริการ")}</p>
                 <p>{t("WhatsApp, Phone, or Email", "WhatsApp, โทรศัพท์, หรืออีเมล")}</p>
+                <Button
+                  onClick={() => setShowWhatsAppQR(true)}
+                  className="w-full bg-green-600 hover:bg-green-700 mt-2"
+                >
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  {t("WhatsApp", "WhatsApp")}
+                </Button>
               </div>
 
               {/* Alternative Contact */}
@@ -267,6 +276,8 @@ export default function Concierge() {
           </Card>
         </div>
       </section>
+
+      <WhatsAppQRModal isOpen={showWhatsAppQR} onClose={() => setShowWhatsAppQR(false)} />
     </div>
   );
 }

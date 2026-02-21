@@ -1,9 +1,13 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 import { Link } from "wouter";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { WhatsAppQRModal } from "./WhatsAppQRModal";
 
 export function Footer() {
   const { t } = useLanguage();
+  const [showWhatsAppQR, setShowWhatsAppQR] = useState(false);
 
   return (
     <footer className="bg-card border-t">
@@ -91,10 +95,20 @@ export function Footer() {
                   )}
                 </span>
               </li>
+              <li>
+                <Button
+                  onClick={() => setShowWhatsAppQR(true)}
+                  size="sm"
+                  className="w-full bg-green-600 hover:bg-green-700 text-white mt-2"
+                >
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  {t("WhatsApp", "WhatsApp")}
+                </Button>
+              </li>
             </ul>
           </div>
 
-
+      <WhatsAppQRModal isOpen={showWhatsAppQR} onClose={() => setShowWhatsAppQR(false)} />
         </div>
 
         <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">

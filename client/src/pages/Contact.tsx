@@ -5,13 +5,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { trpc } from "@/lib/trpc";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, MessageCircle } from "lucide-react";
 import { PropertyMap } from "@/components/PropertyMap";
 import { useState } from "react";
 import { toast } from "sonner";
+import { WhatsAppQRModal } from "@/components/WhatsAppQRModal";
 
 export default function Contact() {
   const { t } = useLanguage();
+  const [showWhatsAppQR, setShowWhatsAppQR] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -97,9 +99,19 @@ export default function Contact() {
                   </div>
                 </div>
 
-
+                <div className="pt-4 border-t">
+                  <Button
+                    onClick={() => setShowWhatsAppQR(true)}
+                    className="w-full bg-green-600 hover:bg-green-700"
+                  >
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    {t("WhatsApp", "WhatsApp")}
+                  </Button>
+                </div>
               </CardContent>
             </Card>
+
+      <WhatsAppQRModal isOpen={showWhatsAppQR} onClose={() => setShowWhatsAppQR(false)} />
 
             <Card>
               <CardHeader>
@@ -224,3 +236,5 @@ export default function Contact() {
     </div>
   );
 }
+
+
