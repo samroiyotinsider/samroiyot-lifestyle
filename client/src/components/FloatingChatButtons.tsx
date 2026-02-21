@@ -33,7 +33,7 @@ export default function FloatingChatButtons() {
             <h3 className="font-bold text-sm mb-3 text-gray-800">WhatsApp</h3>
             <div className="mb-3 bg-gray-100 p-2 rounded flex justify-center">
               <img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663314810987/IFcQZyMDqVPOrZWH.png"
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663314810987/hNKNSJtOxJZSDipM.png"
                 alt="WhatsApp QR Code"
                 className="w-40 h-40 rounded"
                 loading="lazy"
@@ -54,7 +54,7 @@ export default function FloatingChatButtons() {
             <h3 className="font-bold text-sm mb-3 text-gray-800">Line</h3>
             <div className="mb-3 bg-gray-100 p-2 rounded flex justify-center">
               <img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663314810987/zthknVOdoyPXreOw.jpeg"
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663314810987/WFLLyWYOXTkvEzSx.jpeg"
                 alt="Line QR Code"
                 className="w-40 h-40 rounded"
                 loading="lazy"

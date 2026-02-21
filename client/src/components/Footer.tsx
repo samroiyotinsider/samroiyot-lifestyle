@@ -27,11 +27,6 @@ export function Footer() {
             <h4 className="font-semibold">{t("Quick Links", "ลิงก์ด่วน")}</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/properties" className="text-muted-foreground hover:text-primary transition-colors">
-                  {t("Properties", "ทรัพย์สิน")}
-                </Link>
-              </li>
-              <li>
                 <Link href="/area-guide" className="text-muted-foreground hover:text-primary transition-colors">
                   {t("Area Guide", "คู่มือพื้นที่")}
                 </Link>
@@ -42,18 +37,33 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/concierge" className="text-muted-foreground hover:text-primary transition-colors">
-                  {t("Concierge Services", "บริการคอนเซียร์จ")}
+                <Link href="/events" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t("Events", "เหตุการณ์")}
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">
-                  {t("About Us", "เกี่ยวกับเรา")}
+                <Link href="/properties" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t("Properties", "ทรัพย์สิน")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/concierge" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t("Concierge", "บริการคอนเซียร์จ")}
                 </Link>
               </li>
               <li>
                 <Link href="/kits-corner" className="text-muted-foreground hover:text-primary transition-colors">
                   {t("Kit's Corner", "มุมของคิท")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t("About", "เกี่ยวกับเรา")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t("Contact", "ติดต่อ")}
                 </Link>
               </li>
             </ul>
