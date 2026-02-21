@@ -10,10 +10,12 @@ import { PropertyMap } from "@/components/PropertyMap";
 import { useState } from "react";
 import { toast } from "sonner";
 import { WhatsAppQRModal } from "@/components/WhatsAppQRModal";
+import { LineQRModal } from "@/components/LineQRModal";
 
 export default function Contact() {
   const { t } = useLanguage();
   const [showWhatsAppQR, setShowWhatsAppQR] = useState(false);
+  const [showLineQR, setShowLineQR] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -99,7 +101,7 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t">
+                <div className="pt-4 border-t space-y-2">
                   <Button
                     onClick={() => setShowWhatsAppQR(true)}
                     className="w-full bg-green-600 hover:bg-green-700"
@@ -107,11 +109,19 @@ export default function Contact() {
                     <MessageCircle className="h-4 w-4 mr-2" />
                     {t("WhatsApp", "WhatsApp")}
                   </Button>
+                  <Button
+                    onClick={() => setShowLineQR(true)}
+                    className="w-full bg-[#00B900] hover:bg-[#00A000]"
+                  >
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    {t("Line", "Line")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
 
       <WhatsAppQRModal isOpen={showWhatsAppQR} onClose={() => setShowWhatsAppQR(false)} />
+      <LineQRModal isOpen={showLineQR} onClose={() => setShowLineQR(false)} />
 
             <Card>
               <CardHeader>

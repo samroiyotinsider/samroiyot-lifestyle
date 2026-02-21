@@ -9,10 +9,12 @@ import { Plane, Car, FileText, Home, CreditCard, Phone, MessageCircle } from "lu
 import { useState } from "react";
 import { toast } from "sonner";
 import { WhatsAppQRModal } from "@/components/WhatsAppQRModal";
+import { LineQRModal } from "@/components/LineQRModal";
 
 export default function Concierge() {
   const { t } = useLanguage();
   const [showWhatsAppQR, setShowWhatsAppQR] = useState(false);
+  const [showLineQR, setShowLineQR] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -208,6 +210,13 @@ export default function Concierge() {
                   <MessageCircle className="h-4 w-4 mr-2" />
                   {t("WhatsApp", "WhatsApp")}
                 </Button>
+                <Button
+                  onClick={() => setShowLineQR(true)}
+                  className="w-full bg-[#00B900] hover:bg-[#00A000] mt-2"
+                >
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  {t("Line", "Line")}
+                </Button>
               </div>
 
               {/* Alternative Contact */}
@@ -278,6 +287,7 @@ export default function Concierge() {
       </section>
 
       <WhatsAppQRModal isOpen={showWhatsAppQR} onClose={() => setShowWhatsAppQR(false)} />
+      <LineQRModal isOpen={showLineQR} onClose={() => setShowLineQR(false)} />
     </div>
   );
 }

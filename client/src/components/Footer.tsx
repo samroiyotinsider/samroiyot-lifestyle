@@ -4,10 +4,12 @@ import { Link } from "wouter";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { WhatsAppQRModal } from "./WhatsAppQRModal";
+import { LineQRModal } from "./LineQRModal";
 
 export function Footer() {
   const { t } = useLanguage();
   const [showWhatsAppQR, setShowWhatsAppQR] = useState(false);
+  const [showLineQR, setShowLineQR] = useState(false);
 
   return (
     <footer className="bg-card border-t">
@@ -95,7 +97,7 @@ export function Footer() {
                   )}
                 </span>
               </li>
-              <li>
+              <li className="space-y-2">
                 <Button
                   onClick={() => setShowWhatsAppQR(true)}
                   size="sm"
@@ -104,11 +106,20 @@ export function Footer() {
                   <MessageCircle className="h-4 w-4 mr-2" />
                   {t("WhatsApp", "WhatsApp")}
                 </Button>
+                <Button
+                  onClick={() => setShowLineQR(true)}
+                  size="sm"
+                  className="w-full bg-[#00B900] hover:bg-[#00A000] text-white"
+                >
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  {t("Line", "Line")}
+                </Button>
               </li>
             </ul>
           </div>
 
       <WhatsAppQRModal isOpen={showWhatsAppQR} onClose={() => setShowWhatsAppQR(false)} />
+      <LineQRModal isOpen={showLineQR} onClose={() => setShowLineQR(false)} />
         </div>
 
         <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
