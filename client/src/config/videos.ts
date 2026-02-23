@@ -20,7 +20,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: false,
     controls: false,
-    thumbnailUrl: "", // Add thumbnail URL here
+    thumbnailUrl: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663314810987/wiuQSHRkbJjVCsWI.png",
   },
   why2: {
     id: "PLACEHOLDER_WHY_2",
