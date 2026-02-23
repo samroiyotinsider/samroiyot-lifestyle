@@ -188,19 +188,6 @@ export default function Concierge() {
                 </div>
               </div>
 
-              {/* Incentive Message */}
-              <div className="bg-primary/5 border border-primary/20 rounded-lg p-6 space-y-3">
-                <h3 className="font-semibold text-lg text-center">
-                  {t("Special Offer", "ข้อเสนอพิเศษ")}
-                </h3>
-                <p className="text-center text-muted-foreground">
-                  {t(
-                    "Mention our website and receive a complementary gift from our web developer upon your arrival in Sam Roi Yot!",
-                    "พูดถึงเว็บไซต์ของเราและรับของขวัญฟรีจากนักพัฒนาเว็บของเราเมื่อคุณมาถึงแสนร้อยยอด!"
-                  )}
-                </p>
-              </div>
-
               {/* Service Hours */}
               <div className="text-center space-y-2 text-sm text-muted-foreground">
                 <p>{t("Available for consultations and bookings", "พร้อมให้คำปรึกษาและจองบริการ")}</p>
