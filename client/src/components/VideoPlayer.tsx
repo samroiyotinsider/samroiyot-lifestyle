@@ -14,6 +14,7 @@ interface VideoPlayerProps {
   youtubeButtonSize?: "default" | "sm" | "lg";
   youtubeButtonVariant?: "default" | "secondary" | "outline";
   loop?: boolean;
+  preventFullscreen?: boolean;
 }
 
 export function VideoPlayer({
@@ -24,10 +25,11 @@ export function VideoPlayer({
   controls = true,
   className = "",
   showYouTubeButton = true,
-  youtubeButtonLabel = "Watch Full Video on YouTube",
+  youtubeButtonLabel = "Full Video on Youtube",
   youtubeButtonSize = "default",
   youtubeButtonVariant = "secondary",
   loop = false,
+  preventFullscreen = false,
 }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(autoplay);
 
@@ -40,6 +42,7 @@ export function VideoPlayer({
           muted={autoplay}
           loop={loop}
           controls={controls}
+          controlsList={preventFullscreen ? "nofullscreen" : undefined}
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
           className="w-full h-full"
@@ -47,15 +50,6 @@ export function VideoPlayer({
         >
           Your browser does not support the video tag.
         </video>
-
-        {/* Play button overlay for non-autoplay videos */}
-        {!isPlaying && !autoplay && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition-colors cursor-pointer group">
-            <div className="bg-primary rounded-full p-4 group-hover:scale-110 transition-transform">
-              <Play className="w-8 h-8 text-white fill-white" />
-            </div>
-          </div>
-        )}
       </div>
 
       {title && <h3 className="text-lg font-semibold">{title}</h3>}

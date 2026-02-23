@@ -8,7 +8,7 @@ import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { CheckCircle2, Home as HomeIcon, Users, Palmtree, ArrowRight, Star } from "lucide-react";
 import { useState, useEffect } from "react";
-import { EmailSignupForm } from "@/components/EmailSignupForm";
+
 import { videoConfig } from "@/config/videos";
 
 export default function Home() {
@@ -16,8 +16,6 @@ export default function Home() {
   const { data: allProperties, isLoading } = trpc.properties.list.useQuery({});
   const properties = allProperties?.filter(p => p.featured) || [];
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [showEmailPopup, setShowEmailPopup] = useState(false);
-
   const heroSlides = [
     { image: "/hero-dolphin-bay-beach.jpg", alt: "Dolphin Bay Beach" },
     { image: "/hero-national-park.jpg", alt: "Khao Sam Roi Yot National Park" },
@@ -29,13 +27,6 @@ export default function Home() {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    const popupTimer = setTimeout(() => {
-      setShowEmailPopup(true);
-    }, 15000);
-    return () => clearTimeout(popupTimer);
   }, []);
 
   const content = {
@@ -66,11 +57,7 @@ export default function Home() {
       ctaTitle: "Ready to Discover Your Paradise?",
       ctaDesc: "Let us guide you through properties, visas, and relocation—your journey starts here.",
       contactUs: "Contact Us Today",
-      emailPopupTitle: "Get Your Free Sam Roi Yot Insider Guide",
-      emailPopupDesc: "Discover the best beaches, visa tips, hidden spots, and insider secrets about living in Sam Roi Yot.",
-      emailPlaceholder: "Enter your email",
-      getGuide: "Get Free Guide",
-      closePopup: "Maybe Later",
+
       watchFullVideo: "Watch Full Video on YouTube",
     },
     th: {
@@ -100,11 +87,6 @@ export default function Home() {
       ctaTitle: "พร้อมที่จะค้นพบสวรรค์ของคุณหรือยัง?",
       ctaDesc: "ให้เราแนะนำคุณผ่านอสังหาริมทรัพย์ วีซ่า และการย้ายถิ่นฐาน—การเดินทางของคุณเริ่มต้นที่นี่",
       contactUs: "ติดต่อเราวันนี้",
-      emailPopupTitle: "รับคู่มือภายในสามร้อยยอดฟรี",
-      emailPopupDesc: "ค้นพบชายหาดที่ดีที่สุด เคล็ดลับวีซ่า จุดที่ซ่อนอยู่ และความลับภายในเกี่ยวกับการใช้ชีวิตในสามร้อยยอด",
-      emailPlaceholder: "ใส่อีเมลของคุณ",
-      getGuide: "รับคู่มือฟรี",
-      closePopup: "ภายหลัง",
       watchFullVideo: "ดูวิดีโอแบบเต็มบน YouTube",
     },
   };
@@ -340,24 +322,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Email Capture Popup */}
-      {showEmailPopup && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="relative w-full max-w-md">
-            <button
-              onClick={() => setShowEmailPopup(false)}
-              className="absolute -top-8 right-0 text-white hover:text-gray-200 text-2xl z-50"
-            >
-              ✕
-            </button>
-            <EmailSignupForm
-              onSuccess={() => {
-                setShowEmailPopup(false);
-              }}
-            />
-          </div>
-        </div>
-      )}
+
     </div>
   );
 }
