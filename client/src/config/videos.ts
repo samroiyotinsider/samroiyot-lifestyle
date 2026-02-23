@@ -15,9 +15,9 @@ export const videoConfig = {
   },
   why1: {
     id: "PLACEHOLDER_WHY_1",
-    s3Url: "https://samroiyot-videos.s3.amazonaws.com/why-sam-roi-yot-1.mp4",
+    s3Url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663314810987/zEUOmnhDHnkhoiAO.mp4",
     youtubeUrl: "#",
-    autoplay: false,
+    autoplay: true,
     controls: true,
   },
   why2: {

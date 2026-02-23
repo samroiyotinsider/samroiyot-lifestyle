@@ -255,7 +255,7 @@ export default function Home() {
               <VideoPlayer
                 videoUrl={videoConfig.why1.s3Url}
                 youtubeUrl={videoConfig.why1.youtubeUrl}
-                autoplay={false}
+                autoplay={true}
                 controls={true}
                 showYouTubeButton={true}
                 youtubeButtonLabel={t.watchFullVideo || "Watch Full Video on YouTube"}
