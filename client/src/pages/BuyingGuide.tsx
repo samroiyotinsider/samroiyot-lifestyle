@@ -1,10 +1,12 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { YouTubeButton } from "@/components/YouTubeButton";
+import { VideoPlayer } from "@/components/VideoPlayer";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { Link } from "wouter";
 import { EmailSignupForm } from "@/components/EmailSignupForm";
+import { videoConfig } from "@/config/videos";
 
 export default function BuyingGuide() {
   const { language, t } = useLanguage();
@@ -67,23 +69,15 @@ export default function BuyingGuide() {
 
           {/* Main Video */}
           <div className="max-w-4xl mx-auto space-y-4">
-            <div className="video-container-large">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/PLACEHOLDER_MONEY_VIDEO?rel=0&modestbranding=1"
-                frameBorder="0"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                loading="lazy"
-              ></iframe>
-            </div>
-            <YouTubeButton
-              youtubeUrl="#"
-              label={t("Watch Full Video on YouTube", "ดูวิดีโอเต็มบน YouTube")}
-              size="default"
-              variant="secondary"
-              className="w-full"
+            <VideoPlayer
+              videoUrl={videoConfig.buyingGuideHero.s3Url}
+              youtubeUrl={videoConfig.buyingGuideHero.youtubeUrl}
+              autoplay={false}
+              controls={true}
+              showYouTubeButton={true}
+              youtubeButtonLabel={t("Watch Full Video on YouTube", "ดูวิดีโอเต็มบน YouTube")}
+              youtubeButtonSize="default"
+              youtubeButtonVariant="secondary"
             />
           </div>
         </div>
@@ -149,25 +143,17 @@ export default function BuyingGuide() {
 
                 {expandedFAQ === index && (
                   <div className="px-6 py-6 bg-background border-t space-y-4">
-                    <div className="video-container">
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src={`https://www.youtube.com/embed/${item.videoId}?rel=0&modestbranding=1`}
-                        frameBorder="0"
-                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        loading="lazy"
-                      ></iframe>
-                    </div>
-                    <p className="text-muted-foreground">{item.summary}</p>
-                    <YouTubeButton
-                      youtubeUrl="#"
-                      label={t("Watch Full Video on YouTube", "ดูวิดีโอเต็มบน YouTube")}
-                      size="sm"
-                      variant="secondary"
-                      className="w-full"
+                    <VideoPlayer
+                      videoUrl={videoConfig[`faq${index + 1}` as keyof typeof videoConfig]?.s3Url || ""}
+                      youtubeUrl={videoConfig[`faq${index + 1}` as keyof typeof videoConfig]?.youtubeUrl || ""}
+                      autoplay={false}
+                      controls={true}
+                      showYouTubeButton={true}
+                      youtubeButtonLabel={t("Watch Full Video on YouTube", "ดูวิดีโอเต็มบน YouTube")}
+                      youtubeButtonSize="sm"
+                      youtubeButtonVariant="secondary"
                     />
+                    <p className="text-muted-foreground">{item.summary}</p>
                   </div>
                 )}
               </div>

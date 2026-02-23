@@ -359,3 +359,20 @@
 - [ ] Update Mango Hills price to €482,000
 - [ ] Upload QR codes (Line + WhatsApp) and add to contact sections
 - [ ] Change all email references to samroiyot.th@gmail.com
+
+
+## Video Infrastructure Implementation (Current Session)
+- [x] Create VideoPlayer component for HTML5 video playback from S3
+- [x] Create video configuration file (videos.ts) with 18 video placeholders
+- [x] Update Home page to use VideoPlayer component for 4 "Why Sam Roi Yot" videos
+- [x] Update Buying Guide page to use VideoPlayer component for hero + 4 FAQ videos
+- [x] Update Area Guide page to use VideoPlayer component for hero + 6 topic videos
+- [x] Update Property Detail page to use VideoPlayer component for property case study
+- [x] Create vitest tests for VideoPlayer component
+- [ ] Upload 18 MP4 video files to S3
+- [ ] Update video configuration with actual S3 URLs
+- [ ] Update video configuration with YouTube URLs for buttons
+- [ ] Test all video playback on desktop and mobile
+- [ ] Verify autoplay works on hero video
+- [ ] Verify YouTube buttons direct to correct videos
+- [ ] Create final checkpoint with video infrastructure complete

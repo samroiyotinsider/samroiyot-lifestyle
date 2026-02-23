@@ -1,6 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SEO, schemas } from "@/components/SEO";
 import { YouTubeButton } from "@/components/YouTubeButton";
+import { VideoPlayer } from "@/components/VideoPlayer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
@@ -8,6 +9,7 @@ import { trpc } from "@/lib/trpc";
 import { CheckCircle2, Home as HomeIcon, Users, Palmtree, ArrowRight, Star } from "lucide-react";
 import { useState, useEffect } from "react";
 import { EmailSignupForm } from "@/components/EmailSignupForm";
+import { videoConfig } from "@/config/videos";
 
 export default function Home() {
   const { language } = useLanguage();
@@ -267,88 +269,56 @@ export default function Home() {
 
           <div className="benefits-grid">
             <div className="benefit-item">
-              <div className="video-container">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/PLACEHOLDER_BENEFIT_1?rel=0&modestbranding=1"
-                  frameBorder="0"
-                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  loading="lazy"
-                ></iframe>
-              </div>
+              <VideoPlayer
+                videoUrl={videoConfig.why1.s3Url}
+                youtubeUrl={videoConfig.why1.youtubeUrl}
+                autoplay={false}
+                controls={true}
+                showYouTubeButton={true}
+                youtubeButtonLabel={t.watchFullVideo || "Watch Full Video on YouTube"}
+                youtubeButtonSize="sm"
+                youtubeButtonVariant="outline"
+              />
               <h3 className="text-xl font-bold mt-4">{t.benefit1}</h3>
-              <YouTubeButton
-                youtubeUrl="#"
-                label={t.watchFullVideo || "Watch Full Video on YouTube"}
-                size="sm"
-                variant="outline"
-                className="mt-4 w-full"
-              />
             </div>
             <div className="benefit-item">
-              <div className="video-container">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/PLACEHOLDER_BENEFIT_2?rel=0&modestbranding=1"
-                  frameBorder="0"
-                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  loading="lazy"
-                ></iframe>
-              </div>
+              <VideoPlayer
+                videoUrl={videoConfig.why2.s3Url}
+                youtubeUrl={videoConfig.why2.youtubeUrl}
+                autoplay={false}
+                controls={true}
+                showYouTubeButton={true}
+                youtubeButtonLabel={t.watchFullVideo || "Watch Full Video on YouTube"}
+                youtubeButtonSize="sm"
+                youtubeButtonVariant="outline"
+              />
               <h3 className="text-xl font-bold mt-4">{t.benefit2}</h3>
-              <YouTubeButton
-                youtubeUrl="#"
-                label={t.watchFullVideo || "Watch Full Video on YouTube"}
-                size="sm"
-                variant="outline"
-                className="mt-4 w-full"
-              />
             </div>
             <div className="benefit-item">
-              <div className="video-container">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/PLACEHOLDER_BENEFIT_3?rel=0&modestbranding=1"
-                  frameBorder="0"
-                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  loading="lazy"
-                ></iframe>
-              </div>
+              <VideoPlayer
+                videoUrl={videoConfig.why3.s3Url}
+                youtubeUrl={videoConfig.why3.youtubeUrl}
+                autoplay={false}
+                controls={true}
+                showYouTubeButton={true}
+                youtubeButtonLabel={t.watchFullVideo || "Watch Full Video on YouTube"}
+                youtubeButtonSize="sm"
+                youtubeButtonVariant="outline"
+              />
               <h3 className="text-xl font-bold mt-4">{t.benefit3}</h3>
-              <YouTubeButton
-                youtubeUrl="#"
-                label={t.watchFullVideo || "Watch Full Video on YouTube"}
-                size="sm"
-                variant="outline"
-                className="mt-4 w-full"
-              />
             </div>
             <div className="benefit-item">
-              <div className="video-container">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/PLACEHOLDER_BENEFIT_4?rel=0&modestbranding=1"
-                  frameBorder="0"
-                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  loading="lazy"
-                ></iframe>
-              </div>
-              <h3 className="text-xl font-bold mt-4">{t.benefit4}</h3>
-              <YouTubeButton
-                youtubeUrl="#"
-                label={t.watchFullVideo || "Watch Full Video on YouTube"}
-                size="sm"
-                variant="outline"
-                className="mt-4 w-full"
+              <VideoPlayer
+                videoUrl={videoConfig.why4.s3Url}
+                youtubeUrl={videoConfig.why4.youtubeUrl}
+                autoplay={false}
+                controls={true}
+                showYouTubeButton={true}
+                youtubeButtonLabel={t.watchFullVideo || "Watch Full Video on YouTube"}
+                youtubeButtonSize="sm"
+                youtubeButtonVariant="outline"
               />
+              <h3 className="text-xl font-bold mt-4">{t.benefit4}</h3>
             </div>
           </div>
         </div>

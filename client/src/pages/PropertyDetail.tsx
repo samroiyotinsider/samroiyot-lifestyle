@@ -1,5 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { YouTubeButton } from "@/components/YouTubeButton";
+import { VideoPlayer } from "@/components/VideoPlayer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -11,6 +12,7 @@ import { MapPin, Bed, Bath, Maximize, Check, ArrowLeft, ExternalLink } from "luc
 import { useState } from "react";
 import { PropertyMap } from "@/components/PropertyMap";
 import { toast } from "sonner";
+import { videoConfig } from "@/config/videos";
 
 // Convert YouTube URL to embed format
 function getYouTubeEmbedUrl(url: string): string {
@@ -167,21 +169,7 @@ export default function PropertyDetail() {
           {t("Back to Properties", "กลับไปยังทรัพย์สิน")}
         </Button>
 
-        {/* Video Section */}
-        {property.videoUrl && (
-          <div className="space-y-2">
-            <h3 className="text-lg font-semibold">{t("Property Tour Video", "วิดีโอทัวร์ทรัพย์สิน")}</h3>
-            <div className="video-container-large">
-              <iframe
-                src={getYouTubeEmbedUrl(property.videoUrl)}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                loading="lazy"
-              ></iframe>
-            </div>
-          </div>
-        )}
+
 
         {/* Image Gallery */}
         <div className="space-y-4">
@@ -211,31 +199,23 @@ export default function PropertyDetail() {
         </div>
 
         {/* Video Walkthrough */}
-        {property.videoUrl && (
-          <Card>
-            <CardHeader>
-              <CardTitle>{t("Video Walkthrough", "วิดีโอทัวร์")}</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="relative aspect-video rounded-lg overflow-hidden">
-                <iframe
-                  src={getYouTubeEmbedUrl(property.videoUrl)}
-                  title={`${title} - Video Walkthrough`}
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-              <YouTubeButton
-                youtubeUrl="#"
-                label={t("Watch Full Property Case Study on YouTube", "ดูการศึกษากรณีทรัพย์สินเต็มบน YouTube")}
-                size="default"
-                variant="secondary"
-                className="w-full"
-              />
-            </CardContent>
-          </Card>
-        )}
+        <Card>
+          <CardHeader>
+            <CardTitle>{t("Video Walkthrough", "วิดีโอทัวร์")}</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <VideoPlayer
+              videoUrl={videoConfig.propertyWalkthrough.s3Url}
+              youtubeUrl={videoConfig.propertyWalkthrough.youtubeUrl}
+              autoplay={false}
+              controls={true}
+              showYouTubeButton={true}
+              youtubeButtonLabel={t("Watch Full Property Case Study on YouTube", "ดูการศึกษากรณีทรัพย์สินเต็มบน YouTube")}
+              youtubeButtonSize="default"
+              youtubeButtonVariant="secondary"
+            />
+          </CardContent>
+        </Card>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Property Details */}

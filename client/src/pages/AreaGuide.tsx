@@ -1,7 +1,9 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { YouTubeButton } from "@/components/YouTubeButton";
+import { VideoPlayer } from "@/components/VideoPlayer";
 import { Link } from "wouter";
+import { videoConfig } from "@/config/videos";
 
 export default function AreaGuide() {
   const { language, t } = useLanguage();
@@ -9,32 +11,32 @@ export default function AreaGuide() {
   const topics = [
     {
       title: t("Best Beaches in Sam Roi Yot", "หาดที่ดีที่สุดในแสนร้อยยอด"),
-      videoId: "PLACEHOLDER_BEACH_VIDEO",
+      videoKey: "beaches",
       icon: "🏖️",
     },
     {
       title: t("Cost of Living Comparison", "เปรียบเทียบต้นทุนการครองชีพ"),
-      videoId: "PLACEHOLDER_COST_VIDEO",
+      videoKey: "costOfLiving",
       icon: "💰",
     },
     {
       title: t("Things to Do & Activities", "สิ่งที่ต้องทำและกิจกรรม"),
-      videoId: "PLACEHOLDER_ACTIVITIES_VIDEO",
+      videoKey: "activities",
       icon: "🎯",
     },
     {
       title: t("Khao Sam Roi Yot National Park", "อุทยานแห่งชาติขาวสามร้อยยอด"),
-      videoId: "PLACEHOLDER_PARK_VIDEO",
+      videoKey: "nationalPark",
       icon: "🏞️",
     },
     {
       title: t("Restaurants & Dining", "ร้านอาหารและการรับประทานอาหาร"),
-      videoId: "PLACEHOLDER_DINING_VIDEO",
+      videoKey: "dining",
       icon: "🍽️",
     },
     {
       title: t("Healthcare & Expat Services", "สุขภาพและบริการสำหรับชาวต่างชาติ"),
-      videoId: "PLACEHOLDER_HEALTH_VIDEO",
+      videoKey: "healthcare",
       icon: "🏥",
     },
   ];
@@ -55,23 +57,15 @@ export default function AreaGuide() {
 
           {/* Main Video */}
           <div className="max-w-4xl mx-auto space-y-4">
-            <div className="video-container-large">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/PLACEHOLDER_AREA_OVERVIEW?rel=0&modestbranding=1"
-                frameBorder="0"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                loading="lazy"
-              ></iframe>
-            </div>
-            <YouTubeButton
-              youtubeUrl="#"
-              label={t("Watch Full Video on YouTube", "ดูวิดีโอเต็มบน YouTube")}
-              size="default"
-              variant="secondary"
-              className="w-full"
+            <VideoPlayer
+              videoUrl={videoConfig.areaGuideHero.s3Url}
+              youtubeUrl={videoConfig.areaGuideHero.youtubeUrl}
+              autoplay={false}
+              controls={true}
+              showYouTubeButton={true}
+              youtubeButtonLabel={t("Watch Full Video on YouTube", "ดูวิดีโอเต็มบน YouTube")}
+              youtubeButtonSize="default"
+              youtubeButtonVariant="secondary"
             />
           </div>
         </div>
@@ -81,30 +75,25 @@ export default function AreaGuide() {
       <section className="py-12 md:py-16">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {topics.map((topic, index) => (
-              <div key={index} className="space-y-4">
-                <div className="text-4xl mb-2">{topic.icon}</div>
-                <h3 className="text-xl font-semibold">{topic.title}</h3>
-                <div className="video-container">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src={`https://www.youtube.com/embed/${topic.videoId}?rel=0&modestbranding=1`}
-                    frameBorder="0"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    loading="lazy"
-                  ></iframe>
+            {topics.map((topic, index) => {
+              const videoData = videoConfig[topic.videoKey as keyof typeof videoConfig];
+              return (
+                <div key={index} className="space-y-4">
+                  <div className="text-4xl mb-2">{topic.icon}</div>
+                  <h3 className="text-xl font-semibold">{topic.title}</h3>
+                  <VideoPlayer
+                    videoUrl={videoData?.s3Url || ""}
+                    youtubeUrl={videoData?.youtubeUrl || ""}
+                    autoplay={false}
+                    controls={true}
+                    showYouTubeButton={true}
+                    youtubeButtonLabel={t("Watch Full Video on YouTube", "ดูวิดีโอเต็มบน YouTube")}
+                    youtubeButtonSize="sm"
+                    youtubeButtonVariant="secondary"
+                  />
                 </div>
-                <YouTubeButton
-                  youtubeUrl="#"
-                  label={t("Watch Full Video on YouTube", "ดูวิดีโอเต็มบน YouTube")}
-                  size="sm"
-                  variant="secondary"
-                  className="w-full"
-                />
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
