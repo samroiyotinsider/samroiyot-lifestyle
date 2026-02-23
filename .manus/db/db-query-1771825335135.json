@@ -1,0 +1,15 @@
+{
+  "query": "SELECT id, name, email FROM inquiries ORDER BY id DESC LIMIT 1;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT id, name, email FROM inquiries ORDER BY id DESC LIMIT 1;",
+  "rows": [
+    {
+      "id": "60001",
+      "name": "Suresh",
+      "email": "siddharthainsolitude@gmail.com"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\temail\n60001\tSuresh\tsiddharthainsolitude@gmail.com\n",
+  "stderr": "",
+  "execution_time_ms": 1976
+}

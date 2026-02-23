@@ -1,0 +1,18 @@
+{
+  "query": "SELECT id, name, email, phone, message, inquiryType FROM inquiries ORDER BY id DESC LIMIT 1;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT id, name, email, phone, message, inquiryType FROM inquiries ORDER BY id DESC LIMIT 1;",
+  "rows": [
+    {
+      "id": "30001",
+      "name": "Testing",
+      "email": "goducks247365@gmail.com",
+      "phone": "NULL",
+      "message": "i am testing manus' abilities... ",
+      "inquiryType": "general"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\temail\tphone\tmessage\tinquiryType\n30001\tTesting\tgoducks247365@gmail.com\tNULL\ti am testing manus' abilities... \tgeneral\n",
+  "stderr": "",
+  "execution_time_ms": 1604
+}

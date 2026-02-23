@@ -1,5 +1,5 @@
-// Email service for sending transactional emails using Manus built-in email API
-import { ENV } from "./_core/env";
+// Email service for sending transactional emails using Manus notification system
+import { notifyOwner } from "./_core/notification";
 
 export interface EmailContent {
   to: string;
@@ -8,61 +8,37 @@ export interface EmailContent {
   pdfUrl?: string;
 }
 
-const OWNER_EMAIL = "samroiyot.th@gmail.com";
-
 /**
- * Send email using Manus built-in email service
- * All emails are sent via Manus infrastructure to the recipient
- * Emails are sent immediately
+ * Send email using Manus notification system as backend
+ * All emails are delivered to the project owner
  */
 export async function sendEmail(email: EmailContent): Promise<boolean> {
   try {
     console.log(`[Email Service] Sending email to ${email.to}`);
     console.log(`[Email Service] Subject: ${email.subject}`);
-    if (email.pdfUrl) {
-      console.log(`[Email Service] PDF URL: ${email.pdfUrl}`);
-    }
 
-    // Use Manus built-in email API
-    if (!ENV.forgeApiUrl || !ENV.forgeApiKey) {
-      console.error("[Email Service] Manus email API not configured");
-      return false;
-    }
+    // Convert HTML to plain text for notification
+    const plainText = email.htmlContent
+      .replace(/<[^>]*>/g, "") // Remove HTML tags
+      .replace(/&nbsp;/g, " ")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&amp;/g, "&")
+      .trim();
 
-    const endpoint = new URL(
-      "email.v1.EmailService/SendEmail",
-      ENV.forgeApiUrl.endsWith("/") ? ENV.forgeApiUrl : `${ENV.forgeApiUrl}/`
-    ).toString();
-
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        authorization: `Bearer ${ENV.forgeApiKey}`,
-        "content-type": "application/json",
-        "connect-protocol-version": "1",
-      },
-      body: JSON.stringify({
-        to: email.to,
-        subject: email.subject,
-        htmlContent: email.htmlContent,
-        from: "Sam Roi Yot <noreply@samroiyot.manus.space>",
-        ...(email.pdfUrl && { attachmentUrl: email.pdfUrl }),
-      }),
+    // Send via notification system
+    const success = await notifyOwner({
+      title: email.subject,
+      content: plainText,
     });
 
-    if (!response.ok) {
-      const detail = await response.text().catch(() => "");
-      console.error(
-        `[Email Service] Failed to send email (${response.status} ${response.statusText})${
-          detail ? `: ${detail}` : ""
-        }`
-      );
-      return false;
+    if (success) {
+      console.log(`[Email Service] Email notification sent for: ${email.subject}`);
+    } else {
+      console.error(`[Email Service] Failed to send email notification for: ${email.subject}`);
     }
 
-    console.log(`[Email Service] Email sent successfully to ${email.to}`);
-    return true;
+    return success;
   } catch (error) {
     console.error("[Email Service] Error sending email:", error);
     return false;
@@ -71,7 +47,6 @@ export async function sendEmail(email: EmailContent): Promise<boolean> {
 
 /**
  * Schedule email to be sent at a specific time
- * Uses database to track scheduled emails
  */
 export async function scheduleEmail(
   email: EmailContent,
@@ -104,7 +79,7 @@ export async function sendWelcomeEmail(
 ): Promise<boolean> {
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-      <h2>Welcome to Sam Roi Yot Insider! 🌴</h2>
+      <h2>Welcome to Sam Roi Yot Insider!</h2>
       
       <p>Hi ${firstName},</p>
       
@@ -137,12 +112,6 @@ export async function sendWelcomeEmail(
       
       <p>Best regards,<br/>
       Sam Roi Yot Insider Team</p>
-      
-      <hr/>
-      <p style="font-size: 12px; color: #666;">
-        You're receiving this because you signed up for our free guide. 
-        <a href="#">Unsubscribe</a>
-      </p>
     </div>
   `;
 
@@ -164,7 +133,7 @@ export async function sendPropertyPitchEmail(
 ): Promise<boolean> {
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-      <h2>Exclusive Property Opportunity 🏡</h2>
+      <h2>Exclusive Property Opportunity</h2>
       
       <p>Hi ${firstName},</p>
       
@@ -176,15 +145,10 @@ export async function sendPropertyPitchEmail(
       
       <p>This is a rare opportunity in Sam Roi Yot. Limited units available.</p>
       
-      <p>Interested? <a href="#">Schedule a private viewing</a></p>
+      <p>Interested? Schedule a private viewing</p>
       
       <p>Best regards,<br/>
       Sam Roi Yot Insider Team</p>
-      
-      <hr/>
-      <p style="font-size: 12px; color: #666;">
-        <a href="#">Unsubscribe</a>
-      </p>
     </div>
   `;
 
@@ -205,7 +169,7 @@ export async function sendAffiliateEmail(
 ): Promise<boolean> {
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-      <h2>Recommended Services & Partners 🤝</h2>
+      <h2>Recommended Services & Partners</h2>
       
       <p>Hi ${firstName},</p>
       
@@ -225,11 +189,6 @@ export async function sendAffiliateEmail(
       
       <p>Best regards,<br/>
       Sam Roi Yot Insider Team</p>
-      
-      <hr/>
-      <p style="font-size: 12px; color: #666;">
-        <a href="#">Unsubscribe</a>
-      </p>
     </div>
   `;
 
@@ -249,7 +208,7 @@ export async function sendReengagementEmail(
 ): Promise<boolean> {
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-      <h2>Ready to Explore Sam Roi Yot? 🌊</h2>
+      <h2>Ready to Explore Sam Roi Yot?</h2>
       
       <p>Hi ${firstName},</p>
       
@@ -263,17 +222,12 @@ export async function sendReengagementEmail(
         <li>Community introductions</li>
       </ul>
       
-      <p><a href="#">Schedule a free consultation</a></p>
+      <p>Schedule a free consultation</p>
       
       <p>Let's find your perfect home in Sam Roi Yot.</p>
       
       <p>Best regards,<br/>
       Sam Roi Yot Insider Team</p>
-      
-      <hr/>
-      <p style="font-size: 12px; color: #666;">
-        <a href="#">Unsubscribe</a>
-      </p>
     </div>
   `;
 
@@ -295,28 +249,22 @@ export async function sendInquiryNotificationEmail(
   message: string,
   propertyTitle: string | undefined
 ): Promise<boolean> {
-  const htmlContent = `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-      <h2>New ${inquiryType} Inquiry 📬</h2>
-      
-      <p><strong>From:</strong> ${name}</p>
-      <p><strong>Email:</strong> <a href="mailto:${visitorEmail}">${visitorEmail}</a></p>
-      ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ""}
-      ${propertyTitle ? `<p><strong>Property:</strong> ${propertyTitle}</p>` : ""}
-      
-      <h3>Message:</h3>
-      <p>${message.replace(/\n/g, "<br/>")}</p>
-      
-      <hr/>
-      <p style="font-size: 12px; color: #666;">
-        This inquiry was submitted via your Sam Roi Yot Insider website.
-      </p>
-    </div>
-  `;
+  const details = [
+    `From: ${name}`,
+    `Email: ${visitorEmail}`,
+    ...(phone ? [`Phone: ${phone}`] : []),
+    ...(propertyTitle ? [`Property: ${propertyTitle}`] : []),
+    `\nMessage:\n${message}`,
+  ].join("\n");
 
-  return sendEmail({
-    to: OWNER_EMAIL,
-    subject: `New ${inquiryType} Inquiry from ${name}`,
-    htmlContent,
+  const success = await notifyOwner({
+    title: `New ${inquiryType} Inquiry from ${name}`,
+    content: details,
   });
+
+  console.log(
+    `[Email Service] Inquiry notification ${success ? "sent" : "failed"} for ${name}`
+  );
+
+  return success;
 }

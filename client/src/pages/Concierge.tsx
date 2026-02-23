@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { trpc } from "@/lib/trpc";
-import { Plane, Car, FileText, Home, CreditCard, Phone, MessageCircle } from "lucide-react";
+import { Plane, Car, FileText, Home, CreditCard, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { WhatsAppQRModal } from "@/components/WhatsAppQRModal";
@@ -173,17 +173,19 @@ export default function Concierge() {
               </p>
             </CardHeader>
             <CardContent className="space-y-8">
-              {/* Phone CTA */}
+              {/* Contact Methods */}
               <div className="text-center space-y-4">
-                <div className="flex items-center justify-center gap-3">
-                  <Phone className="h-8 w-8 text-primary" />
-                  <a href="tel:+66922746524" className="text-4xl font-bold text-primary hover:underline">
-                    +66 092-2746524
+                <p className="text-lg font-semibold">
+                  {t("Get in Touch", "ติดต่อเรา")}
+                </p>
+                <p className="text-muted-foreground">
+                  {t("Email us or scan our QR codes to connect", "ส่งอีเมลหรือสแกน QR code ของเรา")}
+                </p>
+                <div className="flex items-center justify-center gap-2">
+                  <a href="mailto:samroiyot.th@gmail.com" className="text-primary hover:underline font-medium">
+                    samroiyot.th@gmail.com
                   </a>
                 </div>
-                <p className="text-lg text-muted-foreground">
-                  {t("Khun Kitty (Aor) | Thai / English", "คุณกิตติ (อ้อ) | ไทย / อังกฤษ")}
-                </p>
               </div>
 
               {/* Incentive Message */}
