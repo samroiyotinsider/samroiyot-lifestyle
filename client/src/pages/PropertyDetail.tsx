@@ -207,12 +207,13 @@ export default function PropertyDetail() {
             <VideoPlayer
               videoUrl={videoConfig.propertyWalkthrough.s3Url}
               youtubeUrl={videoConfig.propertyWalkthrough.youtubeUrl}
-              autoplay={false}
+              autoplay={true}
               controls={true}
               showYouTubeButton={true}
-              youtubeButtonLabel={t("Watch Full Property Case Study on YouTube", "ดูการศึกษากรณีทรัพย์สินเต็มบน YouTube")}
+              youtubeButtonLabel={t("Watch Full Property Case Study on YouTube", "ดูการศึกษากรณ์ทรัพย์สินเต็มบน YouTube")}
               youtubeButtonSize="default"
               youtubeButtonVariant="secondary"
+              thumbnailUrl={videoConfig.propertyWalkthrough.thumbnailUrl}
             />
           </CardContent>
         </Card>

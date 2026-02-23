@@ -15,6 +15,7 @@ interface VideoPlayerProps {
   youtubeButtonVariant?: "default" | "secondary" | "outline";
   loop?: boolean;
   preventFullscreen?: boolean;
+  thumbnailUrl?: string; // Custom thumbnail/poster image URL
 }
 
 export function VideoPlayer({
@@ -30,6 +31,7 @@ export function VideoPlayer({
   youtubeButtonVariant = "secondary",
   loop = false,
   preventFullscreen = false,
+  thumbnailUrl,
 }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(autoplay);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -74,7 +76,7 @@ export function VideoPlayer({
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
           className="w-full h-full"
-          poster={`${videoUrl}?time=0`}
+          poster={thumbnailUrl}
         >
           Your browser does not support the video tag.
         </video>

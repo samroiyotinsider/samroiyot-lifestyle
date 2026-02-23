@@ -12,6 +12,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: true,
     controls: true,
+    thumbnailUrl: "", // Hero video doesn't need thumbnail
   },
   why1: {
     id: "PLACEHOLDER_WHY_1",
@@ -19,6 +20,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: true,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
   why2: {
     id: "PLACEHOLDER_WHY_2",
@@ -26,6 +28,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: true,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
   why3: {
     id: "PLACEHOLDER_WHY_3",
@@ -33,6 +36,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: false,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
   why4: {
     id: "PLACEHOLDER_WHY_4",
@@ -40,6 +44,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: false,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
 
   // Buying Guide Videos
@@ -49,6 +54,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: false,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
   faq1: {
     id: "PLACEHOLDER_FAQ_1",
@@ -56,6 +62,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: false,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
   faq2: {
     id: "PLACEHOLDER_FAQ_2",
@@ -63,6 +70,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: false,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
   faq3: {
     id: "PLACEHOLDER_FAQ_3",
@@ -70,6 +78,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: false,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
   faq4: {
     id: "PLACEHOLDER_FAQ_4",
@@ -77,6 +86,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: false,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
 
   // Area Guide Videos
@@ -86,6 +96,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: false,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
   beaches: {
     id: "PLACEHOLDER_BEACH_VIDEO",
@@ -93,6 +104,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: false,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
   costOfLiving: {
     id: "PLACEHOLDER_COST_VIDEO",
@@ -100,6 +112,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: false,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
   activities: {
     id: "PLACEHOLDER_ACTIVITIES_VIDEO",
@@ -107,6 +120,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: false,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
   nationalPark: {
     id: "PLACEHOLDER_PARK_VIDEO",
@@ -114,6 +128,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: false,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
   dining: {
     id: "PLACEHOLDER_DINING_VIDEO",
@@ -121,6 +136,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: false,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
   healthcare: {
     id: "PLACEHOLDER_HEALTH_VIDEO",
@@ -128,6 +144,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: false,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
 
   // Property Videos
@@ -137,6 +154,7 @@ export const videoConfig = {
     youtubeUrl: "#",
     autoplay: false,
     controls: true,
+    thumbnailUrl: "", // Add thumbnail URL here
   },
 };
 

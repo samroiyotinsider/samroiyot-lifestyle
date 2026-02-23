@@ -84,12 +84,13 @@ export default function AreaGuide() {
                   <VideoPlayer
                     videoUrl={videoData?.s3Url || ""}
                     youtubeUrl={videoData?.youtubeUrl || ""}
-                    autoplay={false}
+                    autoplay={true}
                     controls={true}
                     showYouTubeButton={true}
                     youtubeButtonLabel={t("Watch Full Video on YouTube", "ดูวิดีโอเต็มบน YouTube")}
                     youtubeButtonSize="sm"
                     youtubeButtonVariant="secondary"
+                    thumbnailUrl={videoData?.thumbnailUrl}
                   />
                 </div>
               );

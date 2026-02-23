@@ -261,6 +261,7 @@ export default function Home() {
                 youtubeButtonLabel={t.watchFullVideo || "Watch Full Video on YouTube"}
                 youtubeButtonSize="sm"
                 youtubeButtonVariant="outline"
+                thumbnailUrl={videoConfig.why1.thumbnailUrl}
               />
               <h3 className="text-xl font-bold mt-4">{t.benefit1}</h3>
             </div>
@@ -274,6 +275,7 @@ export default function Home() {
                 youtubeButtonLabel={t.watchFullVideo || "Watch Full Video on YouTube"}
                 youtubeButtonSize="sm"
                 youtubeButtonVariant="outline"
+                thumbnailUrl={videoConfig.why2.thumbnailUrl}
               />
               <h3 className="text-xl font-bold mt-4">{t.benefit2}</h3>
             </div>
