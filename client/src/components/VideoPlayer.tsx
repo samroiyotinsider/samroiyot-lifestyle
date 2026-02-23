@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { YouTubeButton } from "./YouTubeButton";
 import { Play } from "lucide-react";
 
@@ -32,13 +32,40 @@ export function VideoPlayer({
   preventFullscreen = false,
 }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(autoplay);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Use Intersection Observer to autoplay when video comes into view
+  useEffect(() => {
+    if (!autoplay || !videoRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Video is in view, start autoplay
+          videoRef.current?.play().catch(() => {
+            // Autoplay might fail due to browser policies, that's ok
+          });
+        } else {
+          // Video is out of view, pause it
+          videoRef.current?.pause();
+        }
+      },
+      { threshold: 0.25 } // Trigger when 25% of video is visible
+    );
+
+    observer.observe(videoRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [autoplay]);
 
   return (
     <div className={`space-y-4 ${className}`}>
       <div className="relative bg-black rounded-lg overflow-hidden video-container">
         <video
+          ref={videoRef}
           src={videoUrl}
-          autoPlay={autoplay}
           muted={autoplay}
           loop={loop}
           controls={controls}
