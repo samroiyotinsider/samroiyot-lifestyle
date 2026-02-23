@@ -8,7 +8,7 @@ export const videoConfig = {
   // Home Page Videos
   hero: {
     id: "PLACEHOLDER_HERO_VIDEO",
-    s3Url: "https://samroiyot-videos.s3.amazonaws.com/hero-video.mp4",
+    s3Url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663314810987/usUXtEazzvpPslZK.mp4",
     youtubeUrl: "#",
     autoplay: true,
     controls: true,
