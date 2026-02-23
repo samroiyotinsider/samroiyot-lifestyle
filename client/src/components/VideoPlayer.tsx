@@ -13,6 +13,7 @@ interface VideoPlayerProps {
   youtubeButtonLabel?: string;
   youtubeButtonSize?: "default" | "sm" | "lg";
   youtubeButtonVariant?: "default" | "secondary" | "outline";
+  loop?: boolean;
 }
 
 export function VideoPlayer({
@@ -26,6 +27,7 @@ export function VideoPlayer({
   youtubeButtonLabel = "Watch Full Video on YouTube",
   youtubeButtonSize = "default",
   youtubeButtonVariant = "secondary",
+  loop = false,
 }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(autoplay);
 
@@ -36,6 +38,7 @@ export function VideoPlayer({
           src={videoUrl}
           autoPlay={autoplay}
           muted={autoplay}
+          loop={loop}
           controls={controls}
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}

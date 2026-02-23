@@ -245,6 +245,30 @@
     object-fit: cover;
   }
 
+  .video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .video-wrapper > div {
+    width: 100%;
+    height: 100%;
+  }
+
+  .video-wrapper .video-container {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 0 !important;
+    height: auto !important;
+  }
+
+  .video-wrapper video {
+    width: 100%;
+    height: 100%;
+  }
+
   .hero-overlay {
     position: absolute;
     inset: 0;

@@ -128,6 +128,7 @@ export default function Home() {
             autoplay={true}
             controls={false}
             showYouTubeButton={false}
+            loop={true}
             className="w-full h-full"
           />
         </div>
