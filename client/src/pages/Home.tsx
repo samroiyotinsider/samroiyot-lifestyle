@@ -122,14 +122,14 @@ export default function Home() {
       {/* Video Hero Section */}
       <section className="relative hero-video-section">
         <div className="video-wrapper">
-          <iframe
-            width="100%"
-            height="100%"
-            src="https://www.youtube.com/embed/PLACEHOLDER_HERO_VIDEO?autoplay=1&mute=1&loop=1&playlist=PLACEHOLDER_HERO_VIDEO&controls=0&modestbranding=1"
-            frameBorder="0"
-            allow="autoplay"
-            className="absolute inset-0"
-          ></iframe>
+          <VideoPlayer
+            videoUrl={videoConfig.hero.s3Url}
+            youtubeUrl={videoConfig.hero.youtubeUrl}
+            autoplay={true}
+            controls={false}
+            showYouTubeButton={false}
+            className="w-full h-full"
+          />
         </div>
         
         <div className="hero-overlay">

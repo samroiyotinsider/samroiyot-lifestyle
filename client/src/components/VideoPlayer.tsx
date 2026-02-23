@@ -35,6 +35,7 @@ export function VideoPlayer({
         <video
           src={videoUrl}
           autoPlay={autoplay}
+          muted={autoplay}
           controls={controls}
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
