@@ -1,5 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
+import { YouTubeButton } from "@/components/YouTubeButton";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { Link } from "wouter";
@@ -153,6 +154,13 @@ export default function BuyingGuide() {
                       ></iframe>
                     </div>
                     <p className="text-muted-foreground">{item.summary}</p>
+                    <YouTubeButton
+                      youtubeUrl="#"
+                      label={t("Watch Full Video on YouTube", "ดูวิดีโอเต็มบน YouTube")}
+                      size="sm"
+                      variant="secondary"
+                      className="w-full"
+                    />
                   </div>
                 )}
               </div>

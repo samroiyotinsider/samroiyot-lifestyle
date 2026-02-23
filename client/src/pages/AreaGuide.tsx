@@ -1,5 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
+import { YouTubeButton } from "@/components/YouTubeButton";
 import { Link } from "wouter";
 
 export default function AreaGuide() {
@@ -88,6 +89,13 @@ export default function AreaGuide() {
                     loading="lazy"
                   ></iframe>
                 </div>
+                <YouTubeButton
+                  youtubeUrl="#"
+                  label={t("Watch Full Video on YouTube", "ดูวิดีโอเต็มบน YouTube")}
+                  size="sm"
+                  variant="secondary"
+                  className="w-full"
+                />
               </div>
             ))}
           </div>
