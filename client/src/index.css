@@ -220,7 +220,7 @@
   /* Hero Video Section */
   .hero-video-section {
     position: relative;
-    height: 70vh;
+    height: 60vh;
     overflow: hidden;
   }
 
@@ -261,12 +261,6 @@
     width: 100%;
     height: 100%;
     padding-bottom: 0 !important;
-    height: auto !important;
-  }
-
-  .video-wrapper video {
-    width: 100%;
-    height: 100%;
   }
 
   .hero-overlay {

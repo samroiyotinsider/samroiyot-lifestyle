@@ -101,7 +101,7 @@ export default function AreaGuide() {
       {/* Bottom CTA */}
       <section className="py-12 md:py-16 bg-gradient-to-r from-primary/10 to-primary/5">
         <div className="container text-center">
-          <h2 className="text-3xl font-bold mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6 leading-tight">
             {t(
               "Thinking about relocating to Sam Roi Yot?",
               "กำลังคิดจะย้ายไปแสนร้อยยอดหรือ?"
