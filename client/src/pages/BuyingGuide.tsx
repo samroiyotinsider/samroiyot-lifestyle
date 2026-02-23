@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { YouTubeButton } from "@/components/YouTubeButton";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { Link } from "wouter";
-import { EmailSignupForm } from "@/components/EmailSignupForm";
+
 import { videoConfig } from "@/config/videos";
 
 export default function BuyingGuide() {
@@ -68,37 +68,7 @@ export default function BuyingGuide() {
         </div>
       </section>
 
-      {/* Email Capture Section */}
-      <section className="py-12 md:py-16 bg-card border-y">
-        <div className="container max-w-2xl">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-2">
-              {t(
-                "Download Free Thailand Property Buyer's Guide (PDF)",
-                "ดาวน์โหลด Thailand Property Buyer's Guide ฟรี (PDF)"
-              )}
-            </h2>
-            <p className="text-muted-foreground">
-              {t(
-                "30-page comprehensive guide with checklists, legal frameworks, and cost breakdowns",
-                "คู่มือฉบับสมบูรณ์ 30 หน้าพร้อมรายการตรวจสอบ กรอบกฎหมาย และการแบ่งต้นทุน"
-              )}
-            </p>
-          </div>
 
-          {/* Email Form */}
-          <EmailSignupForm
-            title={t(
-              "Download Free Thailand Property Buyer's Guide (PDF)",
-              "ดาวน์โหลด Thailand Property Buyer's Guide ฟรี (PDF)"
-            )}
-            description={t(
-              "30-page comprehensive guide with checklists, legal frameworks, and cost breakdowns",
-              "คู่มือฉบับสมบูรณ์ 30 หน้าพร้อมรายการตรวจสอบ กรอบกฎหมาย และการแบ่งต้นทุน"
-            )}
-          />
-        </div>
-      </section>
 
       {/* FAQ Grid Section */}
       <section className="py-12 md:py-16">
