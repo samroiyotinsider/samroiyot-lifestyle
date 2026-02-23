@@ -144,78 +144,7 @@ export default function Contact() {
             </Card>
           </div>
 
-          {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-2xl">
-                  {t("Send us a Message", "ส่งข้อความถึงเรา")}
-                </CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  {t(
-                    "Fill out the form below and we'll get back to you as soon as possible",
-                    "กรอกแบบฟอร์มด้านล่างและเราจะติดต่อกลับโดยเร็วที่สุด"
-                  )}
-                </p>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="name">{t("Name", "ชื่อ")} *</Label>
-                      <Input
-                        id="name"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder={t("Your name", "ชื่อของคุณ")}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="phone">{t("Phone", "โทรศัพท์")}</Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder={t("Your phone number", "หมายเลขโทรศัพท์ของคุณ")}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <Label htmlFor="email">{t("Email", "อีเมล")} *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder={t("your.email@example.com", "อีเมลของคุณ@example.com")}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="message">{t("Message", "ข้อความ")} *</Label>
-                    <Textarea
-                      id="message"
-                      required
-                      rows={8}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder={t(
-                        "Tell us how we can help you...",
-                        "บอกเราว่าเราสามารถช่วยคุณได้อย่างไร..."
-                      )}
-                    />
-                  </div>
-                  <Button type="submit" size="lg" className="w-full" disabled={inquiryMutation.isPending}>
-                    {inquiryMutation.isPending
-                      ? t("Sending...", "กำลังส่ง...")
-                      : t("Send Message", "ส่งข้อความ")}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </div>
+
         </div>
 
         {/* Map Section */}

@@ -133,41 +133,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trust Pillars */}
-      <section className="py-16 bg-muted/30">
-        <div className="container">
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
-              <CardContent className="pt-8 text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <HomeIcon className="h-8 w-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">{t.trustPillar1}</h3>
-                <p className="text-muted-foreground">{t.trustPillar1Desc}</p>
-              </CardContent>
-            </Card>
-            <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
-              <CardContent className="pt-8 text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="h-8 w-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">{t.trustPillar2}</h3>
-                <p className="text-muted-foreground">{t.trustPillar2Desc}</p>
-              </CardContent>
-            </Card>
-            <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
-              <CardContent className="pt-8 text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Palmtree className="h-8 w-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">{t.trustPillar3}</h3>
-                <p className="text-muted-foreground">{t.trustPillar3Desc}</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
       {/* Featured Properties */}
       <section className="py-20">
         <div className="container">
@@ -236,75 +201,6 @@ export default function Home() {
                 {t.viewAll} <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Sam Roi Yot - Video Grid */}
-      <section className="py-20 bg-muted/30">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">{t.whySRY}</h2>
-            <p className="text-lg text-muted-foreground">
-              {t.whyDesc}
-            </p>
-          </div>
-
-          <div className="benefits-grid">
-            <div className="benefit-item">
-              <VideoPlayer
-                videoUrl={videoConfig.why1.s3Url}
-                youtubeUrl={videoConfig.why1.youtubeUrl}
-                autoplay={false}
-                controls={false}
-                showYouTubeButton={true}
-                youtubeButtonLabel={t.watchFullVideo || "Watch Full Video on YouTube"}
-                youtubeButtonSize="sm"
-                youtubeButtonVariant="outline"
-                thumbnailUrl={videoConfig.why1.thumbnailUrl}
-              />
-              <h3 className="text-xl font-bold mt-4">{t.benefit1}</h3>
-            </div>
-            <div className="benefit-item">
-              <VideoPlayer
-                videoUrl={videoConfig.why2.s3Url}
-                youtubeUrl={videoConfig.why2.youtubeUrl}
-                autoplay={false}
-                controls={false}
-                showYouTubeButton={true}
-                youtubeButtonLabel={t.watchFullVideo || "Watch Full Video on YouTube"}
-                youtubeButtonSize="sm"
-                youtubeButtonVariant="outline"
-                thumbnailUrl={videoConfig.why2.thumbnailUrl}
-              />
-              <h3 className="text-xl font-bold mt-4">{t.benefit2}</h3>
-            </div>
-            <div className="benefit-item">
-              <VideoPlayer
-                videoUrl={videoConfig.why3.s3Url}
-                youtubeUrl={videoConfig.why3.youtubeUrl}
-                autoplay={false}
-                controls={true}
-                showYouTubeButton={true}
-                youtubeButtonLabel={t.watchFullVideo || "Watch Full Video on YouTube"}
-                youtubeButtonSize="sm"
-                youtubeButtonVariant="outline"
-              />
-              <h3 className="text-xl font-bold mt-4">{t.benefit3}</h3>
-            </div>
-            <div className="benefit-item">
-              <VideoPlayer
-                videoUrl={videoConfig.why4.s3Url}
-                youtubeUrl={videoConfig.why4.youtubeUrl}
-                autoplay={false}
-                controls={true}
-                showYouTubeButton={true}
-                youtubeButtonLabel={t.watchFullVideo || "Watch Full Video on YouTube"}
-                youtubeButtonSize="sm"
-                youtubeButtonVariant="outline"
-              />
-              <h3 className="text-xl font-bold mt-4">{t.benefit4}</h3>
-            </div>
           </div>
         </div>
       </section>
