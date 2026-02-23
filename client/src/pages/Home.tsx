@@ -178,11 +178,18 @@ export default function Home() {
                       <p className="text-muted-foreground line-clamp-2 mb-4">
                         {property.description}
                       </p>
-                      <div className="flex gap-4 text-sm text-muted-foreground">
+                      <div className="flex gap-4 text-sm text-muted-foreground mb-4">
                         <span>{property.bedrooms} Beds</span>
                         <span>{property.bathrooms} Baths</span>
                         <span>{property.sizeSqm} m²</span>
                       </div>
+                      {videoConfig.propertyWalkthrough?.youtubeUrl && (
+                        <YouTubeButton
+                          youtubeUrl={videoConfig.propertyWalkthrough.youtubeUrl}
+                          label={language === "en" ? "Watch Case Study" : "ดูกรณีศึกษา"}
+                          className="w-full"
+                        />
+                      )}
                     </CardContent>
                   </Card>
                 </Link>
