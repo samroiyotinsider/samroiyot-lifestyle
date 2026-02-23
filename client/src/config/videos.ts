@@ -18,16 +18,16 @@ export const videoConfig = {
     id: "PLACEHOLDER_WHY_1",
     s3Url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663314810987/zEUOmnhDHnkhoiAO.mp4",
     youtubeUrl: "#",
-    autoplay: true,
-    controls: true,
+    autoplay: false,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
   why2: {
     id: "PLACEHOLDER_WHY_2",
     s3Url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663314810987/JJxjJvoEGfMzxGcY.mp4",
     youtubeUrl: "#",
-    autoplay: true,
-    controls: true,
+    autoplay: false,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
   why3: {
@@ -35,7 +35,7 @@ export const videoConfig = {
     s3Url: "https://samroiyot-videos.s3.amazonaws.com/why-sam-roi-yot-3.mp4",
     youtubeUrl: "#",
     autoplay: false,
-    controls: true,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
   why4: {
@@ -43,7 +43,7 @@ export const videoConfig = {
     s3Url: "https://samroiyot-videos.s3.amazonaws.com/why-sam-roi-yot-4.mp4",
     youtubeUrl: "#",
     autoplay: false,
-    controls: true,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
 
@@ -53,7 +53,7 @@ export const videoConfig = {
     s3Url: "https://samroiyot-videos.s3.amazonaws.com/buying-guide-overview.mp4",
     youtubeUrl: "#",
     autoplay: false,
-    controls: true,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
   faq1: {
@@ -61,7 +61,7 @@ export const videoConfig = {
     s3Url: "https://samroiyot-videos.s3.amazonaws.com/faq-foreigners-own-property.mp4",
     youtubeUrl: "#",
     autoplay: false,
-    controls: true,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
   faq2: {
@@ -69,7 +69,7 @@ export const videoConfig = {
     s3Url: "https://samroiyot-videos.s3.amazonaws.com/faq-leasehold-vs-freehold.mp4",
     youtubeUrl: "#",
     autoplay: false,
-    controls: true,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
   faq3: {
@@ -77,7 +77,7 @@ export const videoConfig = {
     s3Url: "https://samroiyot-videos.s3.amazonaws.com/faq-true-costs.mp4",
     youtubeUrl: "#",
     autoplay: false,
-    controls: true,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
   faq4: {
@@ -85,7 +85,7 @@ export const videoConfig = {
     s3Url: "https://samroiyot-videos.s3.amazonaws.com/faq-buying-process.mp4",
     youtubeUrl: "#",
     autoplay: false,
-    controls: true,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
 
@@ -95,7 +95,7 @@ export const videoConfig = {
     s3Url: "https://samroiyot-videos.s3.amazonaws.com/area-guide-overview.mp4",
     youtubeUrl: "#",
     autoplay: false,
-    controls: true,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
   beaches: {
@@ -103,7 +103,7 @@ export const videoConfig = {
     s3Url: "https://samroiyot-videos.s3.amazonaws.com/best-beaches.mp4",
     youtubeUrl: "#",
     autoplay: false,
-    controls: true,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
   costOfLiving: {
@@ -111,7 +111,7 @@ export const videoConfig = {
     s3Url: "https://samroiyot-videos.s3.amazonaws.com/cost-of-living.mp4",
     youtubeUrl: "#",
     autoplay: false,
-    controls: true,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
   activities: {
@@ -119,7 +119,7 @@ export const videoConfig = {
     s3Url: "https://samroiyot-videos.s3.amazonaws.com/things-to-do.mp4",
     youtubeUrl: "#",
     autoplay: false,
-    controls: true,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
   nationalPark: {
@@ -127,7 +127,7 @@ export const videoConfig = {
     s3Url: "https://samroiyot-videos.s3.amazonaws.com/national-park.mp4",
     youtubeUrl: "#",
     autoplay: false,
-    controls: true,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
   dining: {
@@ -135,7 +135,7 @@ export const videoConfig = {
     s3Url: "https://samroiyot-videos.s3.amazonaws.com/restaurants-dining.mp4",
     youtubeUrl: "#",
     autoplay: false,
-    controls: true,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
   healthcare: {
@@ -143,7 +143,7 @@ export const videoConfig = {
     s3Url: "https://samroiyot-videos.s3.amazonaws.com/healthcare-expat-services.mp4",
     youtubeUrl: "#",
     autoplay: false,
-    controls: true,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
 
@@ -153,7 +153,7 @@ export const videoConfig = {
     s3Url: "https://samroiyot-videos.s3.amazonaws.com/property-case-study.mp4",
     youtubeUrl: "#",
     autoplay: false,
-    controls: true,
+    controls: false,
     thumbnailUrl: "", // Add thumbnail URL here
   },
 };

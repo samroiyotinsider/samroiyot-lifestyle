@@ -255,8 +255,8 @@ export default function Home() {
               <VideoPlayer
                 videoUrl={videoConfig.why1.s3Url}
                 youtubeUrl={videoConfig.why1.youtubeUrl}
-                autoplay={true}
-                controls={true}
+                autoplay={false}
+                controls={false}
                 showYouTubeButton={true}
                 youtubeButtonLabel={t.watchFullVideo || "Watch Full Video on YouTube"}
                 youtubeButtonSize="sm"
@@ -269,8 +269,8 @@ export default function Home() {
               <VideoPlayer
                 videoUrl={videoConfig.why2.s3Url}
                 youtubeUrl={videoConfig.why2.youtubeUrl}
-                autoplay={true}
-                controls={true}
+                autoplay={false}
+                controls={false}
                 showYouTubeButton={true}
                 youtubeButtonLabel={t.watchFullVideo || "Watch Full Video on YouTube"}
                 youtubeButtonSize="sm"

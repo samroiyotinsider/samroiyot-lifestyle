@@ -87,8 +87,8 @@ export default function BuyingGuide() {
                   <VideoPlayer
                     videoUrl={videoData?.s3Url || ""}
                     youtubeUrl={videoData?.youtubeUrl || ""}
-                    autoplay={true}
-                    controls={true}
+                    autoplay={false}
+                    controls={false}
                     showYouTubeButton={true}
                     youtubeButtonLabel={t("Watch Full Video on YouTube", "ดูวิดีโอเต็มบน YouTube")}
                     youtubeButtonSize="sm"
