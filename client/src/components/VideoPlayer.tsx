@@ -36,26 +36,43 @@ export function VideoPlayer({
   const [isPlaying, setIsPlaying] = useState(autoplay);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Use Intersection Observer to autoplay when video comes into view
+  // Handle autoplay with Intersection Observer
   useEffect(() => {
-    if (!autoplay || !videoRef.current) return;
+    const video = videoRef.current;
+    if (!autoplay || !video) return;
 
+    // Function to attempt playing the video
+    const attemptPlay = () => {
+      video.play().catch((err) => {
+        // Autoplay might fail due to browser policies, that's ok
+      });
+    };
+
+    // Try to play immediately if video is ready
+    if (video.readyState >= 2) {
+      attemptPlay();
+    } else {
+      // Wait for video to be ready
+      const handleCanPlay = () => {
+        attemptPlay();
+        video.removeEventListener("canplay", handleCanPlay);
+      };
+      video.addEventListener("canplay", handleCanPlay);
+    }
+
+    // Set up Intersection Observer for videos that scroll into view
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Video is in view, start autoplay
-          videoRef.current?.play().catch(() => {
-            // Autoplay might fail due to browser policies, that's ok
-          });
+          attemptPlay();
         } else {
-          // Video is out of view, pause it
-          videoRef.current?.pause();
+          video.pause();
         }
       },
-      { threshold: 0.25 } // Trigger when 25% of video is visible
+      { threshold: 0.1 }
     );
 
-    observer.observe(videoRef.current);
+    observer.observe(video);
 
     return () => {
       observer.disconnect();
