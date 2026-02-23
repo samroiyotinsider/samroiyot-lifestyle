@@ -24,7 +24,7 @@ export const videoConfig = {
     id: "PLACEHOLDER_WHY_2",
     s3Url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663314810987/JJxjJvoEGfMzxGcY.mp4",
     youtubeUrl: "#",
-    autoplay: false,
+    autoplay: true,
     controls: true,
   },
   why3: {

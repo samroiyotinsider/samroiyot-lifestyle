@@ -69,7 +69,8 @@ export function VideoPlayer({
           muted={autoplay}
           loop={loop}
           controls={controls}
-          controlsList={preventFullscreen ? "nofullscreen" : undefined}
+          controlsList="nofullscreen"
+          playsInline
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
           className="w-full h-full"
