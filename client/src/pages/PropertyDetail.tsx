@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { YouTubeButton } from "@/components/YouTubeButton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -215,7 +216,7 @@ export default function PropertyDetail() {
             <CardHeader>
               <CardTitle>{t("Video Walkthrough", "วิดีโอทัวร์")}</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-4">
               <div className="relative aspect-video rounded-lg overflow-hidden">
                 <iframe
                   src={getYouTubeEmbedUrl(property.videoUrl)}
@@ -225,6 +226,13 @@ export default function PropertyDetail() {
                   allowFullScreen
                 />
               </div>
+              <YouTubeButton
+                youtubeUrl="#"
+                label={t("Watch Full Property Case Study on YouTube", "ดูการศึกษากรณีทรัพย์สินเต็มบน YouTube")}
+                size="default"
+                variant="secondary"
+                className="w-full"
+              />
             </CardContent>
           </Card>
         )}

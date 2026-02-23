@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { YouTubeButton } from "@/components/YouTubeButton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -231,6 +232,13 @@ export default function Properties() {
                                   : t("Sea View", "วิวทะเล")}
                               </div>
                             )}
+                            <YouTubeButton
+                              youtubeUrl="#"
+                              label={t("View Property Case Study", "ดูการศึกษากรณีทรัพย์สิน")}
+                              size="sm"
+                              variant="secondary"
+                              className="w-full mt-4"
+                            />
                           </CardContent>
                         </Card>
                       </Link>

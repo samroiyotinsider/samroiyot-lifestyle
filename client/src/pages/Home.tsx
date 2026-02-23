@@ -1,5 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SEO, schemas } from "@/components/SEO";
+import { YouTubeButton } from "@/components/YouTubeButton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
@@ -68,6 +69,7 @@ export default function Home() {
       emailPlaceholder: "Enter your email",
       getGuide: "Get Free Guide",
       closePopup: "Maybe Later",
+      watchFullVideo: "Watch Full Video on YouTube",
     },
     th: {
       heroTitle: "สามร้อยยอด – ความลับชายฝั่งที่แท้จริงของไทย",
@@ -101,6 +103,7 @@ export default function Home() {
       emailPlaceholder: "ใส่อีเมลของคุณ",
       getGuide: "รับคู่มือฟรี",
       closePopup: "ภายหลัง",
+      watchFullVideo: "ดูวิดีโอแบบเต็มบน YouTube",
     },
   };
 
@@ -276,6 +279,13 @@ export default function Home() {
                 ></iframe>
               </div>
               <h3 className="text-xl font-bold mt-4">{t.benefit1}</h3>
+              <YouTubeButton
+                youtubeUrl="#"
+                label={t.watchFullVideo || "Watch Full Video on YouTube"}
+                size="sm"
+                variant="outline"
+                className="mt-4 w-full"
+              />
             </div>
             <div className="benefit-item">
               <div className="video-container">
@@ -290,6 +300,13 @@ export default function Home() {
                 ></iframe>
               </div>
               <h3 className="text-xl font-bold mt-4">{t.benefit2}</h3>
+              <YouTubeButton
+                youtubeUrl="#"
+                label={t.watchFullVideo || "Watch Full Video on YouTube"}
+                size="sm"
+                variant="outline"
+                className="mt-4 w-full"
+              />
             </div>
             <div className="benefit-item">
               <div className="video-container">
@@ -304,6 +321,13 @@ export default function Home() {
                 ></iframe>
               </div>
               <h3 className="text-xl font-bold mt-4">{t.benefit3}</h3>
+              <YouTubeButton
+                youtubeUrl="#"
+                label={t.watchFullVideo || "Watch Full Video on YouTube"}
+                size="sm"
+                variant="outline"
+                className="mt-4 w-full"
+              />
             </div>
             <div className="benefit-item">
               <div className="video-container">
@@ -318,6 +342,13 @@ export default function Home() {
                 ></iframe>
               </div>
               <h3 className="text-xl font-bold mt-4">{t.benefit4}</h3>
+              <YouTubeButton
+                youtubeUrl="#"
+                label={t.watchFullVideo || "Watch Full Video on YouTube"}
+                size="sm"
+                variant="outline"
+                className="mt-4 w-full"
+              />
             </div>
           </div>
         </div>
