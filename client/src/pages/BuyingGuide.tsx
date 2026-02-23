@@ -66,7 +66,7 @@ export default function BuyingGuide() {
           </div>
 
           {/* Main Video */}
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto space-y-4">
             <div className="video-container-large">
               <iframe
                 width="100%"
@@ -78,6 +78,13 @@ export default function BuyingGuide() {
                 loading="lazy"
               ></iframe>
             </div>
+            <YouTubeButton
+              youtubeUrl="#"
+              label={t("Watch Full Video on YouTube", "ดูวิดีโอเต็มบน YouTube")}
+              size="default"
+              variant="secondary"
+              className="w-full"
+            />
           </div>
         </div>
       </section>
