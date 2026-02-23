@@ -1,4 +1,3 @@
-import { useLanguage } from "@/contexts/LanguageContext";
 import { SEO, schemas } from "@/components/SEO";
 import { YouTubeButton } from "@/components/YouTubeButton";
 import { VideoPlayer } from "@/components/VideoPlayer";
@@ -8,6 +7,7 @@ import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { CheckCircle2, Home as HomeIcon, Users, Palmtree, ArrowRight, Star } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 import { videoConfig } from "@/config/videos";
 

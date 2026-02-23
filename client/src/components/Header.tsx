@@ -11,11 +11,10 @@ export function Header() {
 
   const navItems = [
     { href: "/", label: t("Home", "หน้าแรก") },
-    { href: "/area-guide", label: t("Area Guide", "คู่มือพื้นที่") },
-    { href: "/buying-guide", label: t("Buying Guide", "คู่มือการซื้อ") },
+
     { href: "/events", label: t("Events", "เหตุการณ์") },
     { href: "/properties", label: t("Properties", "ทรัพย์สิน") },
-    { href: "/concierge", label: t("Concierge", "บริการคอนเซียร์จ") },
+
     { href: "/kits-corner", label: t("Kit's Corner", "มุมของคิท") },
     { href: "/about", label: t("About", "เกี่ยวกับเรา") },
     { href: "/contact", label: t("Contact", "ติดต่อ") },
