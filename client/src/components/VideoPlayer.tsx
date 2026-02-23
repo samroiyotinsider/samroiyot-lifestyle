@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { YouTubeButton } from "./YouTubeButton";
-import { Play } from "lucide-react";
 
 interface VideoPlayerProps {
   videoUrl: string; // S3 URL or local path
@@ -36,46 +35,28 @@ export function VideoPlayer({
   const [isPlaying, setIsPlaying] = useState(autoplay);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Handle autoplay with Intersection Observer
+  // Simple autoplay handler
   useEffect(() => {
     const video = videoRef.current;
     if (!autoplay || !video) return;
 
-    // Function to attempt playing the video
-    const attemptPlay = () => {
-      video.play().catch((err) => {
-        // Autoplay might fail due to browser policies, that's ok
+    // Attempt to play the video
+    const play = () => {
+      video.play().catch(() => {
+        // Autoplay failed - that's ok, user can click to play
       });
     };
 
-    // Try to play immediately if video is ready
+    // If video is already loaded, play immediately
     if (video.readyState >= 2) {
-      attemptPlay();
+      play();
     } else {
-      // Wait for video to be ready
-      const handleCanPlay = () => {
-        attemptPlay();
-        video.removeEventListener("canplay", handleCanPlay);
-      };
-      video.addEventListener("canplay", handleCanPlay);
+      // Wait for loadedmetadata event
+      video.addEventListener("loadedmetadata", play, { once: true });
     }
 
-    // Set up Intersection Observer for videos that scroll into view
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          attemptPlay();
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(video);
-
     return () => {
-      observer.disconnect();
+      video.removeEventListener("loadedmetadata", play);
     };
   }, [autoplay]);
 
