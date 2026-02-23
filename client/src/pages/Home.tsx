@@ -124,11 +124,6 @@ export default function Home() {
                 {t.browseProp} <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
-            <Link href="/buying-guide">
-              <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white/20 text-lg px-8 py-6">
-                {t.relocation}
-              </Button>
-            </Link>
           </div>
         </div>
       </section>
