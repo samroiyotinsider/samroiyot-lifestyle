@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SEO, schemas } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
@@ -107,6 +108,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Sam Roi Yot Insider - Beachfront Properties & Relocation Services"
+        description="Discover your dream beachfront property in Sam Roi Yot, Thailand. Affordable luxury condos, villas, and houses. Full relocation and concierge services."
+        keywords="Sam Roi Yot real estate, beachfront property Thailand, Hua Hin properties, Thailand retirement, expat living Thailand, Sam Roi Yot condos, beach houses Thailand, property investment Thailand"
+        schema={schemas.realEstateAgent}
+      />
       {/* Video Hero Section */}
       <section className="relative hero-video-section">
         <div className="video-wrapper">
