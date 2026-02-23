@@ -2,48 +2,33 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { YouTubeButton } from "@/components/YouTubeButton";
 import { VideoPlayer } from "@/components/VideoPlayer";
-import { ChevronDown } from "lucide-react";
-import { useState } from "react";
 import { Link } from "wouter";
 import { EmailSignupForm } from "@/components/EmailSignupForm";
 import { videoConfig } from "@/config/videos";
 
 export default function BuyingGuide() {
   const { language, t } = useLanguage();
-  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
 
   const faqItems = [
     {
-      question: t("Can Foreigners Own Property in Thailand?", "ชาวต่างชาติสามารถเป็นเจ้าของทรัพย์สินในไทยได้หรือไม่?"),
-      videoId: "PLACEHOLDER_FAQ_1",
-      summary: t(
-        "Foreigners can own land and buildings in Thailand, but with certain restrictions. Learn about freehold vs leasehold options.",
-        "ชาวต่างชาติสามารถเป็นเจ้าของที่ดินและอาคารในไทยได้ แต่มีข้อจำกัดบางประการ เรียนรู้เกี่ยวกับตัวเลือก freehold และ leasehold"
-      ),
+      title: t("Can Foreigners Own Property in Thailand?", "ชาวต่างชาติสามารถเป็นเจ้าของทรัพย์สินในไทยได้หรือไม่?"),
+      videoKey: "faq1",
+      icon: "🏠",
     },
     {
-      question: t("Leasehold vs Freehold Explained", "อธิบาย Leasehold vs Freehold"),
-      videoId: "PLACEHOLDER_FAQ_2",
-      summary: t(
-        "Understand the differences between leasehold (30-year renewable) and freehold ownership, and which is right for you.",
-        "เข้าใจความแตกต่างระหว่าง leasehold (30 ปีต่ออายุได้) และ freehold และอันไหนเหมาะสมกับคุณ"
-      ),
+      title: t("Leasehold vs Freehold Explained", "อธิบาย Leasehold vs Freehold"),
+      videoKey: "faq2",
+      icon: "📋",
     },
     {
-      question: t("True Costs of Buying Thailand Property", "ต้นทุนที่แท้จริงของการซื้อทรัพย์สินในไทย"),
-      videoId: "PLACEHOLDER_FAQ_3",
-      summary: t(
-        "Beyond the purchase price: transfer fees, taxes, legal costs, and ongoing expenses you need to budget for.",
-        "นอกเหนือจากราคาซื้อ: ค่าโอน ภาษี ค่าทำความเห็น และค่าใช้จ่ายอื่น ๆ ที่คุณต้องคำนวณ"
-      ),
+      title: t("True Costs of Buying Thailand Property", "ต้นทุนที่แท้จริงของการซื้อทรัพย์สินในไทย"),
+      videoKey: "faq3",
+      icon: "💰",
     },
     {
-      question: t("Step-by-Step Buying Process", "กระบวนการซื้อทีละขั้นตอน"),
-      videoId: "PLACEHOLDER_FAQ_4",
-      summary: t(
-        "Complete walkthrough of the Thai property buying process from initial viewing to final registration.",
-        "คำแนะนำที่สมบูรณ์ของกระบวนการซื้อทรัพย์สินไทยตั้งแต่การชมครั้งแรกจนถึงการลงทะเบียนสุดท้าย"
-      ),
+      title: t("Step-by-Step Buying Process", "กระบวนการซื้อทีละขั้นตอน"),
+      videoKey: "faq4",
+      icon: "✅",
     },
   ];
 
@@ -115,49 +100,33 @@ export default function BuyingGuide() {
         </div>
       </section>
 
-      {/* FAQ Section */}
+      {/* FAQ Grid Section */}
       <section className="py-12 md:py-16">
-        <div className="container max-w-3xl">
+        <div className="container">
           <h2 className="text-3xl font-bold mb-8 text-center">
             {t("Frequently Asked Questions", "คำถามที่พบบ่อย")}
           </h2>
 
-          <div className="space-y-4">
-            {faqItems.map((item, index) => (
-              <div key={index} className="border rounded-lg overflow-hidden">
-                <button
-                  onClick={() =>
-                    setExpandedFAQ(expandedFAQ === index ? null : index)
-                  }
-                  className="w-full px-6 py-4 flex items-center justify-between bg-card hover:bg-card/80 transition-colors"
-                >
-                  <h3 className="text-lg font-semibold text-left">
-                    {item.question}
-                  </h3>
-                  <ChevronDown
-                    className={`h-5 w-5 transition-transform ${
-                      expandedFAQ === index ? "rotate-180" : ""
-                    }`}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {faqItems.map((item, index) => {
+              const videoData = videoConfig[item.videoKey as keyof typeof videoConfig];
+              return (
+                <div key={index} className="space-y-4">
+                  <div className="text-4xl mb-2">{item.icon}</div>
+                  <h3 className="text-xl font-semibold">{item.title}</h3>
+                  <VideoPlayer
+                    videoUrl={videoData?.s3Url || ""}
+                    youtubeUrl={videoData?.youtubeUrl || ""}
+                    autoplay={false}
+                    controls={true}
+                    showYouTubeButton={true}
+                    youtubeButtonLabel={t("Watch Full Video on YouTube", "ดูวิดีโอเต็มบน YouTube")}
+                    youtubeButtonSize="sm"
+                    youtubeButtonVariant="secondary"
                   />
-                </button>
-
-                {expandedFAQ === index && (
-                  <div className="px-6 py-6 bg-background border-t space-y-4">
-                    <VideoPlayer
-                      videoUrl={videoConfig[`faq${index + 1}` as keyof typeof videoConfig]?.s3Url || ""}
-                      youtubeUrl={videoConfig[`faq${index + 1}` as keyof typeof videoConfig]?.youtubeUrl || ""}
-                      autoplay={false}
-                      controls={true}
-                      showYouTubeButton={true}
-                      youtubeButtonLabel={t("Watch Full Video on YouTube", "ดูวิดีโอเต็มบน YouTube")}
-                      youtubeButtonSize="sm"
-                      youtubeButtonVariant="secondary"
-                    />
-                    <p className="text-muted-foreground">{item.summary}</p>
-                  </div>
-                )}
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

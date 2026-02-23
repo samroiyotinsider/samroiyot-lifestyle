@@ -369,6 +369,8 @@
 - [x] Update Area Guide page to use VideoPlayer component for hero + 6 topic videos
 - [x] Update Property Detail page to use VideoPlayer component for property case study
 - [x] Create vitest tests for VideoPlayer component
+- [x] Restructure Buying Guide page to use grid layout (2x2) matching Area Guide design
+- [x] Replace expandable FAQ dropdowns with always-visible video grid
 - [ ] Upload 18 MP4 video files to S3
 - [ ] Update video configuration with actual S3 URLs
 - [ ] Update video configuration with YouTube URLs for buttons
