@@ -1,14 +1,9 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { trpc } from "@/lib/trpc";
 import { Mail, MapPin, MessageCircle } from "lucide-react";
 import { PropertyMap } from "@/components/PropertyMap";
 import { useState } from "react";
-import { toast } from "sonner";
 import { WhatsAppQRModal } from "@/components/WhatsAppQRModal";
 import { LineQRModal } from "@/components/LineQRModal";
 
@@ -16,36 +11,6 @@ export default function Contact() {
   const { t } = useLanguage();
   const [showWhatsAppQR, setShowWhatsAppQR] = useState(false);
   const [showLineQR, setShowLineQR] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-
-  const inquiryMutation = trpc.inquiries.create.useMutation({
-    onSuccess: () => {
-      toast.success(t(
-        "Thank you for contacting us! We'll respond within 24 hours.",
-        "ขอบคุณที่ติดต่อเรา! เราจะตอบกลับภายใน 24 ชั่วโมง"
-      ));
-      setFormData({ name: "", email: "", phone: "", message: "" });
-    },
-    onError: () => {
-      toast.error(t("Failed to send message. Please try again.", "ไม่สามารถส่งข้อความได้ กรุณาลองอีกครั้ง"));
-    },
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    inquiryMutation.mutate({
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone || undefined,
-      message: formData.message,
-      inquiryType: "general",
-    });
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -120,8 +85,8 @@ export default function Contact() {
               </CardContent>
             </Card>
 
-      <WhatsAppQRModal isOpen={showWhatsAppQR} onClose={() => setShowWhatsAppQR(false)} />
-      <LineQRModal isOpen={showLineQR} onClose={() => setShowLineQR(false)} />
+            <WhatsAppQRModal isOpen={showWhatsAppQR} onClose={() => setShowWhatsAppQR(false)} />
+            <LineQRModal isOpen={showLineQR} onClose={() => setShowLineQR(false)} />
 
             <Card>
               <CardHeader>
@@ -144,36 +109,32 @@ export default function Contact() {
             </Card>
           </div>
 
-
-        </div>
-
-        {/* Map Section */}
-        <div className="mt-16">
-          <Card>
-            <CardHeader>
-              <CardTitle>{t("Find Us", "ค้นหาเรา")}</CardTitle>
-              <p className="text-sm text-muted-foreground">
-                {t(
-                  "Sam Roi Yot is located in Prachuap Khiri Khan province, approximately 45km south of Hua Hin",
-                  "แสนร้อยยอดตั้งอยู่ในจังหวัดประจวบคีรีขันธ์ ห่างจากหัวหินประมาณ 45 กิโลเมตรทางใต้"
-                )}
-              </p>
-            </CardHeader>
-            <CardContent>
-              <div className="aspect-video rounded-lg overflow-hidden">
-                <PropertyMap
-                  latitude="12.2833"
-                  longitude="99.9500"
-                  title="Sam Roi Yot Lifestyle Office"
-                  address="622 ถนน 4020 Tambon Sam Roi Yot, Sam Roi Yot District, Prachuap Khiri Khan 77120"
-                />
-              </div>
-            </CardContent>
-          </Card>
+          {/* Map Section */}
+          <div className="lg:col-span-2">
+            <Card>
+              <CardHeader>
+                <CardTitle>{t("Find Us", "ค้นหาเรา")}</CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  {t(
+                    "Sam Roi Yot is located in Prachuap Khiri Khan province, approximately 45km south of Hua Hin",
+                    "แสนร้อยยอดตั้งอยู่ในจังหวัดประจวบคีรีขันธ์ ห่างจากหัวหินประมาณ 45 กิโลเมตรทางใต้"
+                  )}
+                </p>
+              </CardHeader>
+              <CardContent>
+                <div className="aspect-video rounded-lg overflow-hidden">
+                  <PropertyMap
+                    latitude="12.2833"
+                    longitude="99.9500"
+                    title="Sam Roi Yot Lifestyle Office"
+                    address="622 ถนน 4020 Tambon Sam Roi Yot, Sam Roi Yot District, Prachuap Khiri Khan 77120"
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-
