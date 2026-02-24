@@ -1,19 +1,23 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { YouTubeButton } from "@/components/YouTubeButton";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
-import { MapPin, Bed, Bath, Maximize } from "lucide-react";
+import { MapPin, Bed, Bath, Maximize, Mail, MessageCircle } from "lucide-react";
 import { useState, useMemo } from "react";
+import { WhatsAppQRModal } from "@/components/WhatsAppQRModal";
+import { LineQRModal } from "@/components/LineQRModal";
 
 export default function Properties() {
   const { t, language } = useLanguage();
   const [propertyType, setPropertyType] = useState<string>("");
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
+  const [showWhatsAppQR, setShowWhatsAppQR] = useState(false);
+  const [showLineQR, setShowLineQR] = useState(false);
   
   const { data: properties, isLoading } = trpc.properties.list.useQuery({
     propertyType: propertyType || undefined,
@@ -59,6 +63,63 @@ export default function Properties() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Filters Sidebar */}
           <aside className="lg:col-span-1 space-y-6">
+            {/* Get in Touch Card */}
+            <Card>
+              <CardHeader>
+                <CardTitle>{t("Get in Touch", "ติดต่อเรา")}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <Mail className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="font-medium">{t("Email", "อีเมล")}</p>
+                      <a
+                        href="mailto:samroiyot.th@gmail.com"
+                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        samroiyot.th@gmail.com
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <MapPin className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="font-medium">{t("Location", "ที่ตั้ง")}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {t(
+                          "Sam Roi Yot, Prachuap Khiri Khan, Thailand",
+                          "แสนร้อยยอด ประจวบคีรีขันธ์ ประเทศไทย"
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t space-y-2">
+                  <Button
+                    onClick={() => setShowWhatsAppQR(true)}
+                    className="w-full bg-green-600 hover:bg-green-700"
+                  >
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    {t("WhatsApp", "WhatsApp")}
+                  </Button>
+                  <Button
+                    onClick={() => setShowLineQR(true)}
+                    className="w-full bg-[#00B900] hover:bg-[#00A000]"
+                  >
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    {t("Line", "Line")}
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <WhatsAppQRModal isOpen={showWhatsAppQR} onClose={() => setShowWhatsAppQR(false)} />
+            <LineQRModal isOpen={showLineQR} onClose={() => setShowLineQR(false)} />
+
+            {/* Filters Card */}
             <Card>
               <CardContent className="pt-6 space-y-6">
                 <div>
