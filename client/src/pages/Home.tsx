@@ -31,7 +31,7 @@ export default function Home() {
 
   const content = {
     en: {
-      heroTitle: "Sam Roi Yot - inside curated property listings",
+      heroTitle: "Sam Roi Yot Insider - Featured Property Listings",
       heroSubtitle: "Video Tours • Investment Analysis • Direct Owner Contact",
       browseProp: "Browse Properties",
       relocation: "Relocation Services",
@@ -61,7 +61,7 @@ export default function Home() {
       watchFullVideo: "Watch Full Video on YouTube",
     },
     th: {
-      heroTitle: "สามร้อยยอด - รายการที่ดำเนินหน้อยอสังหาริมทรัพย์",
+      heroTitle: "สามร้อยยอด Insider - รายการอสังหาริมทรัพย์ที่คัดเลือกหน้อย",
       heroSubtitle: "ทัวร์วิดีโอ • วิเคราะห์การลงทุน • ติดต่อเจ้าหน้อยโดยตรง",
       browseProp: "ดูอสังหาริมทรัพย์",
       relocation: "บริการย้ายถิ่นฐาน",
