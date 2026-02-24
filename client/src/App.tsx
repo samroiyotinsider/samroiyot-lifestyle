@@ -19,6 +19,7 @@ import Contact from "./pages/Contact";
 import AdminDashboard from "./pages/AdminDashboard";
 import PartnersList from "./pages/PartnersList";
 import KitsCorner from "./pages/KitsCorner";
+import AboutKit from "./pages/AboutKit";
 import Events from "./pages/Events";
 import AdminLeads from "./pages/AdminLeads";
 
@@ -39,6 +40,7 @@ function Router() {
           <Route path="/admin" component={AdminDashboard} />
           <Route path="/partners" component={PartnersList} />
           <Route path="/kits-corner" component={KitsCorner} />
+          <Route path="/about-kit" component={AboutKit} />
           <Route path="/events" component={Events} />
           <Route path="/admin/leads" component={AdminLeads} />
           <Route path="/404" component={NotFound} />

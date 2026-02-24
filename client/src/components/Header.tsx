@@ -12,10 +12,7 @@ export function Header() {
   const navItems = [
     { href: "/", label: t("Home", "หน้าแรก") },
     { href: "/properties", label: t("Properties", "ทรัพย์สิน") },
-    { href: "/events", label: t("Events", "เหตุการณ์") },
-    { href: "/kits-corner", label: t("Kit's Corner", "มุมของคิท") },
-    { href: "/about", label: t("About", "เกี่ยวกับเรา") },
-    { href: "/contact", label: t("Contact", "ติดต่อ") },
+    { href: "/about-kit", label: t("About Kit", "เกี่ยวกับคิท") },
   ];
 
   const toggleLanguage = () => {
