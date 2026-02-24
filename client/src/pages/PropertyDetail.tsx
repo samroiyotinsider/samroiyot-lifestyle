@@ -248,27 +248,7 @@ export default function PropertyDetail() {
                 </Card>
               )}
 
-              {/* YouTube Video */}
-              {videoConfig.propertyWalkthrough?.youtubeUrl && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{t("Property Walkthrough", "การเดินทัวร์ทรัพย์สิน")}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="aspect-video rounded-lg overflow-hidden">
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src={getYouTubeEmbedUrl(videoConfig.propertyWalkthrough.youtubeUrl)}
-                        title="Property Walkthrough"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
+
             </div>
           </div>
 

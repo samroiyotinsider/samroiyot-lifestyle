@@ -293,13 +293,7 @@ export default function Properties() {
                                   : t("Sea View", "วิวทะเล")}
                               </div>
                             )}
-                            <YouTubeButton
-                              youtubeUrl="#"
-                              label={t("View Property Case Study", "ดูการศึกษากรณีทรัพย์สิน")}
-                              size="sm"
-                              variant="secondary"
-                              className="w-full mt-4"
-                            />
+
                           </CardContent>
                         </Card>
                       </Link>

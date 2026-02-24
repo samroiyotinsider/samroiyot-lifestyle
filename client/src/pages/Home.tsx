@@ -183,13 +183,7 @@ export default function Home() {
                         <span>{property.bathrooms} Baths</span>
                         <span>{property.sizeSqm} m²</span>
                       </div>
-                      {videoConfig.propertyWalkthrough?.youtubeUrl && (
-                        <YouTubeButton
-                          youtubeUrl={videoConfig.propertyWalkthrough.youtubeUrl}
-                          label={language === "en" ? "Watch Case Study" : "ดูกรณีศึกษา"}
-                          className="w-full"
-                        />
-                      )}
+
                     </CardContent>
                   </Card>
                 </Link>
