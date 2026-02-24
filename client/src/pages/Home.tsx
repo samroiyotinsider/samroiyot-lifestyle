@@ -31,8 +31,8 @@ export default function Home() {
 
   const content = {
     en: {
-      heroTitle: "Sam Roi Yot – Thailand's Last True Coastal Secret",
-      heroSubtitle: "Where Nature Meets Luxury Living & Smart Investment",
+      heroTitle: "Sam Roi Yot - inside curated property listings",
+      heroSubtitle: "Video Tours • Investment Analysis • Direct Owner Contact",
       browseProp: "Browse Properties",
       relocation: "Relocation Services",
       trustPillar1: "Curated Exclusive Properties",
@@ -61,8 +61,8 @@ export default function Home() {
       watchFullVideo: "Watch Full Video on YouTube",
     },
     th: {
-      heroTitle: "สามร้อยยอด – ความลับชายฝั่งที่แท้จริงของไทย",
-      heroSubtitle: "ที่ซึ่งธรรมชาติพบกับการใช้ชีวิตหรูหราและการลงทุนที่ชาญฉลาด",
+      heroTitle: "สามร้อยยอด - รายการที่ดำเนินหน้อยอสังหาริมทรัพย์",
+      heroSubtitle: "ทัวร์วิดีโอ • วิเคราะห์การลงทุน • ติดต่อเจ้าหน้อยโดยตรง",
       browseProp: "ดูอสังหาริมทรัพย์",
       relocation: "บริการย้ายถิ่นฐาน",
       trustPillar1: "อสังหาริมทรัพย์พิเศษที่คัดสรร",
