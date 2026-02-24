@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { MapPin, Bed, Bath, Square, Mail, MessageCircle } from 'lucide-react';
+import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { WhatsAppQRModal } from '@/components/WhatsAppQRModal';
 import { LineQRModal } from '@/components/LineQRModal';
@@ -15,7 +16,7 @@ const AboutKit = () => {
     en: {
       // Hero Section
       heroTitle: "About Kit",
-      heroSubtitle: "Your Sam Roi Yot Local Connection",
+      heroSubtitle: "The Sam Roi Yot Insider",
       heroIntro: "Born and raised in Sam Roi Yot, I help property owners in our village connect with international buyers and renters. I know this area, the people, and what makes each property special.",
 
       // Who is Kit Section
@@ -60,7 +61,8 @@ const AboutKit = () => {
       languageNote: "I speak Thai and English fluently.",
 
       // Footer
-      footerText: "Sam Roi Yot Insider showcases properties in Sam Roi Yot, Thailand. Property owners work directly with buyers through licensed Thai legal professionals. Kit provides local coordination and introductions. All video content available on YouTube:",
+      footerText: "Sam Roi Yot Insider showcases properties in Sam Roi Yot, Thailand. Property owners work directly with buyers through licensed Thai legal professionals. Kit provides local coordination and introductions.",
+      footerVideoLine: "All video content available on YouTube:",
       youtubeLink: "Sam Roi Yot Insider"
     },
     th: {
@@ -111,7 +113,8 @@ const AboutKit = () => {
       languageNote: "ฉันพูดภาษาไทยและอังกฤษได้อย่างคล่องแคล่ว",
 
       // Footer
-      footerText: "Sam Roi Yot Insider แสดงทรัพย์สินในสามร้อยยอด ประเทศไทย เจ้าของทรัพย์สินทำงานโดยตรงกับผู้ซื้อผ่านมืออาชีพกฎหมายไทยที่ได้รับใบอนุญาต คิทให้การประสานงานท้องถิ่นและการแนะนำ เนื้อหาวิดีโอทั้งหมดพร้อมใช้งานบน YouTube:",
+      footerText: "Sam Roi Yot Insider แสดงทรัพย์สินในสามร้อยยอด ประเทศไทย เจ้าของทรัพย์สินทำงานโดยตรงกับผู้ซื้อผ่านมืออาชีพกฎหมายไทยที่ได้รับใบอนุญาต คิทให้การประสานงานท้องถิ่นและการแนะนำ",
+      footerVideoLine: "เนื้อหาวิดีโอทั้งหมดพร้อมใช้งานบน YouTube:",
       youtubeLink: "Sam Roi Yot Insider"
     }
   };
@@ -125,21 +128,24 @@ const AboutKit = () => {
       title: "Exclusive Mango Hills Resort Estate",
       price: "€482,000",
       image: "/mango-hills.png",
-      description: "Offered exclusively through Sam Roi Yot Lifestyle Pro..."
+      description: "Offered exclusively through Sam Roi Yot Lifestyle Pro...",
+      propertyId: 1
     },
     {
       id: 2,
       title: "1 Bedroom Condo for Sale at The Sea Condominium",
       price: "€125,000",
       image: "/sea-condo.png",
-      description: "Sea View Condo for Sale at The Sea Condominium, Sam R..."
+      description: "Sea View Condo for Sale at The Sea Condominium, Sam R...",
+      propertyId: 2
     },
     {
       id: 3,
       title: "Chanote Land 3.2 Rai Sam Roi Yot – Divisible into 3 Plots",
       price: "€195,000",
       image: "/land-plot.png",
-      description: "Unlock unlimited potential in Sam Roi Yot –..."
+      description: "Unlock unlimited potential in Sam Roi Yot –...",
+      propertyId: 3
     }
   ];
 
@@ -149,7 +155,7 @@ const AboutKit = () => {
       <div className="relative h-80 bg-gradient-to-r from-blue-600 to-blue-700 flex items-center justify-center text-white">
         <div className="text-center px-4 max-w-3xl">
           <h1 className="text-5xl font-bold mb-4">{currentContent.heroTitle}</h1>
-          <h2 className="text-2xl font-semibold mb-6 text-blue-100">{currentContent.heroSubtitle}</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-blue-100 italic">{currentContent.heroSubtitle}</h2>
           <p className="text-lg leading-relaxed">{currentContent.heroIntro}</p>
         </div>
       </div>
@@ -176,16 +182,18 @@ const AboutKit = () => {
           <div className="grid md:grid-cols-3 gap-6 mb-8">
             {featuredProperties.map((property) => (
               <Card key={property.id} className="overflow-hidden hover:shadow-lg transition">
-                <div className="h-48 bg-gray-200 flex items-center justify-center">
-                  <span className="text-gray-400">Property Image</span>
+                <div className="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
+                  <img src={property.image} alt={property.title} className="w-full h-full object-cover" />
                 </div>
                 <div className="p-6">
                   <h3 className="text-lg font-bold mb-2 text-gray-900">{property.title}</h3>
                   <p className="text-2xl font-bold text-blue-600 mb-3">{property.price}</p>
                   <p className="text-gray-600 text-sm mb-4">{property.description}</p>
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                    View Details
-                  </Button>
+                  <Link href={`/properties/${property.propertyId}`}>
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                      View Details
+                    </Button>
+                  </Link>
                 </div>
               </Card>
             ))}
@@ -204,8 +212,8 @@ const AboutKit = () => {
           <Card className="overflow-hidden">
             <div className="grid md:grid-cols-2 gap-0">
               {/* Left: Image */}
-              <div className="h-80 bg-gray-200 flex items-center justify-center">
-                <span className="text-gray-400">Airbnb Property Image</span>
+              <div className="h-80 bg-gray-200 flex items-center justify-center overflow-hidden">
+                <img src="/punoi-bungalow.png" alt="Punoi Bungalow" className="w-full h-full object-cover" />
               </div>
 
               {/* Right: Details */}
@@ -247,47 +255,29 @@ const AboutKit = () => {
           <h2 className="text-4xl font-bold mb-2 text-gray-900">{currentContent.contactTitle}</h2>
           <p className="text-lg text-gray-600 mb-12">{currentContent.contactIntro}</p>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <div className="flex flex-col md:flex-row gap-6 mb-12 items-center justify-center">
             {/* WhatsApp */}
-            <div className="text-center">
-              <div className="h-48 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
-                <span className="text-gray-400">WhatsApp QR Code</span>
-              </div>
-              <p className="text-gray-700 font-medium">{currentContent.whatsappText}</p>
-              <Button
-                onClick={() => setShowWhatsAppQR(true)}
-                className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white"
-              >
-                <MessageCircle className="h-4 w-4 mr-2" />
-                {currentContent.whatsappLabel}
-              </Button>
-            </div>
+            <Button
+              onClick={() => setShowWhatsAppQR(true)}
+              className="bg-green-600 hover:bg-green-700 text-white px-8 py-6 text-lg"
+            >
+              <MessageCircle className="h-5 w-5 mr-2" />
+              {currentContent.whatsappLabel}
+            </Button>
 
             {/* Line */}
-            <div className="text-center">
-              <div className="h-48 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
-                <span className="text-gray-400">Line QR Code</span>
-              </div>
-              <p className="text-gray-700 font-medium">{currentContent.lineText}</p>
-              <Button
-                onClick={() => setShowLineQR(true)}
-                className="w-full mt-4 bg-[#00B900] hover:bg-[#00A000] text-white"
-              >
-                <MessageCircle className="h-4 w-4 mr-2" />
-                {currentContent.lineLabel}
-              </Button>
-            </div>
+            <Button
+              onClick={() => setShowLineQR(true)}
+              className="bg-[#00B900] hover:bg-[#00A000] text-white px-8 py-6 text-lg"
+            >
+              <MessageCircle className="h-5 w-5 mr-2" />
+              {currentContent.lineLabel}
+            </Button>
 
             {/* Email */}
-            <div className="text-center">
-              <div className="h-48 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
-                <Mail className="h-16 w-16 text-blue-600" />
-              </div>
-              <a href={`mailto:${currentContent.emailAddress}`} className="text-blue-600 hover:text-blue-700 font-bold text-lg block mb-2">
-                {currentContent.emailAddress}
-              </a>
-              <p className="text-gray-600 text-sm">{currentContent.emailSubtext}</p>
-            </div>
+            <a href={`mailto:${currentContent.emailAddress}`} className="text-blue-600 hover:text-blue-700 font-bold text-lg">
+              {currentContent.emailAddress}
+            </a>
           </div>
 
           <div className="text-center py-8 border-t border-b">
@@ -297,8 +287,11 @@ const AboutKit = () => {
 
         {/* Footer */}
         <footer className="text-center py-8 text-gray-600">
+          <p className="leading-relaxed mb-4">
+            {currentContent.footerText}
+          </p>
           <p className="leading-relaxed">
-            {currentContent.footerText}{" "}
+            {currentContent.footerVideoLine}{" "}
             <a
               href="https://youtube.com/@SamRoiYotinsider"
               target="_blank"
