@@ -22,8 +22,8 @@ export function Footer() {
             </h3>
             <p className="text-sm text-muted-foreground">
               {t(
-                "Your Expert Guide to Thailand's Hidden Coastal Paradise",
-                "คู่มือผู้เชี่ยวชาญสู่สวรรค์ชายฝั่งที่ซ่อนเร้นของไทย"
+                "Video Tours • Investment Analysis • Direct Owner Contact",
+                "ทัวร์วิดีโอ • วิเคราะห์การลงทุน • ติดต่อเจ้าหน้อยโดยตรง"
               )}
             </p>
           </div>

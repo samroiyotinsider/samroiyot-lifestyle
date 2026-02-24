@@ -31,7 +31,7 @@ export default function Home() {
 
   const content = {
     en: {
-      heroTitle: "Sam Roi Yot Insider - Featured Property Listings",
+      heroTitle: "Sam Roi Yot Insider\nFeatured Property Listings",
       heroSubtitle: "Video Tours • Investment Analysis • Direct Owner Contact",
       browseProp: "Browse Properties",
       relocation: "Relocation Services",
@@ -41,8 +41,8 @@ export default function Home() {
       trustPillar2Desc: "Elite visa assistance, bank setup, and settling-in services",
       trustPillar3: "Experience the Lifestyle First",
       trustPillar3Desc: "Private viewings, area tours, and local community introductions",
-      featuredTitle: "Featured Exclusive Properties",
-      featuredDesc: "Discover our curated selection of premium properties in Sam Roi Yot",
+      featuredTitle: "Exclusive Properties",
+      featuredDesc: "Discover our curated selection\nof premium properties in Sam Roi Yot",
       viewAll: "View All Properties",
       whySRY: "Why Sam Roi Yot?",
       whyDesc: "Escape the crowds of Phuket and Pattaya. Sam Roi Yot offers pristine beaches, dramatic limestone mountains, world-class national parks, and a peaceful expat community—all within 4 hours of Bangkok.",
@@ -61,7 +61,7 @@ export default function Home() {
       watchFullVideo: "Watch Full Video on YouTube",
     },
     th: {
-      heroTitle: "สามร้อยยอด Insider - รายการอสังหาริมทรัพย์ที่คัดเลือกหน้อย",
+      heroTitle: "สามร้อยยอด Insider\nรายการอสังหาริมทรัพย์ที่คัดเลือก",
       heroSubtitle: "ทัวร์วิดีโอ • วิเคราะห์การลงทุน • ติดต่อเจ้าหน้อยโดยตรง",
       browseProp: "ดูอสังหาริมทรัพย์",
       relocation: "บริการย้ายถิ่นฐาน",
@@ -71,8 +71,8 @@ export default function Home() {
       trustPillar2Desc: "ความช่วยเหลือด้านวีซ่าระดับพรีเมียม การตั้งค่าธนาคาร และบริการตั้งรกราก",
       trustPillar3: "สัมผัสไลฟ์สไตล์ก่อน",
       trustPillar3Desc: "การชมแบบส่วนตัว ทัวร์พื้นที่ และการแนะนำชุมชนท้องถิ่น",
-      featuredTitle: "อสังหาริมทรัพย์พิเศษแนะนำ",
-      featuredDesc: "ค้นพบคอลเลกชันอสังหาริมทรัพย์พรีเมียมที่คัดสรรมาในสามร้อยยอด",
+      featuredTitle: "อสังหาริมทรัพย์พิเศษ",
+      featuredDesc: "ค้นพบคอลเลกชัน\nอสังหาริมทรัพย์พรีเมียมในสามร้อยยอด",
       viewAll: "ดูอสังหาริมทรัพย์ทั้งหมด",
       whySRY: "ทำไมต้องสามร้อยยอด?",
       whyDesc: "หนีความแออัดของภูเก็ตและพัทยา สามร้อยยอดมีชายหาดที่บริสุทธิ์ ภูเขาหินปูนที่น่าทึ่ง อุทยานแห่งชาติระดับโลก และชุมชนชาวต่างชาติที่สงบ—ทั้งหมดอยู่ห่างจากกรุงเทพฯ เพียง 2.5 ชั่วโมง",

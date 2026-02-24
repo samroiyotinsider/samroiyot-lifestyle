@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { MapPin, Bed, Bath, Square, Mail, MessageCircle } from 'lucide-react';
 import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SEO } from '@/components/SEO';
 import { WhatsAppQRModal } from '@/components/WhatsAppQRModal';
 import { LineQRModal } from '@/components/LineQRModal';
 
-const AboutKit = () => {
+export default function AboutKit() {
   const { language, t } = useLanguage();
   const [showWhatsAppQR, setShowWhatsAppQR] = useState(false);
   const [showLineQR, setShowLineQR] = useState(false);
@@ -165,12 +166,17 @@ const AboutKit = () => {
         {/* Who is Kit Section */}
         <section className="mb-16">
           <h2 className="text-4xl font-bold mb-8 text-gray-900">{currentContent.whoTitle}</h2>
-          <div className="space-y-6">
-            {currentContent.whoParagraphs.map((paragraph, idx) => (
-              <p key={idx} className="text-lg text-gray-700 leading-relaxed">
-                {paragraph}
-              </p>
-            ))}
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
+            <div className="space-y-6">
+              {currentContent.whoParagraphs.map((paragraph, idx) => (
+                <p key={idx} className="text-lg text-gray-700 leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+            <div className="h-96 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+              <img src="/kit-portrait.jpg" alt="Kit" className="w-full h-full object-cover" />
+            </div>
           </div>
         </section>
 
@@ -308,6 +314,4 @@ const AboutKit = () => {
       <LineQRModal isOpen={showLineQR} onClose={() => setShowLineQR(false)} />
     </div>
   );
-};
-
-export default AboutKit;
+}
