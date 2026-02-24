@@ -3,16 +3,14 @@ import { YouTubeButton } from "@/components/YouTubeButton";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { trpc } from "@/lib/trpc";
 import { useParams, useLocation } from "wouter";
-import { MapPin, Bed, Bath, Maximize, Check, ArrowLeft, ExternalLink } from "lucide-react";
+import { MapPin, Bed, Bath, Maximize, Check, ArrowLeft, ExternalLink, Mail, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { PropertyMap } from "@/components/PropertyMap";
-import { toast } from "sonner";
 import { videoConfig } from "@/config/videos";
+import { WhatsAppQRModal } from "@/components/WhatsAppQRModal";
+import { LineQRModal } from "@/components/LineQRModal";
 
 // Convert YouTube URL to embed format
 function getYouTubeEmbedUrl(url: string): string {
@@ -49,44 +47,13 @@ export default function PropertyDetail() {
   const [, setLocation] = useLocation();
   const { t, language } = useLanguage();
   const [selectedImage, setSelectedImage] = useState(0);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
+  const [showWhatsAppQR, setShowWhatsAppQR] = useState(false);
+  const [showLineQR, setShowLineQR] = useState(false);
 
   const { data: property, isLoading } = trpc.properties.getById.useQuery(
     { id: parseInt(id!) },
     { enabled: !!id }
   );
-
-  const inquiryMutation = trpc.inquiries.create.useMutation({
-    onSuccess: () => {
-      toast.success(t(
-        "Thank you! We'll contact you soon.",
-        "ขอบคุณ! เราจะติดต่อคุณเร็วๆ นี้"
-      ));
-      setFormData({ name: "", email: "", phone: "", message: "" });
-    },
-    onError: () => {
-      toast.error(t("Failed to send inquiry. Please try again.", "ไม่สามารถส่งคำถามได้ กรุณาลองอีกครั้ง"));
-    },
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!property) return;
-    
-    inquiryMutation.mutate({
-      propertyId: property.id,
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone || undefined,
-      message: formData.message,
-      inquiryType: "property",
-    });
-  };
 
   if (isLoading) {
     return (
@@ -98,9 +65,12 @@ export default function PropertyDetail() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 space-y-4">
                 <div className="h-8 bg-muted rounded" />
-                <div className="h-32 bg-muted rounded" />
+                <div className="h-4 bg-muted rounded" />
+                <div className="h-4 bg-muted rounded w-2/3" />
               </div>
-              <div className="h-96 bg-muted rounded" />
+              <div className="space-y-4">
+                <div className="h-40 bg-muted rounded" />
+              </div>
             </div>
           </div>
         </div>
@@ -110,15 +80,13 @@ export default function PropertyDetail() {
 
   if (!property) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Card>
-          <CardContent className="pt-6 text-center space-y-4">
-            <p className="text-lg">{t("Property not found", "ไม่พบทรัพย์สิน")}</p>
-            <Button onClick={() => setLocation("/properties")}>
-              {t("Back to Properties", "กลับไปยังทรัพย์สิน")}
-            </Button>
-          </CardContent>
-        </Card>
+      <div className="min-h-screen bg-background">
+        <div className="container py-12 text-center">
+          <h1 className="text-2xl font-bold mb-4">{t("Property not found", "ไม่พบทรัพย์สิน")}</h1>
+          <Button onClick={() => setLocation("/properties")}>
+            {t("Back to Properties", "กลับไปที่ทรัพย์สิน")}
+          </Button>
+        </div>
       </div>
     );
   }
@@ -135,283 +103,231 @@ export default function PropertyDetail() {
   } else if (Array.isArray(property.images)) {
     images = property.images;
   }
-  
+
   // Handle features field similarly
-  let features: string[] = [];
+  let propFeatures: string[] = [];
   if (typeof property.features === 'string') {
     try {
-      features = JSON.parse(property.features);
+      propFeatures = JSON.parse(property.features);
     } catch (e) {
-      features = [];
+      propFeatures = [];
     }
   } else if (Array.isArray(property.features)) {
-    features = property.features;
+    propFeatures = property.features;
   }
+
   const title = language === 'th' && property.titleTh ? property.titleTh : property.title;
   const description = language === 'th' && property.descriptionTh ? property.descriptionTh : property.description;
-  const address = language === 'th' && property.addressTh ? property.addressTh : property.address;
-
-  const featureLabels: Record<string, { en: string; th: string }> = {
-    seaView: { en: "Sea View", th: "วิวทะเล" },
-    beachfront: { en: "Beachfront", th: "ริมชายหาด" },
-    pool: { en: "Swimming Pool", th: "สระว่ายน้ำ" },
-    mountainView: { en: "Mountain View", th: "วิวภูเขา" },
-    renovated: { en: "Newly Renovated", th: "ปรับปรุงใหม่" },
-    furnished: { en: "Fully Furnished", th: "ตกแต่งครบ" },
-  };
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container py-8 space-y-8">
+      <div className="container py-8">
         {/* Back Button */}
-        <Button variant="ghost" onClick={() => setLocation("/properties")}>
+        <Button
+          variant="ghost"
+          onClick={() => setLocation("/properties")}
+          className="mb-6"
+        >
           <ArrowLeft className="h-4 w-4 mr-2" />
-          {t("Back to Properties", "กลับไปยังทรัพย์สิน")}
+          {t("Back to Properties", "กลับไปที่ทรัพย์สิน")}
         </Button>
 
-
-
-        {/* Image Gallery */}
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">{t("Photo Gallery", "แกลเลอรี่ภาพ")}</h3>
-          <div className="relative h-[500px] rounded-lg overflow-hidden">
-            <img
-              src={images[selectedImage] || 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200'}
-              alt={title}
-              className="w-full h-full object-cover"
-            />
-          </div>
-          {images.length > 1 && (
-            <div className="grid grid-cols-4 md:grid-cols-6 gap-4">
-              {images.map((img: string, idx: number) => (
-                <button
-                  key={idx}
-                  onClick={() => setSelectedImage(idx)}
-                  className={`relative h-24 rounded-lg overflow-hidden border-2 transition-all ${
-                    selectedImage === idx ? "border-primary" : "border-transparent"
-                  }`}
-                >
-                  <img src={img} alt={`${title} ${idx + 1}`} className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Video Walkthrough */}
-        <Card>
-          <CardHeader>
-            <CardTitle>{t("Video Walkthrough", "วิดีโอทัวร์")}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <VideoPlayer
-              videoUrl={videoConfig.propertyWalkthrough.s3Url}
-              youtubeUrl={videoConfig.propertyWalkthrough.youtubeUrl}
-              autoplay={false}
-              controls={false}
-              showYouTubeButton={true}
-              youtubeButtonLabel={t("Watch Full Property Case Study on YouTube", "ดูการศึกษากรณ์ทรัพย์สินเต็มบน YouTube")}
-              youtubeButtonSize="default"
-              youtubeButtonVariant="secondary"
-              thumbnailUrl={videoConfig.propertyWalkthrough.thumbnailUrl}
-            />
-          </CardContent>
-        </Card>
-
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Property Details */}
-          <div className="lg:col-span-2 space-y-6">
-            <div>
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">{title}</h1>
-              <p className="text-3xl font-bold text-primary mb-2">
-                {property.priceEur ? (
-                  `€${property.priceEur.toLocaleString()}`
-                ) : property.price ? (
-                  `${property.price.toLocaleString()} THB`
-                ) : (
-                  'Price on request'
-                )}
-                {property.priceUsd && (
-                  <span className="text-xl font-normal text-muted-foreground ml-3">
-                    (${property.priceUsd.toLocaleString()} USD)
-                  </span>
-                )}
-              </p>
-              {address && (
-                <div className="flex items-start gap-2 text-muted-foreground">
-                  <MapPin className="h-5 w-5 mt-0.5" />
-                  <span>{address}</span>
+          {/* Main Content */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Image Gallery */}
+            <div className="space-y-4">
+              <div className="relative h-96 rounded-lg overflow-hidden bg-muted">
+                <img
+                  src={images[selectedImage] || 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800'}
+                  alt={title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {images.length > 1 && (
+                <div className="grid grid-cols-4 gap-2">
+                  {images.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setSelectedImage(idx)}
+                      className={`relative h-20 rounded overflow-hidden border-2 transition-colors ${
+                        selectedImage === idx ? 'border-primary' : 'border-transparent'
+                      }`}
+                    >
+                      <img
+                        src={img}
+                        alt={`${title} ${idx + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
 
-            {/* Specifications */}
-            <Card>
+            {/* Property Info */}
+            <div className="space-y-6">
+              <div>
+                <h1 className="text-4xl font-bold mb-2">{title}</h1>
+                <p className="text-2xl font-bold text-primary">
+                  {property.priceEur ? (
+                    `€${property.priceEur.toLocaleString()}`
+                  ) : property.price ? (
+                    `${property.price.toLocaleString()} THB`
+                  ) : (
+                    'Price on request'
+                  )}
+                  {property.priceUsd && (
+                    <span className="text-sm font-normal text-muted-foreground ml-2">
+                      (${property.priceUsd.toLocaleString()})
+                    </span>
+                  )}
+                </p>
+              </div>
+
+              {/* Key Features */}
+              <div className="flex flex-wrap gap-4">
+                {property.bedrooms && (
+                  <div className="flex items-center gap-2 text-sm">
+                    <Bed className="h-5 w-5 text-primary" />
+                    <span>{property.bedrooms} {t("Bedrooms", "ห้องนอน")}</span>
+                  </div>
+                )}
+                {property.bathrooms && (
+                  <div className="flex items-center gap-2 text-sm">
+                    <Bath className="h-5 w-5 text-primary" />
+                    <span>{property.bathrooms} {t("Bathrooms", "ห้องน้ำ")}</span>
+                  </div>
+                )}
+                {property.sizeSqm && (
+                  <div className="flex items-center gap-2 text-sm">
+                    <Maximize className="h-5 w-5 text-primary" />
+                    <span>{property.sizeSqm} {t("sqm", "ตร.ม.")}</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Description */}
+              {description && (
+                <div className="prose prose-sm max-w-none">
+                  <p className="text-muted-foreground whitespace-pre-wrap">{description}</p>
+                </div>
+              )}
+
+              {/* Features List */}
+              {propFeatures.length > 0 && (
+                <div>
+                  <h3 className="font-semibold mb-3">{t("Features", "คุณสมบัติ")}</h3>
+                  <ul className="space-y-2">
+                    {propFeatures.map((feature) => (
+                      <li key={feature} className="flex items-center gap-2 text-sm">
+                        <Check className="h-4 w-4 text-primary" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Location Map */}
+              {property.latitude && property.longitude && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{t("Location", "ที่ตั้ง")}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="aspect-video rounded-lg overflow-hidden">
+                      <PropertyMap
+                        latitude={property.latitude}
+                        longitude={property.longitude}
+                        title={title}
+                        address={property.address || ''}
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* YouTube Video */}
+              {videoConfig.propertyWalkthrough?.youtubeUrl && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{t("Property Walkthrough", "การเดินทัวร์ทรัพย์สิน")}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="aspect-video rounded-lg overflow-hidden">
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src={getYouTubeEmbedUrl(videoConfig.propertyWalkthrough.youtubeUrl)}
+                        title="Property Walkthrough"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          </div>
+
+          {/* Sidebar - Contact Info */}
+          <div className="lg:col-span-1">
+            <Card className="sticky top-20">
               <CardHeader>
-                <CardTitle>{t("Property Details", "รายละเอียดทรัพย์สิน")}</CardTitle>
+                <CardTitle>{t("Get in Touch", "ติดต่อเรา")}</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {property.propertyType && (
+              <CardContent className="space-y-6">
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <Mail className="h-5 w-5 text-primary mt-0.5" />
                     <div>
-                      <p className="text-sm text-muted-foreground">{t("Type", "ประเภท")}</p>
-                      <p className="font-semibold capitalize">{property.propertyType}</p>
+                      <p className="font-medium">{t("Email", "อีเมล")}</p>
+                      <a
+                        href="mailto:samroiyot.th@gmail.com"
+                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        samroiyot.th@gmail.com
+                      </a>
                     </div>
-                  )}
-                  {property.bedrooms && (
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <MapPin className="h-5 w-5 text-primary mt-0.5" />
                     <div>
-                      <p className="text-sm text-muted-foreground">{t("Bedrooms", "ห้องนอน")}</p>
-                      <p className="font-semibold flex items-center gap-1">
-                        <Bed className="h-4 w-4" /> {property.bedrooms}
+                      <p className="font-medium">{t("Location", "ที่ตั้ง")}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {t(
+                          "Sam Roi Yot, Prachuap Khiri Khan, Thailand",
+                          "แสนร้อยยอด ประจวบคีรีขันธ์ ประเทศไทย"
+                        )}
                       </p>
                     </div>
-                  )}
-                  {property.bathrooms && (
-                    <div>
-                      <p className="text-sm text-muted-foreground">{t("Bathrooms", "ห้องน้ำ")}</p>
-                      <p className="font-semibold flex items-center gap-1">
-                        <Bath className="h-4 w-4" /> {property.bathrooms}
-                      </p>
-                    </div>
-                  )}
-                  {property.sizeSqm && (
-                    <div>
-                      <p className="text-sm text-muted-foreground">{t("Size", "ขนาด")}</p>
-                      <p className="font-semibold flex items-center gap-1">
-                        <Maximize className="h-4 w-4" /> {property.sizeSqm} {t("sqm", "ตร.ม.")}
-                      </p>
-                    </div>
-                  )}
-                  {property.sizeRai && (
-                    <div className="col-span-2">
-                      <p className="text-sm text-muted-foreground">{t("Land Size", "ขนาดที่ดิน")}</p>
-                      <p className="font-semibold">{property.sizeRai}</p>
-                    </div>
-                  )}
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t space-y-2">
+                  <Button
+                    onClick={() => setShowWhatsAppQR(true)}
+                    className="w-full bg-green-600 hover:bg-green-700"
+                  >
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    {t("WhatsApp", "WhatsApp")}
+                  </Button>
+                  <Button
+                    onClick={() => setShowLineQR(true)}
+                    className="w-full bg-[#00B900] hover:bg-[#00A000]"
+                  >
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    {t("Line", "Line")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Features */}
-            {features.length > 0 && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>{t("Features", "คุณสมบัติ")}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {features.map((feature: string) => (
-                      <div key={feature} className="flex items-center gap-2">
-                        <Check className="h-5 w-5 text-primary" />
-                        <span>{t(featureLabels[feature]?.en || feature, featureLabels[feature]?.th || feature)}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Description */}
-            <Card>
-              <CardHeader>
-                <CardTitle>{t("Description", "คำอธิบาย")}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="whitespace-pre-wrap text-muted-foreground leading-relaxed">{description}</p>
-              </CardContent>
-            </Card>
-
-            {/* Map */}
-            {property.latitude && property.longitude ? (
-              <PropertyMap
-                latitude={property.latitude}
-                longitude={property.longitude}
-                title={title}
-                address={address || undefined}
-                className="h-96"
-              />
-            ) : (
-              <div className="bg-muted rounded-lg h-96 flex items-center justify-center">
-                <p className="text-muted-foreground">{t("Map location not available", "ไม่มีตำแหน่งแผนที่")}</p>
-              </div>
-            )}
-
-            {/* FazWaz Link */}
-            {property.fazwazUrl && (
-              <Card>
-                <CardContent className="pt-6">
-                  <a
-                    href={property.fazwazUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-4 bg-muted rounded-lg hover:bg-muted/80 transition-colors"
-                  >
-                    <span className="font-medium">{t("View on FazWaz", "ดูใน FazWaz")}</span>
-                    <ExternalLink className="h-5 w-5" />
-                  </a>
-                </CardContent>
-              </Card>
-            )}
-          </div>
-
-          {/* Inquiry Form */}
-          <div className="lg:col-span-1">
-            <Card className="sticky top-20">
-              <CardHeader>
-                <CardTitle>{t("Interested in this property?", "สนใจทรัพย์สินนี้หรือไม่?")}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <Label htmlFor="name">{t("Name", "ชื่อ")} *</Label>
-                    <Input
-                      id="name"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="email">{t("Email", "อีเมล")} *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="phone">{t("Phone", "โทรศัพท์")}</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="message">{t("Message", "ข้อความ")} *</Label>
-                    <Textarea
-                      id="message"
-                      required
-                      rows={4}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder={t(
-                        "I'm interested in this property...",
-                        "ฉันสนใจทรัพย์สินนี้..."
-                      )}
-                    />
-                  </div>
-                  <Button type="submit" className="w-full" disabled={inquiryMutation.isPending}>
-                    {inquiryMutation.isPending
-                      ? t("Sending...", "กำลังส่ง...")
-                      : t("Send Inquiry", "ส่งคำถาม")}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+            <WhatsAppQRModal isOpen={showWhatsAppQR} onClose={() => setShowWhatsAppQR(false)} />
+            <LineQRModal isOpen={showLineQR} onClose={() => setShowLineQR(false)} />
           </div>
         </div>
       </div>
