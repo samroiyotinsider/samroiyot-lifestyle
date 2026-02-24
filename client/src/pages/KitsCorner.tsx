@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Heart, MapPin, Users, Wifi, ParkingCircle, Utensils, Wind } from 'lucide-react';
+import { Heart, MapPin, Users } from 'lucide-react';
 
 const KitsCorner = () => {
   const [isSaved, setIsSaved] = useState(false);
@@ -245,19 +245,6 @@ const KitsCorner = () => {
                 <h3 className="text-lg font-bold mb-2">{point.title}</h3>
                 <p className="text-gray-600">{point.desc}</p>
               </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Amenities */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-6">{t.amenities}</h2>
-          <div className="grid md:grid-cols-2 gap-3">
-            {t.amenitiesList.map((amenity, idx) => (
-              <div key={idx} className="flex items-center gap-2 p-3 bg-blue-50 rounded">
-                <Wind className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                <span className="text-gray-700">{amenity}</span>
-              </div>
             ))}
           </div>
         </div>
