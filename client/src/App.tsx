@@ -11,6 +11,8 @@ import { Footer } from "./components/Footer";
 import Home from "./pages/Home";
 import Properties from "./pages/Properties";
 import PropertyDetail from "./pages/PropertyDetail";
+import ForSale from "./pages/ForSale";
+import ForRent from "./pages/ForRent";
 import BuyingGuide from "./pages/BuyingGuide";
 import AreaGuide from "./pages/AreaGuide";
 import Concierge from "./pages/Concierge";
@@ -32,6 +34,8 @@ function Router() {
           <Route path="/" component={Home} />
           <Route path="/properties" component={Properties} />
           <Route path="/properties/:id" component={PropertyDetail} />
+          <Route path="/for-sale" component={ForSale} />
+          <Route path="/for-rent" component={ForRent} />
           <Route path="/area-guide" component={AreaGuide} />
           <Route path="/buying-guide" component={BuyingGuide} />
           <Route path="/concierge" component={Concierge} />
