@@ -168,15 +168,15 @@ ${input.phone ? `Phone: ${input.phone}\n` : ''}${propertyInfo ? `Property: ${pro
         
         await notifyOwner({ title, content });
         
-        // Send email notification to owner
-        await sendInquiryNotificationEmail(
-          input.inquiryType,
-          input.name,
-          input.email,
-          input.phone,
-          input.message,
-          propertyInfo?.title
-        );
+        // Email notifications disabled - user requested to stop test emails
+        // await sendInquiryNotificationEmail(
+        //   input.inquiryType,
+        //   input.name,
+        //   input.email,
+        //   input.phone,
+        //   input.message,
+        //   propertyInfo?.title
+        // );
         
         return result;
       }),
