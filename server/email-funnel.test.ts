@@ -15,7 +15,7 @@ describe("Email Funnel System", () => {
         "https://example.com/guide.pdf",
         ["https://youtube.com/watch?v=1", "https://youtube.com/watch?v=2"]
       );
-      expect(result).toBe(true);
+      expect(result).toBe(false); // Emails disabled per user request
     });
 
     it("should send property pitch email", async () => {
@@ -24,7 +24,7 @@ describe("Email Funnel System", () => {
         testName,
         "https://youtube.com/watch?v=property"
       );
-      expect(result).toBe(true);
+      expect(result).toBe(false); // Emails disabled per user request
     });
 
     it("should send affiliate recommendations email", async () => {
@@ -32,12 +32,12 @@ describe("Email Funnel System", () => {
         { name: "Booking.com", url: "https://booking.com" },
         { name: "Agoda", url: "https://agoda.com" },
       ]);
-      expect(result).toBe(true);
+      expect(result).toBe(false); // Emails disabled per user request
     });
 
     it("should send re-engagement email", async () => {
       const result = await sendReengagementEmail(testEmail, testName);
-      expect(result).toBe(true);
+      expect(result).toBe(false); // Emails disabled per user request
     });
   });
 
@@ -72,13 +72,13 @@ describe("Email Funnel System", () => {
     it("welcome email should contain PDF URL", async () => {
       const pdfUrl = "https://example.com/guide.pdf";
       const result = await sendWelcomeEmail(testEmail, testName, pdfUrl, []);
-      expect(result).toBe(true);
+      expect(result).toBe(false); // Emails disabled per user request
     });
 
     it("property email should contain YouTube link", async () => {
       const youtubeUrl = "https://youtube.com/watch?v=property123";
       const result = await sendPropertyPitchEmail(testEmail, testName, youtubeUrl);
-      expect(result).toBe(true);
+      expect(result).toBe(false); // Emails disabled per user request
     });
 
     it("affiliate email should contain multiple links", async () => {
@@ -88,7 +88,7 @@ describe("Email Funnel System", () => {
         { name: "Wise", url: "https://wise.com/invite" },
       ];
       const result = await sendAffiliateEmail(testEmail, testName, affiliateLinks);
-      expect(result).toBe(true);
+      expect(result).toBe(false); // Emails disabled per user request
     });
   });
 });

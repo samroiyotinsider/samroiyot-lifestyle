@@ -9,7 +9,7 @@ import { emailRouter } from "./routers/email";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import * as db from "./db";
-import { notifyOwner } from "./_core/notification";
+// import { notifyOwner } from "./_core/notification"; // Disabled - user requested no emails
 import { sendInquiryNotificationEmail } from "./email-service";
 
 export const appRouter = router({
@@ -155,18 +155,18 @@ export const appRouter = router({
       .mutation(async ({ input }) => {
         const result = await db.createInquiry(input);
         
-        // Send notification to owner via Manus Notification Service
-        const propertyInfo = input.propertyId 
-          ? await db.getPropertyById(input.propertyId)
-          : null;
-        
-        const title = `New ${input.inquiryType} inquiry from ${input.name}`;
-        const content = `
-Name: ${input.name}
-Email: ${input.email}
-${input.phone ? `Phone: ${input.phone}\n` : ''}${propertyInfo ? `Property: ${propertyInfo.title}\n` : ''}Message: ${input.message}`;
-        
-        await notifyOwner({ title, content });
+        // Notifications disabled - user requested to stop all emails
+        // const propertyInfo = input.propertyId 
+        //   ? await db.getPropertyById(input.propertyId)
+        //   : null;
+        // 
+        // const title = `New ${input.inquiryType} inquiry from ${input.name}`;
+        // const content = `
+        // Name: ${input.name}
+        // Email: ${input.email}
+        // ${input.phone ? `Phone: ${input.phone}\n` : ''}${propertyInfo ? `Property: ${propertyInfo.title}\n` : ''}Message: ${input.message}`;
+        // 
+        // await notifyOwner({ title, content });
         
         // Email notifications disabled - user requested to stop test emails
         // await sendInquiryNotificationEmail(

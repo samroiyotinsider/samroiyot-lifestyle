@@ -1,5 +1,5 @@
 // Email service for sending transactional emails using Manus notification system
-import { notifyOwner } from "./_core/notification";
+// import { notifyOwner } from "./_core/notification"; // Disabled - user requested no emails
 
 export interface EmailContent {
   to: string;
@@ -26,11 +26,12 @@ export async function sendEmail(email: EmailContent): Promise<boolean> {
       .replace(/&amp;/g, "&")
       .trim();
 
-    // Send via notification system
-    const success = await notifyOwner({
-      title: email.subject,
-      content: plainText,
-    });
+    // Send via notification system - DISABLED
+    // const success = await notifyOwner({
+    //   title: email.subject,
+    //   content: plainText,
+    // });
+    const success = false; // Notifications disabled
 
     if (success) {
       console.log(`[Email Service] Email notification sent for: ${email.subject}`);
@@ -257,10 +258,11 @@ export async function sendInquiryNotificationEmail(
     `\nMessage:\n${message}`,
   ].join("\n");
 
-  const success = await notifyOwner({
-    title: `New ${inquiryType} Inquiry from ${name}`,
-    content: details,
-  });
+  // const success = await notifyOwner({
+  //   title: `New ${inquiryType} Inquiry from ${name}`,
+  //   content: details,
+  // });
+  const success = false; // Notifications disabled
 
   console.log(
     `[Email Service] Inquiry notification ${success ? "sent" : "failed"} for ${name}`
