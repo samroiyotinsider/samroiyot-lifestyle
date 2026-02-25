@@ -201,21 +201,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="container text-center">
-          <h2 className="text-4xl font-bold mb-4">{t.ctaTitle}</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-            {t.ctaDesc}
-          </p>
-          <Link href="/contact">
-            <Button size="lg" variant="secondary" className="text-lg px-8 py-6">
-              {t.contactUs} <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </Link>
-        </div>
-      </section>
-
 
     </div>
   );
