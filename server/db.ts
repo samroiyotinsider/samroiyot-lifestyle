@@ -104,6 +104,7 @@ export async function getAllProperties(filters?: {
   maxPrice?: number;
   features?: string[];
   status?: string;
+  listingType?: string;
 }) {
   const db = await getDb();
   if (!db) return [];
@@ -122,6 +123,9 @@ export async function getAllProperties(filters?: {
   }
   if (filters?.status) {
     conditions.push(eq(properties.status, filters.status as any));
+  }
+  if (filters?.listingType) {
+    conditions.push(eq(properties.listingType, filters.listingType as any));
   }
 
   if (conditions.length > 0) {

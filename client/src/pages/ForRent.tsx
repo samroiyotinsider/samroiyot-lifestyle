@@ -23,6 +23,7 @@ export default function ForRent() {
     propertyType: propertyType || undefined,
     features: selectedFeatures.length > 0 ? selectedFeatures : undefined,
     status: "available",
+    listingType: "rent",
   });
 
   const features = [

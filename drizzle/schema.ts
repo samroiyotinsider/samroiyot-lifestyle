@@ -53,6 +53,7 @@ export const properties = mysqlTable("properties", {
   addressTh: text("addressTh"),
   fazwazUrl: varchar("fazwazUrl", { length: 500 }),
   status: mysqlEnum("status", ["available", "sold", "pending"]).default("available").notNull(),
+  listingType: mysqlEnum("listingType", ["sale", "rent"]).default("sale").notNull(),
   featured: int("featured").default(0).notNull(), // 1 for featured, 0 for normal
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),

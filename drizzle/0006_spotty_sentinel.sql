@@ -1,0 +1,1 @@
+ALTER TABLE `properties` ADD `listingType` enum('sale','rent') DEFAULT 'sale' NOT NULL;

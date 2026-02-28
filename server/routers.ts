@@ -39,6 +39,7 @@ export const appRouter = router({
         maxPrice: z.number().optional(),
         features: z.array(z.string()).optional(),
         status: z.string().optional(),
+        listingType: z.string().optional(),
       }).optional())
       .query(async ({ input }) => {
         return db.getAllProperties(input);

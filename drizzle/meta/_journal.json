@@ -43,6 +43,13 @@
       "when": 1771560190479,
       "tag": "0005_tidy_avengers",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1772265724012,
+      "tag": "0006_spotty_sentinel",
+      "breakpoints": true
     }
   ]
 }
