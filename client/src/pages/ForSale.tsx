@@ -249,20 +249,27 @@ export default function ForSale() {
                             <h3 className="text-xl font-semibold line-clamp-2 min-h-[3.5rem]">
                               {title}
                             </h3>
-                            <p className="text-2xl font-bold text-primary">
-                              {property.priceEur ? (
-                                `€${property.priceEur.toLocaleString()}`
-                              ) : property.price ? (
-                                `${property.price.toLocaleString()} THB`
-                              ) : (
-                                'Price on request'
+                            <div>
+                              <p className="text-2xl font-bold text-primary">
+                                {property.priceEur ? (
+                                  `€${property.priceEur.toLocaleString()}`
+                                ) : property.price ? (
+                                  `${property.price.toLocaleString()} THB`
+                                ) : (
+                                  'Price on request'
+                                )}
+                              </p>
+                              {property.price && !property.priceEur && (
+                                <p className="text-sm text-muted-foreground">
+                                  {property.price.toLocaleString()} THB
+                                </p>
                               )}
-                              {property.priceUsd && (
-                                <span className="text-sm font-normal text-muted-foreground ml-2">
-                                  (${property.priceUsd.toLocaleString()})
-                                </span>
+                              {property.priceEur && property.price && (
+                                <p className="text-sm text-muted-foreground">
+                                  {property.price.toLocaleString()} THB
+                                </p>
                               )}
-                            </p>
+                            </div>
                             <div className="flex items-center gap-4 text-sm text-muted-foreground">
                               {property.bedrooms && (
                                 <div className="flex items-center gap-1">

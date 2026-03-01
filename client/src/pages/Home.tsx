@@ -172,9 +172,21 @@ export default function Home() {
                       <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
                         {property.title}
                       </h3>
-                      <p className="text-2xl font-bold text-primary mb-2">
-                        {property.priceEur ? `€${property.priceEur.toLocaleString()}` : `${property.price?.toLocaleString()} THB`}
-                      </p>
+                      <div className="mb-2">
+                        <p className="text-2xl font-bold text-primary">
+                          {property.priceEur ? `€${property.priceEur.toLocaleString()}` : `${property.price?.toLocaleString()} THB`}
+                        </p>
+                        {property.price && !property.priceEur && (
+                          <p className="text-sm text-muted-foreground">
+                            {property.price.toLocaleString()} THB
+                          </p>
+                        )}
+                        {property.priceEur && property.price && (
+                          <p className="text-sm text-muted-foreground">
+                            {property.price.toLocaleString()} THB
+                          </p>
+                        )}
+                      </div>
                       <p className="text-muted-foreground line-clamp-2 mb-4">
                         {property.description}
                       </p>
