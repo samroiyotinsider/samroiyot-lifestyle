@@ -11,7 +11,8 @@ export function Header() {
 
   const navItems = [
     { href: "/", label: t("Home", "หน้าแรก") },
-    { href: "/properties", label: t("Properties", "ทรัพย์สิน") },
+    { href: "/for-sale", label: t("For Sale", "ขายแล้ว") },
+    { href: "/for-rent", label: t("For Rent", "ให้เช่า") },
     { href: "/about-kit", label: t("About Kit", "เกี่ยวกับคิท") },
   ];
 

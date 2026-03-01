@@ -33,8 +33,13 @@ export function Footer() {
             <h4 className="font-semibold">{t("Quick Links", "ลิงก์ด่วน")}</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/properties" className="text-muted-foreground hover:text-primary transition-colors">
-                  {t("Properties", "ทรัพย์สิน")}
+                <Link href="/for-sale" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t("For Sale", "ขายแล้ว")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/for-rent" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t("For Rent", "ให้เช่า")}
                 </Link>
               </li>
               <li>
