@@ -1,0 +1,8 @@
+{
+  "query": "SELECT id, title, priceTHB, priceEur, listingType FROM properties ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT id, title, priceTHB, priceEur, listingType FROM properties ORDER BY id;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'pricethb' in 'field list'"
+  ]
+}

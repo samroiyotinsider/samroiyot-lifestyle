@@ -1,0 +1,9 @@
+{
+  "query": "\nUPDATE properties SET priceEur = CEILING(price / 36.68) WHERE id IN (1,2,3,4,5,6,7,8,9);\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute \nUPDATE properties SET priceEur = CEILING(price / 36.68) WHERE id IN (1,2,3,4,5,6,7,8,9);\n",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1541
+}

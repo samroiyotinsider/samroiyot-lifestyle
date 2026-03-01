@@ -1,0 +1,9 @@
+{
+  "query": "\nUPDATE properties SET price = 17700000, priceEur = 483000 WHERE id = 1;\nUPDATE properties SET price = 4500000, priceEur = 123000 WHERE id = 2;\nUPDATE properties SET price = 7150000, priceEur = 195000 WHERE id = 3;\nUPDATE properties SET price = 2020000, priceEur = 56000 WHERE id = 4;\nUPDATE properties SET price = 1900000, priceEur = 52000 WHERE id = 5;\nUPDATE properties SET price = 2020000, priceEur = 56000 WHERE id = 6;\nUPDATE properties SET price = 6700000, priceEur = 183000 WHERE id = 7;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute \nUPDATE properties SET price = 17700000, priceEur = 483000 WHERE id = 1;\nUPDATE properties SET price = 4500000, priceEur = 123000 WHERE id = 2;\nUPDATE properties SET price = 7150000, priceEur = 195000 WHERE id = 3;\nUPDATE properties SET price = 2020000, priceEur = 56000 WHERE id = 4;\nUPDATE properties SET price = 1900000, priceEur = 52000 WHERE id = 5;\nUPDATE properties SET price = 2020000, priceEur = 56000 WHERE id = 6;\nUPDATE properties SET price = 6700000, priceEur = 183000 WHERE id = 7;\n",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 2937
+}
