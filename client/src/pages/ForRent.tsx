@@ -250,17 +250,22 @@ export default function ForRent() {
                               {title}
                             </h3>
                             <p className="text-2xl font-bold text-primary">
-                              {property.priceEur ? (
-                                `€${property.priceEur.toLocaleString()}`
-                              ) : property.price ? (
-                                `${property.price.toLocaleString()} THB`
+                              {property.listingType === 'rent' ? (
+                                property.priceUsd ? (
+                                  `$${property.priceUsd.toLocaleString()}/month`
+                                ) : property.price ? (
+                                  `${property.price.toLocaleString()} THB/month`
+                                ) : (
+                                  'Price on request'
+                                )
                               ) : (
-                                'Price on request'
-                              )}
-                              {property.priceUsd && (
-                                <span className="text-sm font-normal text-muted-foreground ml-2">
-                                  (${property.priceUsd.toLocaleString()})
-                                </span>
+                                property.priceEur ? (
+                                  `€${property.priceEur.toLocaleString()}`
+                                ) : property.price ? (
+                                  `${property.price.toLocaleString()} THB`
+                                ) : (
+                                  'Price on request'
+                                )
                               )}
                             </p>
                             <div className="flex items-center gap-4 text-sm text-muted-foreground">
