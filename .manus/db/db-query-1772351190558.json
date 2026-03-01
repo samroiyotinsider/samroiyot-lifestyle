@@ -1,0 +1,42 @@
+{
+  "query": "SELECT id, title FROM properties WHERE listingType = 'sale' ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT id, title FROM properties WHERE listingType = 'sale' ORDER BY id;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "1 Bedroom Condo for Sale at The Sea Condominium"
+    },
+    {
+      "id": "2",
+      "title": "Chanote Land 3.2 Rai Sam Roi Yot – Divisible into 3 Plots"
+    },
+    {
+      "id": "3",
+      "title": "Prime Sea & Mountain View Land 300m to Beach Sam Roi Yot"
+    },
+    {
+      "id": "4",
+      "title": "Chanote Land 150 sqm Sam Roi Yot 1.9km to Sea + Mountain View"
+    },
+    {
+      "id": "5",
+      "title": "Chanote Land 1 Rai 30 sq wah Sam Roi Yot – Mountain View"
+    },
+    {
+      "id": "6",
+      "title": "1 Bedroom Condo for Sale at The Sea Condominium (70 SqM)"
+    },
+    {
+      "id": "7",
+      "title": "Exclusive Mango Hills Resort Estate Sam Roi Yot"
+    },
+    {
+      "id": "30002",
+      "title": "Brand-New Tropical Villa - Sam Roi Yod National Park"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\n1\t1 Bedroom Condo for Sale at The Sea Condominium\n2\tChanote Land 3.2 Rai Sam Roi Yot – Divisible into 3 Plots\n3\tPrime Sea & Mountain View Land 300m to Beach Sam Roi Yot\n4\tChanote Land 150 sqm Sam Roi Yot 1.9km to Sea + Mountain View\n5\tChanote Land 1 Rai 30 sq wah Sam Roi Yot – Mountain View\n6\t1 Bedroom Condo for Sale at The Sea Condominium (70 SqM)\n7\tExclusive Mango Hills Resort Estate Sam Roi Yot\n30002\tBrand-New Tropical Villa - Sam Roi Yod National Park\n",
+  "stderr": "",
+  "execution_time_ms": 1625
+}
