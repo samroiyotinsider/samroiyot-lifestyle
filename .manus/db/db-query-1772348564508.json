@@ -1,0 +1,15 @@
+{
+  "query": "SELECT id, title, listingType FROM properties WHERE listingType = 'rent';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT id, title, listingType FROM properties WHERE listingType = 'rent';",
+  "rows": [
+    {
+      "id": "30001",
+      "title": "Brand-New Tropical Villa - Sam Roi Yod National Park",
+      "listingType": "rent"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tlistingType\n30001\tBrand-New Tropical Villa - Sam Roi Yod National Park\trent\n",
+  "stderr": "",
+  "execution_time_ms": 1577
+}

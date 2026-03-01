@@ -250,23 +250,24 @@ export default function ForSale() {
                               {title}
                             </h3>
                             <div>
-                              <p className="text-2xl font-bold text-primary">
-                                {property.priceEur ? (
-                                  `€${property.priceEur.toLocaleString()}`
-                                ) : property.price ? (
-                                  `${property.price.toLocaleString()} THB`
-                                ) : (
-                                  'Price on request'
-                                )}
-                              </p>
-                              {property.price && !property.priceEur && (
-                                <p className="text-sm text-muted-foreground">
+                              {property.priceEur ? (
+                                <>
+                                  <p className="text-2xl font-bold text-primary">
+                                    €{property.priceEur.toLocaleString()}
+                                  </p>
+                                  {property.price && (
+                                    <p className="text-sm text-muted-foreground">
+                                      {property.price.toLocaleString()} THB
+                                    </p>
+                                  )}
+                                </>
+                              ) : property.price ? (
+                                <p className="text-2xl font-bold text-primary">
                                   {property.price.toLocaleString()} THB
                                 </p>
-                              )}
-                              {property.priceEur && property.price && (
-                                <p className="text-sm text-muted-foreground">
-                                  {property.price.toLocaleString()} THB
+                              ) : (
+                                <p className="text-2xl font-bold text-primary">
+                                  Price on request
                                 </p>
                               )}
                             </div>
