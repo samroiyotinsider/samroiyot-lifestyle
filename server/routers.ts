@@ -73,7 +73,7 @@ export const appRouter = router({
         sizeSqm: z.number().optional(),
         sizeRai: z.string().optional(),
         bedrooms: z.number().optional(),
-        bathrooms: z.number().optional(),
+        bathrooms: z.string().optional(), // Support decimals like "2.5"
         features: z.array(z.string()),
         images: z.array(z.string()),
         videoUrl: z.string().optional(),
@@ -110,7 +110,7 @@ export const appRouter = router({
         sizeSqm: z.number().optional(),
         sizeRai: z.string().optional(),
         bedrooms: z.number().optional(),
-        bathrooms: z.number().optional(),
+        bathrooms: z.string().optional(), // Support decimals like "2.5"
         features: z.array(z.string()).optional(),
         images: z.array(z.string()).optional(),
         videoUrl: z.string().optional(),

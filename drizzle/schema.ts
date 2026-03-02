@@ -41,7 +41,7 @@ export const properties = mysqlTable("properties", {
   sizeSqm: int("sizeSqm"), // Size in square meters
   sizeRai: varchar("sizeRai", { length: 50 }), // For land: "1 Rai 2 Ngan 41 sq.wah"
   bedrooms: int("bedrooms"),
-  bathrooms: int("bathrooms"),
+  bathrooms: varchar("bathrooms", { length: 10 }), // Store as string to support decimals like "2.5"
   // Features as JSON array: ["seaView", "beachfront", "pool", "mountainView", "renovated", "furnished"]
   features: text("features").notNull(),
   // Images as JSON array of URLs

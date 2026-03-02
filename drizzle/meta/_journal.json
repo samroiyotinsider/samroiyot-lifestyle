@@ -50,6 +50,13 @@
       "when": 1772265724012,
       "tag": "0006_spotty_sentinel",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1772428023469,
+      "tag": "0007_tranquil_lyja",
+      "breakpoints": true
     }
   ]
 }

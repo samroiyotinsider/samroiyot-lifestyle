@@ -27,7 +27,7 @@ export interface PropertyFormData {
   sizeSqm?: number;
   sizeRai?: string;
   bedrooms?: number;
-  bathrooms?: number;
+  bathrooms?: string; // Support decimals like "2.5"
   features: string[];
   images: string[];
   videoUrl?: string;
@@ -272,10 +272,10 @@ export function PropertyForm({ property, onSubmit, onCancel }: PropertyFormProps
               <Label htmlFor="bathrooms">Bathrooms</Label>
               <Input
                 id="bathrooms"
-                type="number"
-                min="0"
+                type="text"
+                placeholder="e.g., 2 or 2.5"
                 value={formData.bathrooms || ""}
-                onChange={(e) => setFormData({ ...formData, bathrooms: parseInt(e.target.value) || undefined })}
+                onChange={(e) => setFormData({ ...formData, bathrooms: e.target.value || undefined })}
               />
             </div>
           </div>
