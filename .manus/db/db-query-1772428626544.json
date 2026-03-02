@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE properties SET bathrooms = '5' WHERE id = 7;\nINSERT INTO properties (title, titleTh, description, descriptionTh, propertyType, price, priceEur, sizeSqm, bedrooms, bathrooms, features, images, status, listingType, featured, createdAt, updatedAt) VALUES ('Brand-New Tropical Villa - Sam Roi Yod National Park', 'วิลล่าเขตรักษาพันธุ์สัตว์ป่าแห่งชาติแสนร้อยยอด', 'A stunning brand-new tropical villa located within the pristine Khao Sam Roi Yot National Park. This modern villa offers breathtaking views and direct access to nature.', 'วิลล่าเขตรักษาพันธุ์สัตว์ป่าแห่งชาติแสนร้อยยอด', 'villa', 3600000, 99000, 1, 2, '2.5', '[\\\"seaView\\\", \\\"pool\\\", \\\"furnished\\\"]', '[\\\"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800\\\"]', 'available', 'sale', 0, NOW(), NOW());",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute UPDATE properties SET bathrooms = '5' WHERE id = 7;\nINSERT INTO properties (title, titleTh, description, descriptionTh, propertyType, price, priceEur, sizeSqm, bedrooms, bathrooms, features, images, status, listingType, featured, createdAt, updatedAt) VALUES ('Brand-New Tropical Villa - Sam Roi Yod National Park', 'วิลล่าเขตรักษาพันธุ์สัตว์ป่าแห่งชาติแสนร้อยยอด', 'A stunning brand-new tropical villa located within the pristine Khao Sam Roi Yot National Park. This modern villa offers breathtaking views and direct access to nature.', 'วิลล่าเขตรักษาพันธุ์สัตว์ป่าแห่งชาติแสนร้อยยอด', 'villa', 3600000, 99000, 1, 2, '2.5', '[\\\"seaView\\\", \\\"pool\\\", \\\"furnished\\\"]', '[\\\"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800\\\"]', 'available', 'sale', 0, NOW(), NOW());",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1858
+}
