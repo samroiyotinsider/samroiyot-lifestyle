@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
 import { useParams, useLocation } from "wouter";
-import { MapPin, Bed, Bath, Maximize, Check, ArrowLeft, ExternalLink, Mail, MessageCircle } from "lucide-react";
+import { MapPin, Bed, Bath, Maximize, Check, ArrowLeft, ExternalLink, Mail, MessageCircle, Youtube } from "lucide-react";
 import { useState } from "react";
 import { PropertyMap } from "@/components/PropertyMap";
 import { videoConfig } from "@/config/videos";
@@ -218,6 +218,21 @@ export default function PropertyDetail() {
               {description && (
                 <div className="prose prose-sm max-w-none">
                   <p className="text-muted-foreground whitespace-pre-wrap">{description}</p>
+                </div>
+              )}
+
+              {/* YouTube Walkthrough Button */}
+              {property.videoUrl && (
+                <div>
+                  <a
+                    href={property.videoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors font-medium"
+                  >
+                    <Youtube className="h-5 w-5" />
+                    {t("3 min walkthrough on youtube", "3 นาทีชมคลิปบนยูทูป")}
+                  </a>
                 </div>
               )}
 
