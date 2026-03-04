@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE properties SET images = '[\\\"https://d2xsxph8kpxj0f.cloudfront.net/310519663314810987/ALw7Sd5LNhGKkw6UaBkkj7/renovated_house_main_68ef27e7.webp\\\"]' WHERE title = 'Renovated 3-Bed House + Chanote Land Sam Roi Yot – Mountain';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute UPDATE properties SET images = '[\\\"https://d2xsxph8kpxj0f.cloudfront.net/310519663314810987/ALw7Sd5LNhGKkw6UaBkkj7/renovated_house_main_68ef27e7.webp\\\"]' WHERE title = 'Renovated 3-Bed House + Chanote Land Sam Roi Yot – Mountain';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1511
+}
