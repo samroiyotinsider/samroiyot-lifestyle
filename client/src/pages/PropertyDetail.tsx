@@ -228,10 +228,12 @@ export default function PropertyDetail() {
                     href={property.videoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors font-medium"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-black hover:bg-gray-900 transition-colors"
                   >
-                    <Youtube className="h-5 w-5" />
-                    {t("3 min walkthrough on youtube", "3 นาทีชมคลิปบนยูทูป")}
+                    <div className="flex items-center justify-center w-5 h-5 bg-red-600 rounded-full">
+                      <Youtube className="h-3 w-3 text-white fill-white" />
+                    </div>
+                    <span className="text-white font-medium text-sm">{t("walkthrough on youtube", "ชมคลิปบนยูทูป")}</span>
                   </a>
                 </div>
               )}
