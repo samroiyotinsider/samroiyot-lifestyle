@@ -274,9 +274,7 @@ export default function AboutKit() {
             </a>
           </div>
 
-          <div className="text-center py-8 border-t border-b">
-            <p className="text-lg text-gray-700">{currentContent.languageNote}</p>
-          </div>
+
         </section>
 
         {/* Footer */}
