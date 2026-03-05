@@ -230,10 +230,12 @@ export default function PropertyDetail() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-black hover:bg-gray-900 transition-colors"
                   >
-                    <div className="flex items-center justify-center w-5 h-5 bg-red-600 rounded-full">
-                      <Youtube className="h-3 w-3 text-white fill-white" />
+                    <div className="flex items-center justify-center w-6 h-6 bg-red-600 rounded">
+                      <svg className="w-3.5 h-3.5 text-white fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="8,5 8,19 19,12" />
+                      </svg>
                     </div>
-                    <span className="text-white font-medium text-sm">{t("walkthrough on youtube", "ชมคลิปบนยูทูป")}</span>
+                    <span className="text-white font-medium text-sm">{t("Walk through on YouTube", "ชมคลิปบนยูทูป")}</span>
                   </a>
                 </div>
               )}
