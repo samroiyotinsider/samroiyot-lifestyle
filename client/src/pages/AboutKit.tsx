@@ -7,11 +7,14 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { SEO } from '@/components/SEO';
 import { WhatsAppQRModal } from '@/components/WhatsAppQRModal';
 import { LineQRModal } from '@/components/LineQRModal';
+import { trpc } from '@/lib/trpc';
 
 export default function AboutKit() {
   const { language, t } = useLanguage();
   const [showWhatsAppQR, setShowWhatsAppQR] = useState(false);
   const [showLineQR, setShowLineQR] = useState(false);
+  const { data: allProperties } = trpc.properties.list.useQuery({});
+  const featuredPropsFromDB = allProperties?.filter(p => p.featured)?.slice(0, 3) || [];
 
   const content = {
     en: {
@@ -122,33 +125,7 @@ export default function AboutKit() {
 
   const currentContent = content[language as keyof typeof content];
 
-  // Featured properties data
-  const featuredProperties = [
-    {
-      id: 1,
-      title: "Exclusive Mango Hills Resort Estate",
-      price: "€482,000",
-      image: "/mango-hills.png",
-      description: "Offered exclusively through Sam Roi Yot Lifestyle Pro...",
-      propertyId: 1
-    },
-    {
-      id: 2,
-      title: "1 Bedroom Condo for Sale at The Sea Condominium",
-      price: "€125,000",
-      image: "/sea-condo.png",
-      description: "Sea View Condo for Sale at The Sea Condominium, Sam R...",
-      propertyId: 2
-    },
-    {
-      id: 3,
-      title: "Chanote Land 3.2 Rai Sam Roi Yot – Divisible into 3 Plots",
-      price: "€195,000",
-      image: "/land-plot.png",
-      description: "Unlock unlimited potential in Sam Roi Yot –...",
-      propertyId: 3
-    }
-  ];
+
 
   return (
     <div className="min-h-screen bg-white">
@@ -174,9 +151,7 @@ export default function AboutKit() {
                 </p>
               ))}
             </div>
-            <div className="h-96 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
-              <img src="/kit-portrait.jpg" alt="Kit" className="w-full h-full object-cover" />
-            </div>
+
           </div>
         </section>
 
@@ -186,23 +161,36 @@ export default function AboutKit() {
           <p className="text-lg text-gray-600 mb-8 italic">{currentContent.featuredSubtitle}</p>
           
           <div className="grid md:grid-cols-3 gap-6 mb-8">
-            {featuredProperties.map((property) => (
-              <Card key={property.id} className="overflow-hidden hover:shadow-lg transition">
-                <div className="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
-                  <img src={property.image} alt={property.title} className="w-full h-full object-cover" />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-lg font-bold mb-2 text-gray-900">{property.title}</h3>
-                  <p className="text-2xl font-bold text-blue-600 mb-3">{property.price}</p>
-                  <p className="text-gray-600 text-sm mb-4">{property.description}</p>
-                  <Link href={`/properties/${property.propertyId}`}>
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                      View Details
-                    </Button>
-                  </Link>
-                </div>
-              </Card>
-            ))}
+            {featuredPropsFromDB.map((property) => {
+              let images: string[] = [];
+              if (typeof property.images === 'string') {
+                try {
+                  images = JSON.parse(property.images);
+                } catch (e) {
+                  images = [];
+                }
+              } else if (Array.isArray(property.images)) {
+                images = property.images;
+              }
+              
+              return (
+                <Card key={property.id} className="overflow-hidden hover:shadow-lg transition">
+                  <div className="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
+                    <img src={images[0] || 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400'} alt={property.title} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold mb-2 text-gray-900">{property.title}</h3>
+                    <p className="text-2xl font-bold text-blue-600 mb-3">€{property.priceEur?.toLocaleString() || property.price?.toLocaleString()}</p>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">{property.description}</p>
+                    <Link href={`/properties/${property.id}`}>
+                      <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                        View Details
+                      </Button>
+                    </Link>
+                  </div>
+                </Card>
+              );
+            })}
           </div>
 
           <div className="text-center py-8 border-t border-b">
