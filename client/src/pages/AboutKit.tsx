@@ -207,7 +207,7 @@ export default function AboutKit() {
             <div className="grid md:grid-cols-2 gap-0">
               {/* Left: Image */}
               <div className="h-80 bg-gray-200 flex items-center justify-center overflow-hidden">
-                <img src="/punoi-bungalow.png" alt="Punoi Bungalow" className="w-full h-full object-cover" />
+                <img src="/punoi_bungalow_hero.webp" alt="Punoi Bungalow" className="w-full h-full object-cover" />
               </div>
 
               {/* Right: Details */}
