@@ -37,11 +37,7 @@ export function Footer() {
                   {t("For Sale", "ขายแล้ว")}
                 </Link>
               </li>
-              <li>
-                <Link href="/for-rent" className="text-muted-foreground hover:text-primary transition-colors">
-                  {t("For Rent", "ให้เช่า")}
-                </Link>
-              </li>
+
               <li>
                 <Link href="/about-kit" className="text-muted-foreground hover:text-primary transition-colors">
                   {t("About Kit", "เกี่ยวกับคิท")}
