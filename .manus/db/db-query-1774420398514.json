@@ -1,0 +1,20 @@
+{
+  "query": "SELECT id, title, images FROM properties WHERE images LIKE '%image1.jpeg%' OR images LIKE '%image2.jpeg%' OR images LIKE '%image3.jpeg%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT id, title, images FROM properties WHERE images LIKE '%image1.jpeg%' OR images LIKE '%image2.jpeg%' OR images LIKE '%image3.jpeg%';",
+  "rows": [
+    {
+      "id": "4",
+      "title": "Chanote Land 150 sqm Sam Roi Yot 1.9km to Sea + Mountain View",
+      "images": "[\"https://cdn.fazwaz.com/wbr/P_jkL8mN9oPqRsT0uVwXyZ1aB2c/2850x1515/unit/5971886/image1.jpeg\", \"https://cdn.fazwaz.com/wbr/C3dEfGhIjKlMnOpQrStUvWxYz1a/250x250/unit/5971886/image2.jpeg\", \"https://cdn.fazwaz.com/wbr/B2cDeFgHiJkLmNoPqRsTuVwXyZ1/250x250/unit/5971886/image3.jpeg\"]"
+    },
+    {
+      "id": "5",
+      "title": "Chanote Land 1 Rai 37 sq wah Sam Roi Yot – Mountain View",
+      "images": "[\"https://cdn.fazwaz.com/wbr/A1bCdEfGhIjKlMnOpQrStUvWxYz/2850x1515/unit/5971940/image1.jpeg\", \"https://cdn.fazwaz.com/wbr/Z0aBcDeFgHiJkLmNoPqRsTuVwXy/250x250/unit/5971940/image2.jpeg\", \"https://cdn.fazwaz.com/wbr/Y9zAbCdEfGhIjKlMnOpQrStUvWx/250x250/unit/5971940/image3.jpeg\"]"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\timages\n4\tChanote Land 150 sqm Sam Roi Yot 1.9km to Sea + Mountain View\t[\"https://cdn.fazwaz.com/wbr/P_jkL8mN9oPqRsT0uVwXyZ1aB2c/2850x1515/unit/5971886/image1.jpeg\", \"https://cdn.fazwaz.com/wbr/C3dEfGhIjKlMnOpQrStUvWxYz1a/250x250/unit/5971886/image2.jpeg\", \"https://cdn.fazwaz.com/wbr/B2cDeFgHiJkLmNoPqRsTuVwXyZ1/250x250/unit/5971886/image3.jpeg\"]\n5\tChanote Land 1 Rai 37 sq wah Sam Roi Yot – Mountain View\t[\"https://cdn.fazwaz.com/wbr/A1bCdEfGhIjKlMnOpQrStUvWxYz/2850x1515/unit/5971940/image1.jpeg\", \"https://cdn.fazwaz.com/wbr/Z0aBcDeFgHiJkLmNoPqRsTuVwXy/250x250/unit/5971940/image2.jpeg\", \"https://cdn.fazwaz.com/wbr/Y9zAbCdEfGhIjKlMnOpQrStUvWx/250x250/unit/5971940/image3.jpeg\"]\n",
+  "stderr": "",
+  "execution_time_ms": 1572
+}
