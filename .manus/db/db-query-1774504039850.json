@@ -1,0 +1,20 @@
+{
+  "query": "SELECT id, title, images FROM properties WHERE id IN (3, 4)",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3NdWH8UPMGqi4Cv.root --database ALw7Sd5LNhGKkw6UaBkkj7 --execute SELECT id, title, images FROM properties WHERE id IN (3, 4)",
+  "rows": [
+    {
+      "id": "3",
+      "title": "Prime Sea & Mountain View Land 300m to Beach Sam Roi Yot",
+      "images": "[\"https://cdn.fazwaz.com/wbr/q_5_fJfCLIKQdqVfXLQhYJ0eFI4/2850x1515/unit/5971841/whatsapp-image-2026-01-10-at-111156-pm.jpeg\", \"https://cdn.fazwaz.com/wbr/0Yj3HvN8BkVVJaVpDQfKPL8lJ_8/250x250/unit/5971841/whatsapp-image-2026-01-10-at-111156-pm-1.jpeg\", \"https://cdn.fazwaz.com/wbr/oC1gKxNvBxHl7KBQfvvKfvVnKJQ/250x250/unit/5971841/whatsapp-image-2026-01-10-at-111156-pm-2.jpeg\", \"https://cdn.fazwaz.com/wbr/vXqJvQKj8vvKfvVnKJQoC1gKxNvBx/250x250/unit/5971841/whatsapp-image-2026-01-10-at-111156-pm-3.jpeg\"]"
+    },
+    {
+      "id": "4",
+      "title": "Chanote Land 150 sqm Sam Roi Yot 1.9km to Sea + Mountain View",
+      "images": "[\"https://cdn.fazwaz.com/wbr/obM3nE2O2dVd6xjcaPc2NAuiVmI/2850x1515/unit/5971886/whatsapp-image-2026-01-10-at-45340-pm.jpeg\", \"https://cdn.fazwaz.com/wbr/uzppcYR_g8QBqPdkVfSws712ozE/250x250/unit/5971886/whatsapp-image-2026-01-10-at-111156-pm.jpeg\", \"https://cdn.fazwaz.com/wbr/8QIKN8RdkDVkJaK8qpezo9A940g/250x250/unit/5971886/whatsapp-image-2026-01-10-at-45340-pm-1.jpeg\", \"https://cdn.fazwaz.com/wbr/GP6O8Nlez_63_OgSPt7QohJf9Uo/250x250/unit/5971886/whatsapp-image-2026-01-10-at-45340-pm-3.jpeg\", \"https://cdn.fazwaz.com/wbr/4hMP-_3PnEZPpI0gSaIB0qMmHS8/250x250/unit/5971886/whatsapp-image-2026-01-10-at-45340-pm-2.jpeg\"]"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\timages\n3\tPrime Sea & Mountain View Land 300m to Beach Sam Roi Yot\t[\"https://cdn.fazwaz.com/wbr/q_5_fJfCLIKQdqVfXLQhYJ0eFI4/2850x1515/unit/5971841/whatsapp-image-2026-01-10-at-111156-pm.jpeg\", \"https://cdn.fazwaz.com/wbr/0Yj3HvN8BkVVJaVpDQfKPL8lJ_8/250x250/unit/5971841/whatsapp-image-2026-01-10-at-111156-pm-1.jpeg\", \"https://cdn.fazwaz.com/wbr/oC1gKxNvBxHl7KBQfvvKfvVnKJQ/250x250/unit/5971841/whatsapp-image-2026-01-10-at-111156-pm-2.jpeg\", \"https://cdn.fazwaz.com/wbr/vXqJvQKj8vvKfvVnKJQoC1gKxNvBx/250x250/unit/5971841/whatsapp-image-2026-01-10-at-111156-pm-3.jpeg\"]\n4\tChanote Land 150 sqm Sam Roi Yot 1.9km to Sea + Mountain View\t[\"https://cdn.fazwaz.com/wbr/obM3nE2O2dVd6xjcaPc2NAuiVmI/2850x1515/unit/5971886/whatsapp-image-2026-01-10-at-45340-pm.jpeg\", \"https://cdn.fazwaz.com/wbr/uzppcYR_g8QBqPdkVfSws712ozE/250x250/unit/5971886/whatsapp-image-2026-01-10-at-111156-pm.jpeg\", \"https://cdn.fazwaz.com/wbr/8QIKN8RdkDVkJaK8qpezo9A940g/250x250/unit/5971886/whatsapp-image-2026-01-10-at-45340-pm-1.jpeg\", \"https://cdn.fazwaz.com/wbr/GP6O8Nlez_63_OgSPt7QohJf9Uo/250x250/unit/5971886/whatsapp-image-2026-01-10-at-45340-pm-3.jpeg\", \"https://cdn.fazwaz.com/wbr/4hMP-_3PnEZPpI0gSaIB0qMmHS8/250x250/unit/5971886/whatsapp-image-2026-01-10-at-45340-pm-2.jpeg\"]\n",
+  "stderr": "",
+  "execution_time_ms": 1571
+}
