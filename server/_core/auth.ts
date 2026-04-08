@@ -1,6 +1,5 @@
-import { Request, Response } from "express";
 import * as bcrypt from "bcryptjs";
-import { jwtVerify, jwtSign } from "jose";
+import { jwtVerify, SignJWT } from "jose";
 import * as db from "../db";
 import type { User } from "../../drizzle/schema";
 
@@ -16,11 +15,10 @@ export async function verifyPassword(password: string, hash: string): Promise<bo
 }
 
 export async function createJWT(userId: number): Promise<string> {
-  const token = await jwtSign(
-    { userId, iat: Math.floor(Date.now() / 1000) },
-    JWT_SECRET,
-    { expiresIn: "7d" }
-  );
+  const token = await new SignJWT({ userId, iat: Math.floor(Date.now() / 1000) })
+    .setProtectedHeader({ alg: "HS256" })
+    .setExpirationTime("7d")
+    .sign(JWT_SECRET);
   return token;
 }
 
@@ -48,7 +46,7 @@ export async function authenticateRequest(req: Request): Promise<User | null> {
   }
 }
 
-export async function loginUser(username: string, password: string, res: Response): Promise<User | null> {
+export async function loginUser(username: string, password: string, res: any): Promise<User | null> {
   const user = await db.getUserByUsername(username);
   if (!user) return null;
 
@@ -56,26 +54,12 @@ export async function loginUser(username: string, password: string, res: Respons
   if (!isValid) return null;
 
   const token = await createJWT(user.id);
-  res.cookie(COOKIE_NAME, token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-  });
-
+  res.setHeader("Set-Cookie", `${COOKIE_NAME}=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=604800`);
+  
   return user;
 }
 
-export function logoutUser(res: Response): void {
-  res.clearCookie(COOKIE_NAME, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-  });
-}
-
 export async function registerUser(username: string, email: string, password: string): Promise<User | null> {
-  // Check if user already exists
   const existing = await db.getUserByUsername(username);
   if (existing) return null;
 
@@ -87,8 +71,9 @@ export async function registerUser(username: string, email: string, password: st
     role: "user",
   });
 
-  if (!result) return null;
-
-  // Fetch and return the created user
   return db.getUserByUsername(username);
+}
+
+export function logoutUser(res: any): void {
+  res.setHeader("Set-Cookie", `${COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0`);
 }
