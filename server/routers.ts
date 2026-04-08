@@ -1,5 +1,5 @@
-import { COOKIE_NAME } from "@shared/const";
-import { getSessionCookieOptions } from "./_core/cookies";
+
+import { loginUser, logoutUser, registerUser } from "./_core/auth";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { chatbotRouter } from "./chatbotRouter";
@@ -21,12 +21,34 @@ export const appRouter = router({
   email: emailRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
+    login: publicProcedure
+      .input(z.object({
+        username: z.string(),
+        password: z.string(),
+      }))
+      .mutation(async ({ input, ctx }) => {
+        const user = await loginUser(input.username, input.password, ctx.res);
+        if (!user) {
+          throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Invalid credentials' });
+        }
+        return user;
+      }),
+    register: publicProcedure
+      .input(z.object({
+        username: z.string().min(3),
+        email: z.string().email(),
+        password: z.string().min(8),
+      }))
+      .mutation(async ({ input }) => {
+        const user = await registerUser(input.username, input.email, input.password);
+        if (!user) {
+          throw new TRPCError({ code: 'BAD_REQUEST', message: 'Username already exists' });
+        }
+        return user;
+      }),
     logout: publicProcedure.mutation(({ ctx }) => {
-      const cookieOptions = getSessionCookieOptions(ctx.req);
-      ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
-      return {
-        success: true,
-      } as const;
+      logoutUser(ctx.res);
+      return { success: true } as const;
     }),
   }),
 
