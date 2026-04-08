@@ -1,0 +1,9 @@
+[build]
+builder = "nixpacks"
+
+[build.nixpacks]
+node = "22"
+pnpm = "10"
+
+[start]
+cmd = "npm run start"

@@ -154,3 +154,24 @@ export const affiliateLinks = pgTable("affiliateLinks", {
 
 export type AffiliateLink = typeof affiliateLinks.$inferSelect;
 export type InsertAffiliateLink = typeof affiliateLinks.$inferInsert;
+
+/**
+ * Email leads and subscribers
+ */
+export const leads = pgTable("leads", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  email: varchar("email", { length: 320 }).notNull().unique(),
+  firstName: varchar("firstName", { length: 100 }),
+  lastName: varchar("lastName", { length: 100 }),
+  phone: varchar("phone", { length: 50 }),
+  interestLevel: varchar("interestLevel", { length: 50 }).default("casual_visitor").notNull(), // "casual_visitor", "serious_buyer", "investor"
+  unsubscribeToken: varchar("unsubscribeToken", { length: 255 }).unique(),
+  subscribed: integer("subscribed").default(1).notNull(),
+  source: varchar("source", { length: 100 }), // "website", "facebook", "referral", etc.
+  notes: text("notes"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export type Lead = typeof leads.$inferSelect;
+export type InsertLead = typeof leads.$inferInsert;
