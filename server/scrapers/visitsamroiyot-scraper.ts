@@ -239,8 +239,8 @@ export async function scrapeVisitSamRoiYotEvents(): Promise<void> {
 }
 
 export function scheduleVisitSamRoiYotScraper(): void {
-  // Run immediately on startup
-  scrapeVisitSamRoiYotEvents().catch(console.error);
+  // Run immediately on startup (disabled for Railway deployment)
+  // scrapeVisitSamRoiYotEvents().catch(console.error);
 
   // Schedule daily at 2 AM (02:00)
   const now = new Date();
