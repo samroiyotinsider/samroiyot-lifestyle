@@ -8,6 +8,7 @@ export const users = pgTable("users", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
   username: varchar("username", { length: 64 }).notNull().unique(),
   email: varchar("email", { length: 320 }),
+  name: varchar("name", { length: 255 }),
   passwordHash: varchar("passwordHash", { length: 255 }).notNull(), // bcrypt hash
   role: varchar("role", { length: 20 }).default("user").notNull(), // "user" or "admin"
   createdAt: timestamp("createdAt").defaultNow().notNull(),
